@@ -12,6 +12,8 @@ b {
   font-weight: bold;
 }
 
-/* Should be temporary style for temporary icon */
+/* Tempoorary styles i.e. Quick fixes for initial site. */
 #branding img { height: 100px; }
+h4 { margin-top: 30px; }
+/* End Temporary styles */
 #branding { padding: 15px 0px 15px 13px;}
