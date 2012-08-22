@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ * General customizations to compost website.
+ */
+
+/*
+ * Implements hook_mail()
+ */
+function compost_customizations_mail_alter(&$message) {
+  // Set the from address to the site's email so emails don't get blocked coming from uncontrolled sources
+  $site_from_email = variable_get('site_mail',  $message['from']);
+  $message['headers']['Return-Path']=  $message['from'];
+  $message['headers']['From'] = $message['headers']['Sender']  = $message['from'] = $site_from_email;
+}

@@ -1,0 +1,4 @@
+name = Compost customizations
+description = Provides customizations to compost website.  A
+core = 7.x
+
