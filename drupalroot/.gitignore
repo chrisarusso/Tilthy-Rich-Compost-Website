@@ -7,3 +7,6 @@ sites/*/private
 
 # CiviCRM config
 sites/*/civicrm.settings.php
+
+# Ignore cache folder created by boost
+/cache
