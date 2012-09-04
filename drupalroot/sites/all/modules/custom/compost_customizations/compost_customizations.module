@@ -14,3 +14,47 @@ function compost_customizations_mail_alter(&$message) {
   $message['headers']['Return-Path']=  $message['from'];
   $message['headers']['From'] = $message['headers']['Sender']  = $message['from'] = $site_from_email;
 }
+
+/*
+ * Implements hook_block_info()
+ */
+function compost_customizations_block_info() {
+
+  $blocks['paypal_payment_form'] = array(
+    'info' => t('Paypal payment form'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+
+  return $blocks;
+}
+
+/*
+ * Implements hook_block_view()
+ */
+function compost_customizations_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = array();
+
+  switch ($delta) {
+    case 'paypal_payment_form':
+      $block['subject'] = t('Paypal payment form');
+      $block['content'] = array(
+        '#theme' => 'paypal_payment_form'
+      );
+      break;
+  }
+  return $block;
+
+}
+
+/*
+ * Implements hook_theme()
+ */
+function compost_customizations_theme() {
+  return array(
+    'paypal_payment_form' => array(
+      'template' => "templates/paypal_payment_form"
+    ),
+  );
+}
