@@ -73,6 +73,22 @@ function compost_customizations_form_user_register_form_alter(&$form, $form_stat
     ),
   );
 
+  // Add validation to ensure if user wants text messages, that they've selected a mobile carrier
+  $form['#validate'][] = '_compot_customizations_mobile_carrier_validate';
+
   // @todo: Change form submission to redirect to paypal papyment
 
+}
+
+/*
+ * Validation function for registrants selecting mobile text reminders
+ */
+function _compot_customizations_mobile_carrier_validate($form, $form_state) {
+  $v = $form_state['values'];
+
+  // If user opted in to text reminders, but did not provide mobile provider, set error
+  if ($v['field_reminders'][LANGUAGE_NONE][1]['value'] == 2
+    && $v['field_mobile_carrier_provider'][LANGUAGE_NONE][0]['value'] == null) {
+    form_error($form['field_mobile_carrier_provider'], t('Please select a mobile carrier when opting into text reminders'));
+  }
 }
