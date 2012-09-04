@@ -58,3 +58,13 @@ function compost_customizations_theme() {
     ),
   );
 }
+
+/*
+ * Implements hook_form_FORM_ID_alter()
+ */
+function compost_customizations_form_user_register_form_alter(&$form, $form_state, $form_id) {
+  $form['actions']['submit']['#value'] = t('Register');
+
+  // @todo: Change form submission to redirect to paypal papyment
+
+}
