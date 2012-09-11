@@ -67,8 +67,8 @@ function compost_customizations_theme() {
  * Implements hook_form_FORM_ID_alter()
  */
 function compost_customizations_form_user_register_form_alter(&$form, $form_state, $form_id) {
-  // Change "Create new account" to "Register"
-  $form['actions']['submit']['#value'] = t('Register');
+  // Change "Create new account" to "Subscribe"
+  $form['actions']['submit']['#value'] = t('Subscribe');
 
   // Only reveal mobile carrier inquiry if user wants text reminders
   $form['field_mobile_carrier_provider']['#states'] = array(
