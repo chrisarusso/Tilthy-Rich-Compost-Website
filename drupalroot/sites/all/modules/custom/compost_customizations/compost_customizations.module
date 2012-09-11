@@ -80,7 +80,8 @@ function compost_customizations_form_user_register_form_alter(&$form, $form_stat
   // Add validation to ensure if user wants text messages, that they've selected a mobile carrier
   $form['#validate'][] = '_compost_customizations_mobile_carrier_validate';
 
-  // @todo: Change form submission to redirect to paypal papyment
+  // Add custom submit handling
+  $form['#submit'][] = '_compost_customizations_user_register_submit';
 
 }
 
@@ -95,4 +96,19 @@ function _compost_customizations_mobile_carrier_validate($form, $form_state) {
     && $v['field_mobile_carrier_provider'][LANGUAGE_NONE][0]['value'] == null) {
     form_error($form['field_mobile_carrier_provider'], t('Please select a mobile carrier when opting into text reminders'));
   }
+}
+
+/*
+ * We allow users to signup and since there is no hard-fast obligation to pay, they are redirected to the payment
+ * page after finishing their registration
+ */
+function _compost_customizations_user_register_submit($form, &$form_state) {
+  // Redirect to our pyament page which consists of a block on an empty node page
+  $form_state['redirect'] = 'payment';
+  // Unset the welcome message from the user so (s)he doesn't expect email
+  drupal_get_messages('status');
+  drupal_set_message(t('Thank you so much for subscribing!  Please help us out financially if you can!'));
+
+}
+
 }
