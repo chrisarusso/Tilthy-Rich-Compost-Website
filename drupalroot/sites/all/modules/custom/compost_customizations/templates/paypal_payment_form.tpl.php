@@ -3,12 +3,11 @@
   <input type="hidden" name="hosted_button_id" value="DGV69L4NQW9DU">
   <table>
     <tr><td><input type="hidden" name="on0" value="Monthly damage">Monthly damage</td></tr><tr><td><select name="os0">
-    <option value="Select">Please select your monthly contribution amount</option>
     <option value="Carter level">Carter level : $5.00 USD - monthly</option>
     <option value="Carter + $5">Carter + $5 : $10.00 USD - monthly</option>
     <option value="Carter goes to middle school">Carter goes to middle school : $15.00 USD - monthly</option>
     <option value="Middle of the road">Middle of the road : $20.00 USD - monthly</option>
-    <option value="Middle + $5">Middle + $5 : $25.00 USD - monthly</option>
+    <option value="Middle + $5" selected="selected">Middle + $5 : $25.00 USD - monthly</option>
     <option value="One exclamation!">One exclamation! : $30.00 USD - monthly</option>
     <option value="Golly, thanks!!">Golly, thanks!! : $35.00 USD - monthly</option>
     <option value="Big spender!!!">Big spender!!! : $40.00 USD - monthly</option>
