@@ -111,4 +111,12 @@ function _compost_customizations_user_register_submit($form, &$form_state) {
 
 }
 
+/*
+ * Implements hook_menu_alter()
+ */
+function compost_customizations_menu_alter(&$items) {
+  // Replace /user/register with /subscribe
+  $user_reg = $items['user/register'];
+  $items['subscribe'] = $user_reg;
+  unset($items['user/register']);
 }
