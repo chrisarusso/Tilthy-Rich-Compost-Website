@@ -52,9 +52,13 @@ function compost_customizations_block_view($delta = '') {
  * Implements hook_theme()
  */
 function compost_customizations_theme() {
+  // Allow for easy way to swap between test payment form and production
+  // via local.settings.php, hence not DB dependent
+  global $conf;
+  $sandbox_string = ($conf['production']) ? '' : 'sandbox_';
   return array(
     'paypal_payment_form' => array(
-      'template' => "templates/paypal_payment_form"
+      'template' =>  "templates/" . $sandbox_string . "paypal_payment_form"
     ),
   );
 }
