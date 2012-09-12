@@ -110,7 +110,6 @@
 
       <div id="content">
         <div class="inner">
-          <?php if ($breadcrumb): ?><div id="breadcrumb" class="clearfix"><?php print $breadcrumb; ?></div><?php endif; ?>
           <?php if ($messages): ?><div id="messages"><?php print $messages; ?></div><?php endif; ?>
           <?php if ($tabs): ?><div class="tabs"><?php print render($tabs); ?></div><?php endif; ?>
 
