@@ -24,3 +24,9 @@ body.page-user-register .tabs { display: none;}
 
 body.front .node-title { display: none;}
 #node-1 { padding-top: 0px;}
+
+.node { 
+  border-top: none; 
+  padding-top: 0;
+}
+
