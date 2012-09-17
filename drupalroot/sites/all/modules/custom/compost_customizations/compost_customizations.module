@@ -6,6 +6,24 @@
  */
 
 /*
+ * Implements hook_menu()
+ */
+function compost_customizations_menu() {
+
+  $items = array();
+
+  // Define an always accessible path to receive IPNs.
+  $items['paypal/ipn'] = array(
+    'page callback' => '_compost_customizations_paypal_process_ipn',
+    'page arguments' => array(),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+
+}
+/*
  * Implements hook_mail()
  */
 function compost_customizations_mail_alter(&$message) {
@@ -119,4 +137,24 @@ function compost_customizations_menu_alter(&$items) {
   $user_reg = $items['user/register'];
   $items['subscribe'] = $user_reg;
   unset($items['user/register']);
+}
+
+/*
+ * Listener function to process Paypal IPNs
+ *
+ * Local testing can be done by mimicking an external POST via curl.  First enable debugger, which sets the debugger
+ * cookie.  Then issue:
+ * curl [LOCAL-URL]/paypal/ipn -b "ZendDebuggerCookie=127.0.1.1%2C127.0.0.1%3A10137%3A0||004|77742D65|19201" -d "good=golly"
+ * -d key value pair can be replaced with a file
+ */
+function _compost_customizations_paypal_process_ipn() {
+  //require_once drupal_get_path('module', 'compost_customizations') . '/IPN_PHP/IPN_PHP.php';
+
+  // Log it
+  watchdog('paypal_ipn', 'Post: @Post', array('@Post' => print_r($_POST, TRUE)), WATCHDOG_INFO);
+
+  // @todo: Handle it.  Update when we get live data to test with
+
+  // If IPN for instant payment, set user's selection in his/her profile
+  // Set the user's payment selection
 }
