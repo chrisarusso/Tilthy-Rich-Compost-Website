@@ -1,4 +1,10 @@
 name = Compost customizations
 description = Provides customizations to compost website.  A
 core = 7.x
+Package = Custom
 
+dependencies[] = date
+dependencies[] = features
+dependencies[] = field_sql_storage
+features[features_api][] = api:1
+features[field][] = user-user-field_skip_day
