@@ -30,3 +30,7 @@ body.front .node-title { display: none;}
   padding-top: 0;
 }
 
+/* Hide account form timezone and contact form */
+#user-profile-form #edit-contact, #user-profile-form #edit-timezone { display: none; }
+
+
