@@ -33,4 +33,4 @@ body.front .node-title { display: none;}
 /* Hide account form timezone and contact form */
 #user-profile-form #edit-contact, #user-profile-form #edit-timezone { display: none; }
 
-
+div.form-item .error { border: 2px solid #ff0000; }
