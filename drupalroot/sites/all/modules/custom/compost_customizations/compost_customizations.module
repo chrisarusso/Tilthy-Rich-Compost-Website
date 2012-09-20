@@ -112,7 +112,7 @@ function compost_customizations_form_user_profile_form_alter(&$form, $form_state
 
   // Hide but don't delete previous skip days
   // @todo: This is erroring out when hiding previously good date element
-  // $form = _compost_customizations_hide_past_skip_days($form);
+  $form = _compost_customizations_hide_past_skip_days($form);
 }
 
 /*
@@ -219,7 +219,7 @@ function _compost_customizations_hide_past_skip_days($form) {
   foreach ($children as $key) {
     $value = $form['field_skip_day'][LANGUAGE_NONE][$key]['#default_value']['value'];
     if (is_numeric($key) && !empty($value) && $value < $today) {
-      hide($form['field_skip_day'][LANGUAGE_NONE][$key]);
+      $form['field_skip_day'][LANGUAGE_NONE][$key]['#type'] = 'hidden';
     }
   }
 
