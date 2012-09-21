@@ -44,7 +44,7 @@ function compost_customizations_field_default_fields() {
     'field_instance' => array(
       'bundle' => 'user',
       'deleted' => '0',
-      'description' => 'This is for days you will not need pick up (e.g. on vacation, out of town, didn\'t eat at home all week).',
+      'description' => '',
       'display' => array(
         'default' => array(
           'label' => 'inline',
@@ -63,7 +63,7 @@ function compost_customizations_field_default_fields() {
       ),
       'entity_type' => 'user',
       'field_name' => 'field_skip_day',
-      'label' => 'Skip dates',
+      'label' => 'Skip date',
       'required' => 0,
       'settings' => array(
         'default_value' => 'now',
@@ -79,7 +79,7 @@ function compost_customizations_field_default_fields() {
           'increment' => '15',
           'input_format' => 'Y M j - g:i:sa',
           'input_format_custom' => '',
-          'label_position' => 'above',
+          'label_position' => 'none',
           'repeat_collapsed' => 0,
           'text_parts' => array(),
           'year_range' => '-3:+3',
@@ -92,8 +92,7 @@ function compost_customizations_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Skip dates');
-  t('This is for days you will not need pick up (e.g. on vacation, out of town, didn\'t eat at home all week).');
+  t('Skip date');
 
   return $fields;
 }
