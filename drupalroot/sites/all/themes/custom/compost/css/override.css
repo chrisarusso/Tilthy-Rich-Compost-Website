@@ -25,12 +25,48 @@ body.page-user-register .tabs { display: none;}
 body.front .node-title { display: none;}
 #node-1 { padding-top: 0px;}
 
-.node { 
-  border-top: none; 
+.node {
+  border-top: none;
   padding-top: 0;
 }
 
-/* Hide account form timezone and contact form */
-#user-profile-form #edit-contact, #user-profile-form #edit-timezone { display: none; }
+/* User profile form  */
+#user-profile-form #edit-contact, #user-profile-form #edit-timezone {
+    display: none;
+}
 
-div.form-item .error { border: 2px solid #ff0000; }
+div.form-item .error {
+    border: 2px solid #ff0000;
+}
+
+#user-profile-form .form-item:last-child {
+    margin-bottom: 0px;
+}
+
+#user-profile-form fieldset {
+    margin-top: 2px;
+}
+
+#user-profile-form th, #user-profile-form td  {
+    padding: 0px;
+}
+
+#user-profile-form th {
+    text-align: center;
+}
+
+#field-skip-day-values .form-item:first-child  {
+    margin-top: 2px;
+}
+
+th label {
+    font-size: 2em;
+}
+
+.container-inline-date .date-padding {
+    padding: 0px;
+}
+
+#field-skip-day-values input {
+    width: 110px;
+}
