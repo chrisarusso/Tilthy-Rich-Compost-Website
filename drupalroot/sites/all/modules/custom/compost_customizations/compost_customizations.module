@@ -110,6 +110,8 @@ function compost_customizations_form_user_profile_form_alter(&$form, $form_state
   // Add validation to handle skip_day
   $form['#validate'][] = '_compost_customizations_user_skip_day_validate';
 
+  $form['field_skip_day'][LANGUAGE_NONE]['#title'] = t('Enter dates you won\'t need a pick up (e.g. on vacation)');
+
   // Hide but don't delete previous skip days
   // @todo: This is erroring out when hiding previously good date element
   $form = _compost_customizations_hide_past_skip_days($form);
