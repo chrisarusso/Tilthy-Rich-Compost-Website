@@ -161,14 +161,32 @@ function _compost_customizations_user_skip_day_validate($form, $form_state) {
  * page after finishing their registration
  */
 function _compost_customizations_user_register_submit($form, &$form_state) {
-  // Redirect to our pyament page which consists of a block on an empty node page
-  $form_state['redirect'] = array(
-    'payment',
-    array('query' => array('uid' => $form_state['user']->uid)),
-  );
+
   // Unset the welcome message from the user so (s)he doesn't expect email
   drupal_get_messages('status');
-  drupal_set_message(t('Thank you so much for subscribing!  Please help us out financially if you can!'));
+
+  $subscription_level = $form_state['values']['field_subscription_level'][LANGUAGE_NONE][0]['value'];
+
+  // Direct them to payment if they've selected anything but FREE
+  if ($subscription_level  != "0") {
+    // Redirect to our pyament page which consists of a block on an empty node page
+    $form_state['redirect'] = array(
+      'payment',
+      array('query' => array('uid' => $form_state['user']->uid, 'subscription level' => $subscription_level )),
+    );
+
+    drupal_set_message(t('You\'re not done!  Please submit your payment now.  Thank you so much for subscribing.'));
+
+  }
+  else {
+    drupal_set_message(t('Thank you so much for subscribing!  If later, you are able to help out financially please
+      visit !URL', array('!URL' => l(
+        'the payment page',
+        'payment',
+        array('query' => array('uid' => $form_state['user']->uid)))
+      ))
+    );
+  }
 
 }
 
@@ -214,6 +232,15 @@ function template_preprocess_paypal_payment_form(&$variables) {
   elseif (isset($_GET['uid']) && is_numeric($_GET['uid'])) {
     $variables['uid'] = $_GET['uid'];
   }
+
+  $select_element = array(
+    'element' => array(
+      '#options' => _compost_customizations_paypal_payment_options(),
+      '#default_value' => isset($_GET['subscription_level']) ? $_GET['subscription_level'] : 'Middle + $5',
+      '#value' => isset($_GET['subscription_level']) ? $_GET['subscription_level'] : 'Middle + $5'
+    ),
+  );
+  $variables['select_list'] = theme('select', $select_element);
 }
 
 /**
@@ -232,4 +259,18 @@ function _compost_customizations_hide_past_skip_days($form) {
   }
 
   return $form;
+}
+
+function _compost_customizations_paypal_payment_options() {
+  return array(
+    "Carter level" => "Carter level : $5.00 USD - monthly",
+    "Carter + $5" => "Carter + $5 : $10.00 USD - monthly",
+    "Carter goes to middle school" => "Carter goes to middle school : $15.00 USD - monthly",
+    "Middle of the road" => "Middle of the road : $20.00 USD - monthly",
+    "Middle + $5" => "Middle + $5 : $25.00 USD - monthly",
+    "One exclamation!" => "One exclamation! : $30.00 USD - monthly",
+    "Golly, thanks!!" => "Golly, thanks!! : $35.00 USD - monthly",
+    "Big spender!!!" => "Big spender!!! : $40.00 USD - monthly",
+    "Please...?" => "Please...? : $1,000.00 USD - monthly",
+  );
 }

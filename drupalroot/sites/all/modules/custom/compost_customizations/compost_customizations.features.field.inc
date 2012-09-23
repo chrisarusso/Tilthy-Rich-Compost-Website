@@ -90,9 +90,75 @@ function compost_customizations_field_default_fields() {
     ),
   );
 
+  // Exported field: 'user-user-field_subscription_level'.
+  $fields['user-user-field_subscription_level'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_subscription_level',
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => 'Free',
+          'Carter level' => 'Carter level : $5.00 USD - monthly',
+          'Carter + $5' => 'Carter + $5 : $10.00 USD - monthly',
+          'Carter goes to middle school' => 'Carter goes to middle school : $15.00 USD - monthly',
+          'Middle of the road' => 'Middle of the road : $20.00 USD - monthly',
+          'Middle + $5' => 'Middle + $5 : $25.00 USD - monthly',
+          'One exclamation!' => 'One exclamation! : $30.00 USD - monthly',
+          'Golly, thanks!!' => 'Golly, thanks!! : $35.00 USD - monthly',
+          'Big spender!!!' => 'Big spender!!! : $40.00 USD - monthly',
+          'Please...?' => 'Please...? : $1,000.00 USD - monthly',
+        ),
+        'allowed_values_function' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 5,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_subscription_level',
+      'label' => 'Subscription Level',
+      'required' => 1,
+      'settings' => array(
+        'user_register_form' => 1,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => '8',
+      ),
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Skip date');
+  t('Subscription Level');
 
   return $fields;
 }
