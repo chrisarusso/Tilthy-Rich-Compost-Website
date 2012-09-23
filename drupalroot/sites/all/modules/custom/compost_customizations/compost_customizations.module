@@ -207,7 +207,13 @@ function _compost_customizations_paypal_process_ipn() {
  */
 function template_preprocess_paypal_payment_form(&$variables) {
   // Set user id in the form so we can link drupal accounts with payment
-  $variables['uid'] = (isset($_GET['uid']) && is_numeric($_GET['uid'])) ? $_GET['uid'] : 0;
+  $variables['uid'] = 0;
+  if ($GLOBALS['user']->uid) {
+    $variables['uid'] = $GLOBALS['user']->uid;
+  }
+  elseif (isset($_GET['uid']) && is_numeric($_GET['uid'])) {
+    $variables['uid'] = $_GET['uid'];
+  }
 }
 
 /**
