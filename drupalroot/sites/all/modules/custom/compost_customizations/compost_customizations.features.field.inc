@@ -10,6 +10,72 @@
 function compost_customizations_field_default_fields() {
   $fields = array();
 
+  // Exported field: 'user-user-field_active'.
+  $fields['user-user-field_active'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_active',
+      'field_permissions' => array(
+        'type' => '2',
+      ),
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => '',
+          1 => '',
+        ),
+        'allowed_values_function' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_boolean',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => array(
+        0 => array(
+          'value' => 0,
+        ),
+      ),
+      'deleted' => '0',
+      'description' => 'Whether or not user is an active subscriber.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => '6',
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_active',
+      'label' => 'Active',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => 0,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(
+          'display_label' => 1,
+        ),
+        'type' => 'options_onoff',
+        'weight' => '9',
+      ),
+    ),
+  );
+
   // Exported field: 'user-user-field_skip_day'.
   $fields['user-user-field_skip_day'] = array(
     'field_config' => array(
@@ -135,7 +201,7 @@ function compost_customizations_field_default_fields() {
           'module' => 'list',
           'settings' => array(),
           'type' => 'list_default',
-          'weight' => 5,
+          'weight' => '5',
         ),
       ),
       'entity_type' => 'user',
@@ -157,8 +223,10 @@ function compost_customizations_field_default_fields() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('Active');
   t('Skip date');
   t('Subscription Level');
+  t('Whether or not user is an active subscriber.');
 
   return $fields;
 }

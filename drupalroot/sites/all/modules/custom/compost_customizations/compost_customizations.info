@@ -5,7 +5,16 @@ Package = Custom
 
 dependencies[] = date
 dependencies[] = features
+dependencies[] = field_permissions
 dependencies[] = list
 features[features_api][] = api:1
+features[field][] = user-user-field_active
 features[field][] = user-user-field_skip_day
 features[field][] = user-user-field_subscription_level
+features[user_permission][] = access private fields
+features[user_permission][] = administer field permissions
+features[user_permission][] = create field_active
+features[user_permission][] = edit field_active
+features[user_permission][] = edit own field_active
+features[user_permission][] = view field_active
+features[user_permission][] = view own field_active
