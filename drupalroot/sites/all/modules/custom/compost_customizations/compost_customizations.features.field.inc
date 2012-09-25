@@ -167,6 +167,9 @@ function compost_customizations_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_subscription_level',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
       'foreign keys' => array(),
       'indexes' => array(
         'value' => array(
@@ -210,7 +213,7 @@ function compost_customizations_field_default_fields() {
       'entity_type' => 'user',
       'field_name' => 'field_subscription_level',
       'label' => 'Subscription Level',
-      'required' => 1,
+      'required' => 0,
       'settings' => array(
         'user_register_form' => 1,
       ),
