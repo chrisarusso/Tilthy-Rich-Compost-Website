@@ -182,6 +182,12 @@ function _compost_customizations_user_account_submit($form, &$form_state) {
   if (user_access('Administer users')) {
     return;
   }
+  else {
+    // If a user registered herself, notify the admin, too.
+    // This is pulled from _user_mail_notify
+    $params['account'] = $form_state['user'];
+    drupal_mail('user', 'register_pending_approval_admin', variable_get('site_mail', ini_get('sendmail_from')), language_default(), $params);
+  }
 
   $subscription_level = $form_state['values']['field_subscription_level'][LANGUAGE_NONE][0]['value'];
   $default_value = $form['field_subscription_level'][LANGUAGE_NONE]['#default_value'];
