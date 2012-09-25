@@ -84,6 +84,9 @@ function compost_customizations_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_skip_day',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
       'foreign keys' => array(),
       'indexes' => array(),
       'locked' => '0',
@@ -132,7 +135,7 @@ function compost_customizations_field_default_fields() {
       'label' => 'Skip date',
       'required' => 0,
       'settings' => array(
-        'default_value' => 'now',
+        'default_value' => 'blank',
         'default_value2' => 'same',
         'default_value_code' => '',
         'default_value_code2' => '',
