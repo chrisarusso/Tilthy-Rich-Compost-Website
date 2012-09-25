@@ -93,11 +93,14 @@ function compost_customizations_form_user_register_form_alter(&$form, $form_stat
     ),
   );
 
+  // Make non-admin registration subscription level required
+  $form['field_subscription_level'][LANGUAGE_NONE]['#required'] = user_access('Administer users') ? FALSE : 1;
+
   // Add validation to ensure if user wants text messages, that they've selected a mobile carrier
   $form['#validate'][] = '_compost_customizations_mobile_carrier_validate';
 
   // Add custom submit handling
-  $form['#submit'][] = '_compost_customizations_user_register_submit';
+  $form['#submit'][] = '_compost_customizations_user_account_submit';
 
 }
 
@@ -110,14 +113,15 @@ function compost_customizations_form_user_profile_form_alter(&$form, $form_state
 
   $form['field_skip_day'][LANGUAGE_NONE]['#title'] = t('Enter dates you won\'t need a pick up (e.g. on vacation)');
 
-  // Make subscription level mandatory for non-admins so admins can create with blank data
-  // but user, when logging in, needs to make a change
+  // Make non-admin subscription level required when updating profile
   $form['field_subscription_level'][LANGUAGE_NONE]['#required'] = user_access('Administer users') ? FALSE : 1;
-
 
   // Hide but don't delete previous skip days
   // @todo: This is erroring out when hiding previously good date element
   $form = _compost_customizations_hide_past_skip_days($form);
+
+  // Add custom submit handling
+  $form['#submit'][] = '_compost_customizations_user_account_submit';
 }
 
 /*
@@ -163,20 +167,19 @@ function _compost_customizations_user_skip_day_validate($form, $form_state) {
  * We allow users to signup and since there is no hard-fast obligation to pay, they are redirected to the payment
  * page after finishing their registration
  */
-function _compost_customizations_user_register_submit($form, &$form_state) {
-
-  // Unset the welcome message from the user so (s)he doesn't expect email
-  drupal_get_messages('status');
-
-  $subscription_level = $form_state['values']['field_subscription_level'][LANGUAGE_NONE][0]['value'];
+function _compost_customizations_user_account_submit($form, &$form_state) {
 
   // Don't redirect on admin form creation
-  if ('admin' == arg(0)) {
+  if (user_access('Administer users')) {
     return;
   }
 
-  // Direct them to payment if they've selected anything but FREE
-  if ($subscription_level  != "0") {
+  $subscription_level = $form_state['values']['field_subscription_level'][LANGUAGE_NONE][0]['value'];
+  $default_value = $form['field_subscription_level'][LANGUAGE_NONE]['#default_value'];
+  // Direct them to payment if they've selected anything but FREE on registration
+  // of if they are moving from no selection to a non-free selection on an admin created account
+  if (($subscription_level  != "0" && $form['#form_id'] == 'user_register_form') ||
+    $subscription_level  != "0" && $form['#form_id'] == 'user_profile_form' && empty($default_value)) {
     // Redirect to our pyament page which consists of a block on an empty node page
     $form_state['redirect'] = array(
       'payment',
@@ -184,9 +187,8 @@ function _compost_customizations_user_register_submit($form, &$form_state) {
     );
 
     drupal_set_message(t('You\'re not done!  Please submit your payment now.  Thank you so much for subscribing.'));
-
   }
-  else {
+  elseif ($form['#form_id'] == 'user_register_form') {
     drupal_set_message(t('Thank you so much for subscribing!  If later, you are able to help out financially please
       visit !URL', array('!URL' => l(
         'the payment page',
@@ -195,7 +197,6 @@ function _compost_customizations_user_register_submit($form, &$form_state) {
       ))
     );
   }
-
 }
 
 /*
