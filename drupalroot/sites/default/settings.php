@@ -408,6 +408,10 @@ ini_set('session.cookie_lifetime', 2000000);
 #   '@count min' => '@count minutes',
 # );
 
+$conf['locale_custom_strings_en'][''] = array(
+  'Create new account' => 'Subscribe'
+);
+
 /**
  *
  * IP blocking:
