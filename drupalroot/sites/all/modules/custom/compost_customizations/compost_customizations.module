@@ -244,6 +244,7 @@ function template_preprocess_paypal_payment_form(&$variables) {
 
   $select_element = array(
     'element' => array(
+      '#name' => 'os0', // Paypal code needed to work
       '#options' => _compost_customizations_paypal_payment_options(),
       '#default_value' => isset($_GET['subscription_level']) ? $_GET['subscription_level'] : 'Middle + $5',
       '#value' => isset($_GET['subscription_level']) ? $_GET['subscription_level'] : 'Middle + $5'
