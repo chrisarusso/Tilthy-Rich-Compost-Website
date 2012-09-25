@@ -165,6 +165,11 @@ function _compost_customizations_user_register_submit($form, &$form_state) {
 
   $subscription_level = $form_state['values']['field_subscription_level'][LANGUAGE_NONE][0]['value'];
 
+  // Don't redirect on admin form creation
+  if ('admin' == arg(0)) {
+    return;
+  }
+
   // Direct them to payment if they've selected anything but FREE
   if ($subscription_level  != "0") {
     // Redirect to our pyament page which consists of a block on an empty node page
