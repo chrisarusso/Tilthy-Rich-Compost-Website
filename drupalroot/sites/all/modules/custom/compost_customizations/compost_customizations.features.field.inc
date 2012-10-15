@@ -71,7 +71,257 @@ function compost_customizations_field_default_fields() {
           'display_label' => 1,
         ),
         'type' => 'options_onoff',
-        'weight' => '9',
+        'weight' => '8',
+      ),
+    ),
+  );
+
+  // Exported field: 'user-user-field_location'.
+  $fields['user-user-field_location'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_location',
+      'field_permissions' => array(
+        'type' => '1',
+      ),
+      'foreign keys' => array(),
+      'indexes' => array(
+        'lid' => array(
+          0 => 'lid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'location_cck',
+      'settings' => array(
+        'gmap_macro' => '[gmap ]',
+        'gmap_marker' => 'drupal',
+        'location_settings' => array(
+          'display' => array(
+            'hide' => array(
+              'additional' => 0,
+              'city' => 0,
+              'coords' => 0,
+              'country' => 0,
+              'country_name' => 0,
+              'locpick' => 0,
+              'map_link' => 0,
+              'name' => 0,
+              'postal_code' => 0,
+              'province' => 0,
+              'province_name' => 0,
+              'street' => 0,
+            ),
+          ),
+          'form' => array(
+            'fields' => array(
+              'additional' => array(
+                'collect' => '1',
+                'default' => '',
+                'weight' => '6',
+              ),
+              'city' => array(
+                'collect' => '2',
+                'default' => '',
+                'weight' => '8',
+              ),
+              'country' => array(
+                'collect' => '1',
+                'default' => 'us',
+                'weight' => '14',
+              ),
+              'locpick' => array(
+                'collect' => '1',
+                'weight' => '20',
+              ),
+              'name' => array(
+                'collect' => '0',
+                'default' => '',
+                'weight' => '2',
+              ),
+              'postal_code' => array(
+                'collect' => '2',
+                'default' => '',
+                'weight' => '12',
+              ),
+              'province' => array(
+                'collect' => '2',
+                'default' => '',
+                'weight' => '10',
+                'widget' => 'autocomplete',
+              ),
+              'street' => array(
+                'collect' => '1',
+                'default' => '',
+                'weight' => '4',
+              ),
+            ),
+          ),
+        ),
+      ),
+      'translatable' => '0',
+      'type' => 'location',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => array(
+        0 => array(
+          'location_settings' => array(
+            'display' => array(
+              'hide' => array(
+                'additional' => 0,
+                'city' => 0,
+                'coords' => 0,
+                'country' => 0,
+                'country_name' => 0,
+                'locpick' => 0,
+                'map_link' => 0,
+                'name' => 0,
+                'postal_code' => 0,
+                'province' => 0,
+                'province_name' => 0,
+                'street' => 0,
+              ),
+            ),
+            'form' => array(
+              'fields' => array(
+                'additional' => array(
+                  '#parents' => array(
+                    0 => 'field_location',
+                    1 => 'und',
+                    2 => 0,
+                  ),
+                  'collect' => '1',
+                  'default' => '',
+                  'weight' => '6',
+                ),
+                'city' => array(
+                  '#parents' => array(
+                    0 => 'field_location',
+                    1 => 'und',
+                    2 => 0,
+                  ),
+                  'collect' => 1,
+                  'default' => '',
+                  'weight' => '8',
+                ),
+                'country' => array(
+                  '#parents' => array(
+                    0 => 'field_location',
+                    1 => 'und',
+                    2 => 0,
+                  ),
+                  'collect' => '1',
+                  'default' => 'us',
+                  'weight' => '14',
+                ),
+                'delete_location' => array(
+                  'default' => FALSE,
+                  'nodiff' => TRUE,
+                ),
+                'is_primary' => array(
+                  'default' => 0,
+                ),
+                'latitude' => array(
+                  'default' => 0,
+                ),
+                'lid' => array(
+                  'default' => FALSE,
+                ),
+                'locpick' => array(
+                  '#parents' => array(
+                    0 => 'field_location',
+                    1 => 'und',
+                    2 => 0,
+                  ),
+                  'collect' => '1',
+                  'default' => FALSE,
+                  'nodiff' => TRUE,
+                  'weight' => '20',
+                ),
+                'longitude' => array(
+                  'default' => 0,
+                ),
+                'name' => array(
+                  'collect' => '0',
+                  'default' => '',
+                  'weight' => '2',
+                ),
+                'postal_code' => array(
+                  '#parents' => array(
+                    0 => 'field_location',
+                    1 => 'und',
+                    2 => 0,
+                  ),
+                  'collect' => 1,
+                  'default' => '',
+                  'weight' => '12',
+                ),
+                'province' => array(
+                  '#parents' => array(
+                    0 => 'field_location',
+                    1 => 'und',
+                    2 => 0,
+                  ),
+                  'collect' => 1,
+                  'default' => '',
+                  'weight' => '10',
+                  'widget' => 'autocomplete',
+                ),
+                'source' => array(
+                  'default' => 0,
+                ),
+                'street' => array(
+                  '#parents' => array(
+                    0 => 'field_location',
+                    1 => 'und',
+                    2 => 0,
+                  ),
+                  'collect' => '1',
+                  'default' => '',
+                  'weight' => '4',
+                ),
+              ),
+            ),
+          ),
+          'street' => '',
+          'additional' => '',
+          'city' => 'Durham',
+          'province' => 'North Carolina',
+          'postal_code' => '',
+          'country' => 'us',
+          'locpick' => array(
+            'user_latitude' => '',
+            'user_longitude' => '',
+          ),
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'location_cck',
+          'settings' => array(),
+          'type' => 'location_default',
+          'weight' => 7,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_location',
+      'label' => 'Location',
+      'required' => 1,
+      'settings' => array(
+        'user_register_form' => 1,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'location_cck',
+        'settings' => array(),
+        'type' => 'location',
+        'weight' => '2',
       ),
     ),
   );
@@ -154,7 +404,7 @@ function compost_customizations_field_default_fields() {
           'year_range' => '-3:+3',
         ),
         'type' => 'date_popup',
-        'weight' => '7',
+        'weight' => '6',
       ),
     ),
   );
@@ -222,7 +472,7 @@ function compost_customizations_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '8',
+        'weight' => '7',
       ),
     ),
   );
@@ -230,6 +480,7 @@ function compost_customizations_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Active');
+  t('Location');
   t('Skip date');
   t('Subscription Level');
   t('Whether or not user is an active subscriber.');
