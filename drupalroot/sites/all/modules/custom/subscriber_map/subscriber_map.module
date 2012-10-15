@@ -16,11 +16,15 @@ function subscriber_map_views_pre_render(&$view) {
       // Store up the locations to be passed to javascript.
       $locations = array();
       foreach($view->result as $key => $result) {
-        $locations[$key] = array(
-          'uid'     => $result->uid,
-          'title'   => check_plain($result->field_field_address[0]['raw']['first_name'] . " " . $result->field_field_address[0]['raw']['last_name']),
-          'address' => drupal_render($result->field_field_address[0]['rendered'])
-        );
+        if (!is_null($result->field_field_location[0]['raw']['longitude'])) {
+          $locations[$key] = array(
+            'uid'     => $result->uid,
+            'lon' => $result->field_field_location[0]['raw']['longitude'],
+            'lat' => $result->field_field_location[0]['raw']['latitude'],
+            'title'   => check_plain($result->field_field_first_name[0]['raw']['safe_value'] . " " . $result->field_field_last_name[0]['raw']['safe_value']),
+            'address' => drupal_render($result->field_field_location[0]['rendered'])
+          );
+        }
       }
       // Add Google maps API.
       drupal_add_js('http://maps.googleapis.com/maps/api/js?sensor=false', array('type' => 'external', 'scope' => 'header'));
@@ -39,8 +43,3 @@ function subscriber_map_views_pre_render(&$view) {
 
 }
 
-function subscriber_map_preprocess_page(&$vars) {
-  if (!empty($vars['theme_hook_suggestions']) && in_array('page__map',$vars['theme_hook_suggestions'])) {
-    $vars['custom_page_title'] = '<h1>' . t('Subscriber Map') . '</h1>';
-  }
-}

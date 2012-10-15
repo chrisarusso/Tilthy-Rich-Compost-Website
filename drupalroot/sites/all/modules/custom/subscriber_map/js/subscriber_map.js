@@ -1,19 +1,19 @@
 (function ($) {
 
   // Initialize
-  Drupal.tasupply_storefinder = Drupal.tasupply_storefinder || {};
+  Drupal.subscriber_map = Drupal.subscriber_map || {};
 
   // Map drawing function
-  Drupal.tasupply_storefinder.draw_map = function() {
+  Drupal.subscriber_map.draw_map = function() {
 
     // Don't do anything if you don't have locations
-    if (typeof(Drupal.settings.tasupply_storefinder) != 'undefined') {
+    if (typeof(Drupal.settings.subscriber_map) != 'undefined') {
 
-      var settings = Drupal.settings.tasupply_storefinder;
+      var settings = Drupal.settings.subscriber_map;
 
       // Put the map canvas below the View.
-      var map_canvas = $('<div id="storefinder-map"></div>');
-      $('.view-id-store_locations').after(map_canvas);
+      var map_canvas = $('<div id="subscriber-map"></div>');
+      $('.view-id-map').after(map_canvas);
 
       var center = [];
       var markers = [];
@@ -76,7 +76,7 @@
       // Add the markers to the map.
       $.each(markers, function(i){
         //var spriteSize = new google.maps.Size(50, 50);
-        var icon = new google.maps.MarkerImage('sites/tasupply.com/modules/custom/tasupply_storefinder/images/star-32.png', new google.maps.Size(32, 32));
+        var icon = new google.maps.MarkerImage('sites/all/modules/custom/subscriber_map/images/green-light-map-icon.png', new google.maps.Size(32, 32));
         this.setIcon(icon);
         this.setZIndex(i * -1);
         this.setMap(map);
@@ -91,9 +91,9 @@
   }
 
   // Attach our behaviors.
-  Drupal.behaviors.tasupply_storefinder = {
+  Drupal.behaviors.subscriber_map = {
     attach: function(context) {
-      Drupal.tasupply_storefinder.draw_map();
+      Drupal.subscriber_map.draw_map();
     }
   }
 

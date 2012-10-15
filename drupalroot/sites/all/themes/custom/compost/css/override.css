@@ -70,3 +70,13 @@ th label {
 #field-skip-day-values input {
     width: 110px;
 }
+
+div.form-item-field-first-name-und-0-value {
+    width: 270px;
+    float: left;
+    margin-right: 30px;
+}
+
+div.form-item-field-first-name-und-0-value.form-item {
+    margin-top: 0px;
+}
