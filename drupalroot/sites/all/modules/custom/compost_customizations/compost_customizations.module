@@ -93,6 +93,11 @@ function compost_customizations_form_user_register_form_alter(&$form, $form_stat
     ),
   );
 
+  $form['field_location'][LANGUAGE_NONE][0]['#title'] = t('Address');
+  // Defaults set in UI @ admin/config/people/accounts/fields/field_location
+  // $form['field_location'][LANGUAGE_NONE][0]['#default_value']['city'] = t('Durham');
+  // $form['field_location'][LANGUAGE_NONE][0]['#default_value']['province'] = t('North Carolina');
+
   // Make non-admin registration subscription level required
   $form['field_subscription_level'][LANGUAGE_NONE]['#required'] = user_access('Administer users') ? FALSE : 1;
 

@@ -1,0 +1,46 @@
+<?php
+/**
+ * @file
+ * Code for the subscriber_map feature.
+ */
+
+include_once('subscriber_map.features.inc');
+
+/**
+ * Implements hook_views_pre_render().
+ * @param type $view
+ */
+function subscriber_map_views_pre_render(&$view) {
+  switch($view->name) {
+    case 'map':
+      // Store up the locations to be passed to javascript.
+      $locations = array();
+      foreach($view->result as $key => $result) {
+        $locations[$key] = array(
+          'uid'     => $result->uid,
+          'title'   => check_plain($result->field_field_address[0]['raw']['first_name'] . " " . $result->field_field_address[0]['raw']['last_name']),
+          'address' => drupal_render($result->field_field_address[0]['rendered'])
+        );
+      }
+      // Add Google maps API.
+      drupal_add_js('http://maps.googleapis.com/maps/api/js?sensor=false', array('type' => 'external', 'scope' => 'header'));
+
+      // Add Custom JS.
+      drupal_add_js(drupal_get_path('module', 'subscriber_map') . '/js/subscriber_map.js');
+
+      // Make locations available to js.
+      $js_settings = array('subscriber_map' => $locations);
+      drupal_add_js($js_settings, array('type' => 'setting'));
+
+      // Add some minimal CSS
+      drupal_add_css(drupal_get_path('module', 'subscriber_map') . '/css/subscriber_map.css');
+      break;
+  }
+
+}
+
+function subscriber_map_preprocess_page(&$vars) {
+  if (!empty($vars['theme_hook_suggestions']) && in_array('page__map',$vars['theme_hook_suggestions'])) {
+    $vars['custom_page_title'] = '<h1>' . t('Subscriber Map') . '</h1>';
+  }
+}
