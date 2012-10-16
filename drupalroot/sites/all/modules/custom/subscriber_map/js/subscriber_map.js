@@ -36,8 +36,11 @@
         var opts = {
           position: latlng,
           title: this.title,
-          type: i.toString()
+          type: i.toString(),
+          access: this.access,
+          active: this.status
         };
+
         markers[i] = new google.maps.Marker(opts);
 
         // Set up the clickable windows with the address
@@ -75,8 +78,14 @@
 
       // Add the markers to the map.
       $.each(markers, function(i){
-        //var spriteSize = new google.maps.Size(50, 50);
-        var icon = new google.maps.MarkerImage('sites/all/modules/custom/subscriber_map/images/green-light-map-icon.png', new google.maps.Size(32, 32));
+
+        if (this.access == 0 || this.status == 0) {
+            var icon = new google.maps.MarkerImage('sites/all/modules/custom/subscriber_map/images/red-light-map-icon.png', new google.maps.Size(32, 32));
+        }
+        else {
+            var icon = new google.maps.MarkerImage('sites/all/modules/custom/subscriber_map/images/green-light-map-icon.png', new google.maps.Size(32, 32));
+        }
+
         this.setIcon(icon);
         this.setZIndex(i * -1);
         this.setMap(map);

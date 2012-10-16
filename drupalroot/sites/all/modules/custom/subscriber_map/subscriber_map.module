@@ -18,6 +18,8 @@ function subscriber_map_views_pre_render(&$view) {
       foreach($view->result as $key => $result) {
         if (!is_null($result->field_field_location[0]['raw']['longitude'])) {
           $locations[$key] = array(
+            'access' => $result->users_access,
+            'status' => $result->users_status,
             'uid'     => $result->uid,
             'lon' => $result->field_field_location[0]['raw']['longitude'],
             'lat' => $result->field_field_location[0]['raw']['latitude'],
