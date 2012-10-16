@@ -24,6 +24,7 @@ function subscriber_map_field_default_fields() {
           0 => 'lid',
         ),
       ),
+      'locked' => '0',
       'module' => 'location_cck',
       'settings' => array(
         'gmap_macro' => '[gmap ]',

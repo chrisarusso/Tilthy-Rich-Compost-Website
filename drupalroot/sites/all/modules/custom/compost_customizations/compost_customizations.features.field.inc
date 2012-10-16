@@ -71,7 +71,7 @@ function compost_customizations_field_default_fields() {
           'display_label' => 1,
         ),
         'type' => 'options_onoff',
-        'weight' => '10',
+        'weight' => '11',
       ),
     ),
   );
@@ -137,7 +137,7 @@ function compost_customizations_field_default_fields() {
           'size' => '30',
         ),
         'type' => 'text_textfield',
-        'weight' => '1',
+        'weight' => '2',
       ),
     ),
   );
@@ -203,7 +203,7 @@ function compost_customizations_field_default_fields() {
           'size' => '30',
         ),
         'type' => 'text_textfield',
-        'weight' => '2',
+        'weight' => '3',
       ),
     ),
   );
@@ -235,11 +235,11 @@ function compost_customizations_field_default_fields() {
             'hide' => array(
               'additional' => 0,
               'city' => 0,
-              'coords' => 'coords',
+              'coords' => 0,
               'country' => 0,
               'country_name' => 0,
               'locpick' => 0,
-              'map_link' => 'map_link',
+              'map_link' => 0,
               'name' => 0,
               'postal_code' => 0,
               'province' => 0,
@@ -535,7 +535,7 @@ function compost_customizations_field_default_fields() {
           'year_range' => '-3:+3',
         ),
         'type' => 'date_popup',
-        'weight' => '8',
+        'weight' => '9',
       ),
     ),
   );
@@ -603,7 +603,7 @@ function compost_customizations_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '9',
+        'weight' => '10',
       ),
     ),
   );
