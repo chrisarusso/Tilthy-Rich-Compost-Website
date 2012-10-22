@@ -304,3 +304,18 @@ function _compost_customizations_paypal_payment_options() {
     "Please...?" => "Please...? : $1,000.00 USD - monthly",
   );
 }
+
+/**
+ * @param $user
+ *  A user object
+ * @return string
+ *  The formatted first and last name of the user
+ */
+function compost_customizations_format_name($user) {
+  $account = user_load($user->uid);
+
+  $first_name = $account->field_first_name[LANGUAGE_NONE][0]['safe_value'];
+  $last_name = $account->field_last_name[LANGUAGE_NONE][0]['safe_value'];
+
+  return (!empty($first_name) && !empty($last_name)) ? $first_name . ' ' . $last_name : $account->mail;
+}

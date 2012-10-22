@@ -80,3 +80,19 @@ div.form-item-field-first-name-und-0-value {
 div.form-item-field-first-name-und-0-value.form-item {
     margin-top: 0px;
 }
+
+#login_name_or_link {
+  color: #FFF;
+  float: right;
+  font-size: 1.5em;
+  position: relative;
+  top: 90px;
+}
+
+#login_name_or_link a {
+    color: #B0DF5C;
+    font-weight: bold;
+}
+#login_name_or_link a:hover {
+    text-decoration: underline;
+}
