@@ -66,6 +66,19 @@ function subscriber_map_views_default_views() {
   $handler->display->display_options['fields']['access']['field'] = 'access';
   $handler->display->display_options['fields']['access']['exclude'] = TRUE;
   $handler->display->display_options['fields']['access']['date_format'] = 'long';
+  /* Field: User: Skip date */
+  $handler->display->display_options['fields']['field_skip_day']['id'] = 'field_skip_day';
+  $handler->display->display_options['fields']['field_skip_day']['table'] = 'field_data_field_skip_day';
+  $handler->display->display_options['fields']['field_skip_day']['field'] = 'field_skip_day';
+  $handler->display->display_options['fields']['field_skip_day']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_skip_day']['settings'] = array(
+    'format_type' => 'long',
+    'fromto' => 'both',
+    'multiple_number' => '',
+    'multiple_from' => '',
+    'multiple_to' => '',
+  );
+  $handler->display->display_options['fields']['field_skip_day']['delta_offset'] = '0';
   /* Sort criterion: User: Created date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'users';

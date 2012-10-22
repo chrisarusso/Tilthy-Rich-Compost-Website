@@ -38,7 +38,8 @@
           title: this.title,
           type: i.toString(),
           access: this.access,
-          active: this.status
+          active: this.status,
+          next_day_off: this.next_day_off
         };
 
         markers[i] = new google.maps.Marker(opts);
@@ -79,12 +80,20 @@
       // Add the markers to the map.
       $.each(markers, function(i){
 
+        // Set map icon to red for subscribers who haven't paid or logged in
+        // Set map icon to yellow for subscribers who are taking this week off
+        // Set map icon to green for subscribers who should get a pick up this week
         if (this.access == 0 || this.status == 0) {
-            var icon = new google.maps.MarkerImage('sites/all/modules/custom/subscriber_map/images/red-light-map-icon.png', new google.maps.Size(32, 32));
+            var color = 'red';
+        }
+        else if (this.next_day_off == true) {
+            var color = 'yellow';
         }
         else {
-            var icon = new google.maps.MarkerImage('sites/all/modules/custom/subscriber_map/images/green-light-map-icon.png', new google.maps.Size(32, 32));
+            var color = 'green';
         }
+
+        var icon = new google.maps.MarkerImage('sites/all/modules/custom/subscriber_map/images/' + color + '-light-map-icon.png', new google.maps.Size(32, 32));
 
         this.setIcon(icon);
         this.setZIndex(i * -1);
