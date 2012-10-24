@@ -71,7 +71,7 @@ function compost_customizations_field_default_fields() {
           'display_label' => 1,
         ),
         'type' => 'options_onoff',
-        'weight' => '11',
+        'weight' => '10',
       ),
     ),
   );
@@ -137,7 +137,7 @@ function compost_customizations_field_default_fields() {
           'size' => '30',
         ),
         'type' => 'text_textfield',
-        'weight' => '2',
+        'weight' => '1',
       ),
     ),
   );
@@ -203,7 +203,7 @@ function compost_customizations_field_default_fields() {
           'size' => '30',
         ),
         'type' => 'text_textfield',
-        'weight' => '3',
+        'weight' => '2',
       ),
     ),
   );
@@ -535,7 +535,7 @@ function compost_customizations_field_default_fields() {
           'year_range' => '-3:+3',
         ),
         'type' => 'date_popup',
-        'weight' => '9',
+        'weight' => '8',
       ),
     ),
   );
@@ -603,7 +603,7 @@ function compost_customizations_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '10',
+        'weight' => '9',
       ),
     ),
   );

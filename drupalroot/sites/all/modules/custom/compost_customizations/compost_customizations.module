@@ -319,3 +319,116 @@ function compost_customizations_format_name($user) {
 
   return (!empty($first_name) && !empty($last_name)) ? $first_name . ' ' . $last_name : $account->mail;
 }
+
+/**
+ * @param $user
+ *  User object
+ *
+ * returns
+ *  Email that will go to user's cell phone
+ */
+function compost_customizations_retrieve_text_email($user) {
+  $carrier = $user->field_mobile_carrier_provider[LANGUAGE_NONE][0]['value'];
+  $unformatted_phone_number = $user->field_phone_number[LANGUAGE_NONE][0]['value'];
+  $formatted_phone_number = preg_replace("/[^0-9]+/", "", $unformatted_phone_number);
+
+  // @todo: Update with more comprehensive list of carriers
+  switch ($carrier) {
+    case 'Verizon':
+      return $formatted_phone_number . '@vtext.com';
+    case 'AT&T':
+      return $formatted_phone_number . '@txt.att.net';
+    case 'Sprint':
+      return $formatted_phone_number . '@messaging.sprintpcs.com';
+    case 'T-Mobile':
+      return $formatted_phone_number . '@tmomail.net';
+    case 'U.S. Cellular':
+      return $formatted_phone_number . '@email.uscc.net';
+    default:
+      return false;
+  }
+}
+
+/*
+ * Send email and text reminders via cron night before buckets go out
+ */
+function compost_customizations_send_reminders() {
+  // @todo: Combine these into one function as there is a lot of reuse
+  compost_customizations_send_email_reminders();
+  compost_customizations_send_text_reminders();
+}
+
+/*
+ * Send text reminders to subscribers who want texts
+ */
+function compost_customizations_send_text_reminders() {
+
+  $query = new EntityFieldQuery();
+
+  $query->entityCondition('entity_type', 'user')
+    ->fieldCondition('field_reminders', 'value', 2);
+
+  $result = $query->execute();
+
+  if (isset($result['user'])) {
+    $user_uids = array_keys($result['user']);
+    $users = entity_load('user', $user_uids);
+  }
+
+  // @todo: Don't send them on weeks they've opted out of
+  foreach ($users as $user) {
+    $text_email = compost_customizations_retrieve_text_email($user);
+    drupal_mail('compost_customizations', 'text_email_reminder', $text_email, $user->language);
+  }
+}
+
+/*
+ * Send email reminders to subscribers who want emails
+ */
+function compost_customizations_send_email_reminders() {
+
+  $query = new EntityFieldQuery();
+
+  $query->entityCondition('entity_type', 'user')
+    ->fieldCondition('field_reminders', 'value', 1);
+
+  $result = $query->execute();
+
+  if (isset($result['user'])) {
+    $user_uids = array_keys($result['user']);
+    $users = entity_load('user', $user_uids);
+  }
+
+  // @todo: Don't send them on weeks they've opted out of
+  foreach ($users as $user) {
+    drupal_mail('compost_customizations', 'email_reminder', $user->mail, $user->language);
+  }
+}
+
+/*
+ * Implements hook_mail()
+ */
+function compost_customizations_mail($key, &$message, $headers) {
+  global $conf;
+  // @todo: Come up with better way to store reply text number than in settings.php
+  switch ($key) {
+    case 'text_email_reminder':
+      $message['body'][] = t('Put your bucket out tonight!  Text back @cell_phone with any issues',
+        array('@cell_phone' => $conf['reply_mobile_number']));
+      $message['subject'] = 'Compost Bucket Reminder';
+      break;
+    case 'email_reminder':
+      $message['body'][] = 'Put your compost bucket(s) out tonight please!';
+      $message['body'][] = 'Thanks,';
+      $message['body'][] = "- " . url('', array ('absolute' => true));
+      $message['subject'] = 'Compost Bucket Reminder';
+  }
+}
+
+/*
+ * Implements hook_cron()
+ */
+function compost_customizations_cron() {
+  // Timing should be controlled by elysia_cron
+  compost_customizations_send_reminders();
+}
