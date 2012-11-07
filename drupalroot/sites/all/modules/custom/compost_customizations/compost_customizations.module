@@ -350,18 +350,9 @@ function compost_customizations_retrieve_text_email($user) {
 }
 
 /*
- * Send email and text reminders via cron night before buckets go out
+ * Returns users (objects) that opted into text reminders
  */
-function compost_customizations_send_reminders() {
-  // @todo: Combine these into one function as there is a lot of reuse
-  compost_customizations_send_email_reminders();
-  compost_customizations_send_text_reminders();
-}
-
-/*
- * Send text reminders to subscribers who want texts
- */
-function compost_customizations_send_text_reminders() {
+function compost_customizations_get_text_reminders() {
 
   $query = new EntityFieldQuery();
 
@@ -375,17 +366,14 @@ function compost_customizations_send_text_reminders() {
     $users = entity_load('user', $user_uids);
   }
 
-  // @todo: Don't send them on weeks they've opted out of
-  foreach ($users as $user) {
-    $text_email = compost_customizations_retrieve_text_email($user);
-    drupal_mail('compost_customizations', 'text_email_reminder', $text_email, $user->language);
-  }
+  return $users;
+
 }
 
 /*
- * Send email reminders to subscribers who want emails
+ * Returns users (objects) that opted into email reminders
  */
-function compost_customizations_send_email_reminders() {
+function compost_customizations_get_email_reminders() {
 
   $query = new EntityFieldQuery();
 
@@ -394,15 +382,13 @@ function compost_customizations_send_email_reminders() {
 
   $result = $query->execute();
 
+  // @todo: Don't send them on weeks they've opted out of
   if (isset($result['user'])) {
     $user_uids = array_keys($result['user']);
     $users = entity_load('user', $user_uids);
   }
 
-  // @todo: Don't send them on weeks they've opted out of
-  foreach ($users as $user) {
-    drupal_mail('compost_customizations', 'email_reminder', $user->mail, $user->language);
-  }
+  return $users;
 }
 
 /*
@@ -430,5 +416,50 @@ function compost_customizations_mail($key, &$message, $headers) {
  */
 function compost_customizations_cron() {
   // Timing should be controlled by elysia_cron
-  compost_customizations_send_reminders();
+  // Fill out queues now, and they get executed as queues later in the cron run
+
+  $text_queue = DrupalQueue::get('text_reminders');
+  foreach (compost_customizations_get_text_reminders() as $item) {
+    $text_queue->createItem($item);
+  }
+
+  $email_queue = DrupalQueue::get('email_reminders');
+  foreach (compost_customizations_get_email_reminders() as $item) {
+    $email_queue->createItem($item);
+  }
+}
+
+// Implementation per http://rbayliss.net/drupal-queue-api
+/**
+ * Implements hook_cron_queue_info()
+ */
+function compost_customizations_cron_queue_info() {
+  $queues['email_reminders'] = array(
+    'worker callback' => 'compost_customizations_send_email_reminders',
+    'time' => 300,
+  );
+
+  $queues['text_reminders'] = array(
+    'worker callback' => 'compost_customizations_send_text_reminders',
+    'time' => 300,
+  );
+
+  return $queues;
+}
+
+/**
+ * @param $user
+ *  User object as queue item
+ */
+function compost_customizations_send_email_reminders($user) {
+  drupal_mail('compost_customizations', 'email_reminder', $user->mail, $user->language);
+}
+
+/**
+ * @param $user
+ *  User object as queue item
+ */
+function compost_customizations_send_text_reminders($user) {
+  $text_email = compost_customizations_retrieve_text_email($user);
+  drupal_mail('compost_customizations', 'text_email_reminder', $text_email, $user->language);
 }
