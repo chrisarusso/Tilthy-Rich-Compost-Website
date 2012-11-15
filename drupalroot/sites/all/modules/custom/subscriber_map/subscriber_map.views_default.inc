@@ -49,6 +49,7 @@ function subscriber_map_views_default_views() {
   $handler->display->display_options['fields']['field_location']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_location']['alter']['text'] = ' ';
   $handler->display->display_options['fields']['field_location']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_location']['type'] = 'just_street_name';
   /* Field: User: First Name */
   $handler->display->display_options['fields']['field_first_name']['id'] = 'field_first_name';
   $handler->display->display_options['fields']['field_first_name']['table'] = 'field_data_field_first_name';
@@ -88,6 +89,11 @@ function subscriber_map_views_default_views() {
     'multiple_to' => '',
   );
   $handler->display->display_options['fields']['field_skip_day']['delta_offset'] = '0';
+  /* Field: User: Bucket Location */
+  $handler->display->display_options['fields']['field_bucket_location']['id'] = 'field_bucket_location';
+  $handler->display->display_options['fields']['field_bucket_location']['table'] = 'field_data_field_bucket_location';
+  $handler->display->display_options['fields']['field_bucket_location']['field'] = 'field_bucket_location';
+  $handler->display->display_options['fields']['field_bucket_location']['exclude'] = TRUE;
   /* Sort criterion: User: Created date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'users';

@@ -24,7 +24,8 @@ function subscriber_map_views_pre_render(&$view) {
             'lon' => $result->field_field_location[0]['raw']['longitude'],
             'lat' => $result->field_field_location[0]['raw']['latitude'],
             'title'   => check_plain($result->field_field_first_name[0]['raw']['safe_value'] . " " . $result->field_field_last_name[0]['raw']['safe_value']),
-            'address' => drupal_render($result->field_field_location[0]['rendered'])
+            'address' => drupal_render($result->field_field_location[0]['rendered']),
+            'bucket_location' => empty($result->field_field_bucket_location) ? '' : $result->field_field_bucket_location[0]['raw']['safe_value'],
           );
 
           // If user is skipping next day, add that to the data
