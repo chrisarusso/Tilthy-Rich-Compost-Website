@@ -463,3 +463,26 @@ function compost_customizations_send_text_reminders($user) {
   $text_email = compost_customizations_retrieve_text_email($user);
   drupal_mail('compost_customizations', 'text_email_reminder', $text_email, $user->language);
 }
+
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function compost_customizations_field_formatter_info() {
+  // Add formatter to show just the street name instead of full location with GPS coordinates
+  return array(
+    'just_street_name' => array(
+      'label' => t('Street name only'),
+      'field types' => array('location'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function compost_customizations_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  // Probably should be some qualifier here
+  $element[0]['#markup'] = $items[0]['street'];
+  return $element;
+}
