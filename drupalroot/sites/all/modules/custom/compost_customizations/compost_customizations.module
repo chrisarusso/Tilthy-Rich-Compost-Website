@@ -357,6 +357,7 @@ function compost_customizations_get_text_reminders() {
   $query = new EntityFieldQuery();
 
   $query->entityCondition('entity_type', 'user')
+    ->fieldCondition('field_active', 'value', 1)
     ->fieldCondition('field_reminders', 'value', 2);
 
   $result = $query->execute();
@@ -378,7 +379,8 @@ function compost_customizations_get_email_reminders() {
   $query = new EntityFieldQuery();
 
   $query->entityCondition('entity_type', 'user')
-    ->fieldCondition('field_reminders', 'value', 1);
+    ->fieldCondition('field_reminders', 'value', 1)
+    ->fieldCondition('field_active', 'value', 1);
 
   $result = $query->execute();
 
