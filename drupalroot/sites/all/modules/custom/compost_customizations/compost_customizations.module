@@ -367,6 +367,8 @@ function compost_customizations_get_text_reminders() {
     $users = entity_load('user', $user_uids);
   }
 
+  $users = _compost_customizations_remove_skippers($users);
+
   return $users;
 
 }
@@ -384,11 +386,12 @@ function compost_customizations_get_email_reminders() {
 
   $result = $query->execute();
 
-  // @todo: Don't send them on weeks they've opted out of
   if (isset($result['user'])) {
     $user_uids = array_keys($result['user']);
     $users = entity_load('user', $user_uids);
   }
+
+  $users = _compost_customizations_remove_skippers($users);
 
   return $users;
 }
@@ -487,4 +490,26 @@ function compost_customizations_field_formatter_view($entity_type, $entity, $fie
   // Probably should be some qualifier here
   $element[0]['#markup'] = $items[0]['street'];
   return $element;
+}
+
+/**
+ * @param $users
+ *  An array of users keyed by uid
+ *
+ * Returns all users who haven't skipped the upcoming pick up
+ */
+function _compost_customizations_remove_skippers($users) {
+
+  $time = time();
+  foreach ($users as $user) {
+    foreach($user->field_skip_day as $day) {
+      $stamp = strtotime($day[0]['value']);
+      if ($stamp > $time && $stamp < $time + 7 * 24 * 60 * 60) {
+        unset ($users[$user->uid]);
+      }
+    }
+  }
+
+  return $users;
+
 }
