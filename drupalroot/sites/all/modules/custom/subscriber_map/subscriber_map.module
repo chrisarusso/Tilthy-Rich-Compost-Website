@@ -11,6 +11,11 @@ include_once('subscriber_map.features.inc');
  * @param type $view
  */
 function subscriber_map_views_pre_render(&$view) {
+  // Don't muck with json returns while editing view.
+  if ($view->editing == TRUE) {
+    return;
+  }
+
   switch($view->name) {
     case 'map':
       // Store up the locations to be passed to javascript.
