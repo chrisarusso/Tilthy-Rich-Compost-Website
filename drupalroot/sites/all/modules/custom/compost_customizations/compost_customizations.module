@@ -114,7 +114,6 @@ function compost_customizations_form_user_register_form_alter(&$form, $form_stat
  */
 function compost_customizations_form_user_profile_form_alter(&$form, $form_state, $form_id) {
 
-  // @todo: Reduce duplication in user_profile and user_reg forms.  Maybe general form alter
   // Only reveal mobile carrier inquiry if user wants text reminders
   $form['field_mobile_carrier_provider']['#states'] = array(
     'invisible' => array(
@@ -131,7 +130,6 @@ function compost_customizations_form_user_profile_form_alter(&$form, $form_state
   $form['field_subscription_level'][LANGUAGE_NONE]['#required'] = user_access('Administer users') ? FALSE : 1;
 
   // Hide but don't delete previous skip days
-  // @todo: This is erroring out when hiding previously good date element
   $form = _compost_customizations_hide_past_skip_days($form);
 
   // Add custom submit handling
@@ -332,7 +330,6 @@ function compost_customizations_retrieve_text_email($user) {
   $unformatted_phone_number = $user->field_phone_number[LANGUAGE_NONE][0]['value'];
   $formatted_phone_number = preg_replace("/[^0-9]+/", "", $unformatted_phone_number);
 
-  // @todo: Update with more comprehensive list of carriers
   switch ($carrier) {
     case 'Verizon':
       return $formatted_phone_number . '@vtext.com';
@@ -402,6 +399,7 @@ function compost_customizations_get_email_reminders() {
 function compost_customizations_mail($key, &$message, $headers) {
   global $conf;
   // @todo: Come up with better way to store reply text number than in settings.php
+  // There ought to be a route captain, who has a cell phone number that these go to
   switch ($key) {
     case 'text_email_reminder':
       $message['body'][] = t('Put your bucket out tonight!  Text back @cell_phone with any issues',
@@ -512,4 +510,31 @@ function _compost_customizations_remove_skippers($users) {
 
   return $users;
 
+}
+
+/*
+ * Implements hook_form_FORM_ID_alter()
+ */
+function compost_customizations_form_views_exposed_form_alter(&$form, $form_state, $form_id) {
+  // Inject our routes as a select option instead of leaving it to text input
+  $name = $form_state['view']->name;
+  if (isset($form_state['view']) && ($name == 'map' || $name == 'addresses')){
+
+    $results = db_select('node','n')
+      ->fields('n',array('title'))
+      ->condition('type','route')
+      ->condition('status', 1)
+      ->execute()
+      ->fetchAllKeyed(0, 0);
+
+    $default['All'] = t('All routes');
+
+    $options = array_merge($default, $results);
+
+    $form['title'] = array(
+      '#type' => 'select',
+      '#options' => $options,
+      '#default_value' => 'All',
+    );
+  }
 }
