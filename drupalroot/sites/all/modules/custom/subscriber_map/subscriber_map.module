@@ -35,9 +35,8 @@ function subscriber_map_views_pre_render(&$view) {
 
           // If user is skipping next day, add that to the data
           if (!empty($result->field_field_skip_day)) {
-            // @todo: Remove hardcoding of Thursday
             // This is a timestamp for the next pick up, whether today or sometime in the next week
-            $next_pickup_day = strtotime("This Thursday");
+            $next_pickup_day = strtotime("This " . $result->field_field_pickup_day[0]['raw']['value']);
 
             foreach ($result->field_field_skip_day as $data) {
               if (strtotime($data['raw']['value']) == $next_pickup_day) {
