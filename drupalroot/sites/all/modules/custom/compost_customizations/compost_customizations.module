@@ -398,13 +398,11 @@ function compost_customizations_get_email_reminders() {
  * Implements hook_mail()
  */
 function compost_customizations_mail($key, &$message, $headers) {
-  global $conf;
-  // @todo: Come up with better way to store reply text number than in settings.php
-  // There ought to be a route captain, who has a cell phone number that these go to
+
   switch ($key) {
     case 'text_email_reminder':
       $message['body'][] = t('Put your bucket out tonight!  Text back @cell_phone with any issues',
-        array('@cell_phone' => $conf['reply_mobile_number']));
+        array('@cell_phone' => $message['params']['captain']->field_phone_number[LANGUAGE_NONE][0]['value']));
       $message['subject'] = 'Compost Bucket Reminder';
       break;
     case 'email_reminder':
@@ -464,8 +462,12 @@ function compost_customizations_send_email_reminders($user) {
  *  User object as queue item
  */
 function compost_customizations_send_text_reminders($user) {
+  // Grab formatted text email address as well as captains text-back number for message body
   $text_email = compost_customizations_retrieve_text_email($user);
-  drupal_mail('compost_customizations', 'text_email_reminder', $text_email, $user->language);
+  $route = node_load($user->field_route[LANGUAGE_NONE][0]['target_id']);
+  $captain = user_load($route->field_route_captain[LANGUAGE_NONE][0]['target_id']);
+  $params = array('captain' => $captain);
+  drupal_mail('compost_customizations', 'text_email_reminder', $text_email, $user->language, $params);
 }
 
 
