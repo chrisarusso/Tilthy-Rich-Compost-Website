@@ -155,8 +155,9 @@ function _compost_customizations_mobile_carrier_validate($form, $form_state) {
 function _compost_customizations_user_skip_day_validate($form, $form_state) {
 
   $today = date('Y-m-d', time());
-  // @todo: Update this to incorporate pickup node that user is a part of and not just default to Thursdee
-  $pickup_day = 'Thursday';
+
+  $route = node_load($form_state['user']->field_route[LANGUAGE_NONE][0]['target_id']);
+  $pickup_day = $route->field_pickup_day[LANGUAGE_NONE][0]['value'];
 
   foreach ($form_state['values']['field_skip_day'][LANGUAGE_NONE] as $key => $date) {
 
