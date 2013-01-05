@@ -40,7 +40,8 @@
           access: this.access,
           active: this.status,
           next_day_off: this.next_day_off,
-          bucket_location: this.bucket_location
+          bucket_location: this.bucket_location,
+          uid: this.uid
         };
 
         markers[i] = new google.maps.Marker(opts);
@@ -48,7 +49,7 @@
         // Set up the clickable windows with the address
         // TODO: add title.
         bubbles[i] = new google.maps.InfoWindow({
-          content: '<strong>' + this.title + '</strong><br/>' + this.address + '<br />' + this.bucket_location
+          content: '<strong><a href="' + Drupal.settings.basePath + 'user/' + this.uid + '/edit">' + this.title + '</a></strong><br/>' + this.address + '<br />' + this.bucket_location
         });
 
         // If we have more than one location in our result set create some
