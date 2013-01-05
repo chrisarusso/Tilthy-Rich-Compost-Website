@@ -93,6 +93,11 @@ div.form-item-field-first-name-und-0-value.form-item {
     color: #B0DF5C;
     font-weight: bold;
 }
+
 #login_name_or_link a:hover {
     text-decoration: underline;
+}
+
+tr.new, tr.skip {
+    background-color: rgb(255, 79, 79);
 }

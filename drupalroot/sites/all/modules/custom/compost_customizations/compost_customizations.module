@@ -541,3 +541,57 @@ function compost_customizations_form_views_exposed_form_alter(&$form, $form_stat
     );
   }
 }
+
+
+/**
+ * Implements hook_views_pre_render().
+ * @param type $view
+ */
+function compost_customizations_views_pre_render(&$view) {
+  if ($view->editing == TRUE) {
+    return;
+  }
+
+  switch ($view->name) {
+    case 'addresses':
+      // Use eight days to be safe
+      $eight_days_ago = 60 * 60 * 24 * 8;
+      $now = time();
+      $date_format = 'Y-m-d';
+      $today = date($date_format, $now);
+
+      foreach ($view->result as $id => $subscriber) {
+        // If skip day is today, show "skip"
+        if (!empty($subscriber->field_field_skip_day)) {
+          foreach ($subscriber->field_field_skip_day as $skip_day) {
+            if (date($date_format, strtotime($skip_day['raw']['value'])) == $today) {
+              $view->result[$id]->skip = TRUE;
+            }
+          }
+        }
+
+        // If the user joined in the last 8 days, make sure it's known she's new
+        if ($subscriber->users_created > $now - $eight_days_ago) {
+          $view->result[$id]->new = TRUE;
+        }
+      }
+
+    break;
+  }
+
+}
+
+/*
+ * Implements hook_preprocess_views_view_table()
+ */
+function compost_customizations_preprocess_views_view_table(&$variables, $hook) {
+  foreach ($variables['view']->result as $id => $result) {
+    if ($result->new == TRUE) {
+      $variables['row_classes'][$id][] = 'new';
+    }
+
+    if ($result->skip == TRUE) {
+      $variables['row_classes'][$id][] = 'skip';
+    }
+  }
+}
