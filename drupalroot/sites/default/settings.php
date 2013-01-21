@@ -451,6 +451,10 @@ $conf['locale_custom_strings_en'][''] = array(
  */
 # $conf['allow_authorize_operations'] = FALSE;
 
+// Default to off.  This prevents a production database from having working smtp emails outgoing from
+// a development environment.  This must be overridden in local.settings.php for it to work.
+$conf['smtp_on'] = 0;
+
 if (file_exists(dirname(__FILE__) .'/local.settings.php')) {
   include 'local.settings.php';
 }
