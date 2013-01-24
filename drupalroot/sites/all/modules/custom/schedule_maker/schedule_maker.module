@@ -1,0 +1,77 @@
+<?php
+
+/**
+ * @file
+ * Custom code for multiple node creations from a node add form.
+ */
+
+/*
+ * Implements hook_form_FORM_ID_alter()
+ */
+function schedule_maker_form_route_run_node_form_alter(&$form, &$form_state, $form_id) {
+
+  // Add a vertical menu setting to opt into the node multiplier
+  $form['node_multiplier'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Node multiplier'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#group' => 'additional_settings',
+    '#weight' => 200,
+    '#access' => user_access('administer site configuration'),
+  );
+
+  $form['node_multiplier']['number_to_create'] = array(
+    '#title' => t('Number of nodes to create'),
+    '#type' => 'select',
+    '#options' => array(
+      0 => 0,
+      50 => 50,
+      100 => 100,
+      150 => 150,
+      200 => 200,
+      250 => 250,
+    ),
+  );
+
+  // @todo: Steal from date repeat module intervals setup.
+  $form['node_multiplier']['interval'] = array(
+    '#title' => t('Select interval'),
+    '#description' => t('Nodes will be created per the interval selected beginning at the start date.'),
+    '#type' => 'select',
+    '#options' => array('week'),
+  );
+}
+
+/*
+ * Implements hook_node_submit()
+ */
+function schedule_maker_node_submit($node, $form, $form_state) {
+
+  // If the user opted in to create multiple nodes, we hook in on node creation
+  if ($form_state['values']['number_to_create'] > 0) {
+
+    $route = node_load($form_state['values']['field_route'][LANGUAGE_NONE][0]['target_id']);
+    $start_date = $form_state['values']['field_date'][LANGUAGE_NONE][0]['value'];
+
+    $start_day = date('l', strtotime($form_state['values']['field_date'][LANGUAGE_NONE][0]['value']));
+
+    // If start day isn't on the day of the week of the route, we offset the date the +7 days off the second date
+    if($start_day == $route->field_pickup_day[LANGUAGE_NONE][0]['value']) {
+      $date = strtotime($start_date);
+    }
+    else {
+      $date = strtotime("Previous " . $route->field_pickup_day[LANGUAGE_NONE][0]['value'], strtotime($start_date));
+    }
+
+    // Loop and create route runs starting at number 2.
+    for ($i=2; $i<=$form_state['values']['number_to_create']; $i++) {
+      // Reuse the uncreated node object so it doesn't have things like an nid
+      $node_copy = clone($node);
+      $date = strtotime("+7 days", $date);
+      $node_copy->field_date[LANGUAGE_NONE][0]['value'] =
+      $node_copy->field_date[LANGUAGE_NONE][0]['value2'] = date('Y-m-d', $date) . ' 00:00:00';
+      node_save($node_copy);
+    }
+  }
+}

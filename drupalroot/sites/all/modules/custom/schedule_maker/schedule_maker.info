@@ -1,0 +1,8 @@
+name = Schedule Maker
+description = Used to create distinct "route run" nodes for which runners and cleaners can sign up.
+core = 7.x
+Package = Custom
+
+dependencies[] = date
+
+
