@@ -1,15 +1,16 @@
 name = Compost customizations
 description = Provides customizations to compost website.  A
 core = 7.x
-Package = Custom
-
+package = Other
+php = 5.2.4
 dependencies[] = date
+dependencies[] = elysia_cron
 dependencies[] = features
 dependencies[] = field_permissions
 dependencies[] = list
 dependencies[] = location_cck
-dependencies[] = elysia_cron
 dependencies[] = views
+Package = Custom
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:1
 features[field][] = user-user-field_active
