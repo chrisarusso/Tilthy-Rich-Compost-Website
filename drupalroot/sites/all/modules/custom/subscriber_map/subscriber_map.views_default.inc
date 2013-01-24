@@ -41,6 +41,10 @@ function subscriber_map_views_default_views() {
 <div>Skip day this week: <img src="/sites/all/modules/custom/subscriber_map/images/yellow-light-map-icon.png"></div>
 <div>User has not paid or logged in: <img src="/sites/all/modules/custom/subscriber_map/images/red-light-map-icon.png"></div>';
   $handler->display->display_options['header']['area']['format'] = 'full_html';
+  /* Relationship: Entity Reference: Referenced Entity */
+  $handler->display->display_options['relationships']['field_route_target_id']['id'] = 'field_route_target_id';
+  $handler->display->display_options['relationships']['field_route_target_id']['table'] = 'field_data_field_route';
+  $handler->display->display_options['relationships']['field_route_target_id']['field'] = 'field_route_target_id';
   /* Field: User: Location */
   $handler->display->display_options['fields']['field_location']['id'] = 'field_location';
   $handler->display->display_options['fields']['field_location']['table'] = 'field_data_field_location';
@@ -94,6 +98,14 @@ function subscriber_map_views_default_views() {
   $handler->display->display_options['fields']['field_bucket_location']['table'] = 'field_data_field_bucket_location';
   $handler->display->display_options['fields']['field_bucket_location']['field'] = 'field_bucket_location';
   $handler->display->display_options['fields']['field_bucket_location']['exclude'] = TRUE;
+  /* Field: Content: Pickup day */
+  $handler->display->display_options['fields']['field_pickup_day']['id'] = 'field_pickup_day';
+  $handler->display->display_options['fields']['field_pickup_day']['table'] = 'field_data_field_pickup_day';
+  $handler->display->display_options['fields']['field_pickup_day']['field'] = 'field_pickup_day';
+  $handler->display->display_options['fields']['field_pickup_day']['relationship'] = 'field_route_target_id';
+  $handler->display->display_options['fields']['field_pickup_day']['label'] = '';
+  $handler->display->display_options['fields']['field_pickup_day']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_pickup_day']['element_label_colon'] = FALSE;
   /* Sort criterion: User: Created date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'users';
@@ -106,20 +118,6 @@ function subscriber_map_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = '1';
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filter criterion: User: Route (field_route) */
-  $handler->display->display_options['filters']['field_route_target_id']['id'] = 'field_route_target_id';
-  $handler->display->display_options['filters']['field_route_target_id']['table'] = 'field_data_field_route';
-  $handler->display->display_options['filters']['field_route_target_id']['field'] = 'field_route_target_id';
-  $handler->display->display_options['filters']['field_route_target_id']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_route_target_id']['expose']['operator_id'] = 'field_route_target_id_op';
-  $handler->display->display_options['filters']['field_route_target_id']['expose']['label'] = 'Route ';
-  $handler->display->display_options['filters']['field_route_target_id']['expose']['operator'] = 'field_route_target_id_op';
-  $handler->display->display_options['filters']['field_route_target_id']['expose']['identifier'] = 'field_route_target_id';
-  $handler->display->display_options['filters']['field_route_target_id']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    3 => 0,
-  );
   /* Filter criterion: User: Roles */
   $handler->display->display_options['filters']['rid']['id'] = 'rid';
   $handler->display->display_options['filters']['rid']['table'] = 'users_roles';
@@ -127,6 +125,52 @@ function subscriber_map_views_default_views() {
   $handler->display->display_options['filters']['rid']['operator'] = 'not';
   $handler->display->display_options['filters']['rid']['value'] = array(
     3 => '3',
+  );
+  $handler->display->display_options['filters']['rid']['group'] = 1;
+  /* Filter criterion: User: Active (field_active) */
+  $handler->display->display_options['filters']['field_active_value']['id'] = 'field_active_value';
+  $handler->display->display_options['filters']['field_active_value']['table'] = 'field_data_field_active';
+  $handler->display->display_options['filters']['field_active_value']['field'] = 'field_active_value';
+  $handler->display->display_options['filters']['field_active_value']['value'] = array(
+    1 => '1',
+  );
+  $handler->display->display_options['filters']['field_active_value']['group'] = 1;
+  /* Filter criterion: Content: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'node';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['relationship'] = 'field_route_target_id';
+  $handler->display->display_options['filters']['title']['value'] = 'All';
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Route name';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    3 => '3',
+    1 => 0,
+  );
+  $handler->display->display_options['filters']['title']['group_info']['label'] = 'Title';
+  $handler->display->display_options['filters']['title']['group_info']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['group_info']['default_group'] = '1';
+  $handler->display->display_options['filters']['title']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'louie',
+      'operator' => '=',
+      'value' => 'louie',
+    ),
+    2 => array(
+      'title' => 'time',
+      'operator' => '=',
+      'value' => 'time',
+    ),
+    3 => array(
+      'title' => '',
+      'operator' => '=',
+      'value' => '',
+    ),
   );
 
   /* Display: Page */
