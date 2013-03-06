@@ -14,7 +14,8 @@ function compost_customizations_user_default_permissions() {
   $permissions['access private fields'] = array(
     'name' => 'access private fields',
     'roles' => array(
-      0 => 'administrator',
+      0 => 'Rider',
+      1 => 'administrator',
     ),
     'module' => 'field_permissions',
   );
@@ -42,7 +43,8 @@ function compost_customizations_user_default_permissions() {
   $permissions['edit field_active'] = array(
     'name' => 'edit field_active',
     'roles' => array(
-      0 => 'administrator',
+      0 => 'Rider',
+      1 => 'administrator',
     ),
     'module' => 'field_permissions',
   );
@@ -51,7 +53,8 @@ function compost_customizations_user_default_permissions() {
   $permissions['edit own field_active'] = array(
     'name' => 'edit own field_active',
     'roles' => array(
-      0 => 'administrator',
+      0 => 'Rider',
+      1 => 'administrator',
     ),
     'module' => 'field_permissions',
   );
@@ -60,7 +63,8 @@ function compost_customizations_user_default_permissions() {
   $permissions['view field_active'] = array(
     'name' => 'view field_active',
     'roles' => array(
-      0 => 'administrator',
+      0 => 'Rider',
+      1 => 'administrator',
     ),
     'module' => 'field_permissions',
   );
@@ -69,7 +73,8 @@ function compost_customizations_user_default_permissions() {
   $permissions['view own field_active'] = array(
     'name' => 'view own field_active',
     'roles' => array(
-      0 => 'administrator',
+      0 => 'Rider',
+      1 => 'administrator',
     ),
     'module' => 'field_permissions',
   );

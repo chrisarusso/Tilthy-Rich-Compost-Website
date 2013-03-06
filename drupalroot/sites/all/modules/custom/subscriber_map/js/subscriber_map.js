@@ -95,7 +95,9 @@
             var color = 'green';
         }
 
-        var icon = new google.maps.MarkerImage('sites/all/modules/custom/subscriber_map/images/' + color + '-light-map-icon.png', new google.maps.Size(32, 32));
+        num = i + 1;
+
+        var icon = new google.maps.MarkerImage('sites/all/modules/custom/subscriber_map/images/lwt_map_icons/blue/' + num + '.png', new google.maps.Size(32, 36));
 
         this.setIcon(icon);
         this.setZIndex(i * -1);
