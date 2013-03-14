@@ -582,17 +582,41 @@ function compost_customizations_views_pre_render(&$view) {
 }
 
 /*
- * Implements hook_preprocess_views_view_table()
+ * Implements hook_preprocess_views_view()
  */
-function compost_customizations_preprocess_views_view_table(&$variables, $hook) {
-  // @todo: This needs to be refined so it's not checking every view
+function compost_customizations_preprocess_views_view(&$variables, $hook) {
+
+  if ($variables['view']->name != 'addresses') {
+    return;
+  }
+
   foreach ($variables['view']->result as $id => $result) {
     if ($result->new == TRUE) {
-      $variables['row_classes'][$id][] = 'new';
+      $variables['row_classes'][$id][] = t('new');
     }
 
     if ($result->skip == TRUE) {
-      $variables['row_classes'][$id][] = 'skip';
+      $variables['row_classes'][$id][] = t('skip');
+    }
+  }
+}
+
+/*
+ * Implements hook_preprocess_views_data_export_csv_body()
+ */
+function compost_customizations_preprocess_views_data_export_csv_body(&$variables, $hook) {
+
+  if ($variables['view']->name != 'addresses') {
+    return;
+  }
+
+  foreach ($variables['view']->result as $id => $result) {
+    if ($result->new == TRUE) {
+      $variables['themed_rows'][$id]['nothing'] = '"' . t('new') .'"';
+    }
+
+    if ($result->skip == TRUE) {
+      $variables['themed_rows'][$id]['nothing'] = '"' . t('skip') .'"';
     }
   }
 }
