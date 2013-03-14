@@ -218,7 +218,7 @@ function compost_views_views_default_views() {
   $handler->display->display_options['fields']['field_subscriber_notes']['id'] = 'field_subscriber_notes';
   $handler->display->display_options['fields']['field_subscriber_notes']['table'] = 'field_data_field_subscriber_notes';
   $handler->display->display_options['fields']['field_subscriber_notes']['field'] = 'field_subscriber_notes';
-  $handler->display->display_options['fields']['field_subscriber_notes']['type'] = 'editable';
+  $handler->display->display_options['fields']['field_subscriber_notes']['label'] = 'Notes';
   $handler->display->display_options['fields']['field_subscriber_notes']['settings'] = array(
     'click_to_edit' => 1,
     'empty_text' => '',
