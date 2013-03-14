@@ -36,7 +36,7 @@
   <div class="view-header">
   <?php
     $options = (isset($_GET['title'])) ? array('query' => array('title' => $_GET['title'])) : array();
-    echo l('Print', 'print/addresses', $options); ?> this page.
+    echo l('Download Excel Sheet (CSV)', 'addresses/csv', $options); ?>.
     <?php print $header; ?>
   </div>
   <?php if ($exposed): ?>
