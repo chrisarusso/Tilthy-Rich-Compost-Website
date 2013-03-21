@@ -32,15 +32,6 @@ function subscriber_map_views_default_views() {
   $handler->display->display_options['pager']['type'] = 'none';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
-  /* Header: Global: Text area */
-  $handler->display->display_options['header']['area']['id'] = 'area';
-  $handler->display->display_options['header']['area']['table'] = 'views';
-  $handler->display->display_options['header']['area']['field'] = 'area';
-  $handler->display->display_options['header']['area']['content'] = '<h3>Legend</h3>
-<div>Normal pick up: <img src="/sites/all/modules/custom/subscriber_map/images/green-light-map-icon.png"></div>
-<div>Skip day this week: <img src="/sites/all/modules/custom/subscriber_map/images/yellow-light-map-icon.png"></div>
-<div>User has not paid or logged in: <img src="/sites/all/modules/custom/subscriber_map/images/red-light-map-icon.png"></div>';
-  $handler->display->display_options['header']['area']['format'] = 'full_html';
   /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_route_target_id']['id'] = 'field_route_target_id';
   $handler->display->display_options['relationships']['field_route_target_id']['table'] = 'field_data_field_route';

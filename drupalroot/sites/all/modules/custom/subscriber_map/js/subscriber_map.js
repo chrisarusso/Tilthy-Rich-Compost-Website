@@ -80,35 +80,28 @@
       }
 
       // Add the markers to the map.
+      var count = 1;
       $.each(markers, function(i){
 
-        // Set map icon to red for subscribers who haven't paid or logged in
-        // Set map icon to yellow for subscribers who are taking this week off
-        // Set map icon to green for subscribers who should get a pick up this week
-        if (this.access == 0 || this.status == 0) {
-            var color = 'red';
-        }
-        else if (this.next_day_off == true) {
-            var color = 'yellow';
+        // If user has never accessed the site, or is inactive, or is skipping the day, we don't
+        // show her on the map
+        if (this.access == 0 || this.status == 0 || this.next_day_off == true) {
+            // Do nothing
         }
         else {
-            var color = 'green';
+            var marker_path = 'sites/all/modules/custom/subscriber_map/images/lwt_map_icons/blue/' + count + '.png'
+            var icon = new google.maps.MarkerImage(marker_path, new google.maps.Size(32, 36));
+            count++;
+            this.setIcon(icon);
+            this.setZIndex(i * -1);
+            this.setMap(map);
+
+            // Add click event listener for the bubble window.
+            google.maps.event.addListener(this, 'click', function() {
+              infoWindow.setContent(this.content);
+              infoWindow.open(map, this);
+            });
         }
-
-        num = i + 1;
-
-        var icon = new google.maps.MarkerImage('sites/all/modules/custom/subscriber_map/images/lwt_map_icons/blue/' + num + '.png', new google.maps.Size(32, 36));
-
-        this.setIcon(icon);
-        this.setZIndex(i * -1);
-        this.setMap(map);
-
-        // Add click event listener for the bubble window.
-        google.maps.event.addListener(this, 'click', function() {
-          infoWindow.setContent(this.content);
-          infoWindow.open(map, this);
-        });
-
       })
     }
   }
