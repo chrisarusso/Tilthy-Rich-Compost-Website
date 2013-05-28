@@ -401,15 +401,17 @@ function compost_customizations_mail($key, &$message, $headers) {
 
   switch ($key) {
     case 'text_email_reminder':
-      $message['body'][] = t('Put your bucket out tonight!  Text back @cell_phone with any issues',
+      $message['body'][] = t('Put your compost bucket(s) out tonight please!  Text back @cell_phone with any issues',
         array('@cell_phone' => $message['params']['captain']->field_phone_number[LANGUAGE_NONE][0]['value']));
-      $message['subject'] = 'Compost Bucket Reminder';
+      $message['subject'] = t('Compost Bucket Reminder');
       break;
     case 'email_reminder':
-      $message['body'][] = 'Put your compost bucket(s) out tonight please!';
-      $message['body'][] = 'Thanks,';
-      $message['body'][] = "- " . url('', array ('absolute' => true));
-      $message['subject'] = 'Compost Bucket Reminder';
+      $message['body'][] = t('Put your compost bucket(s) out tonight please!');
+      $message['body'][] = t('If you do not need service this week, please login to your profile: @profile_link and
+      elect for a skip day.', array('@profile_link' => url('user/' . $message['params']['user']->uid . '/edit', array('absolute' => true))));
+      $message['body'][] = t('Thank you') . ',';
+      $message['body'][] = "- " . t('Your friends @') . ' ' . url('', array('absolute' => true));
+      $message['subject'] = t('Compost Bucket Reminder');
   }
 }
 
@@ -454,7 +456,8 @@ function compost_customizations_cron_queue_info() {
  *  User object as queue item
  */
 function compost_customizations_send_email_reminders($user) {
-  drupal_mail('compost_customizations', 'email_reminder', $user->mail, $user->language);
+  $params = array('user' => $user);
+  drupal_mail('compost_customizations', 'email_reminder', $user->mail, $user->language, $params);
 }
 
 /**
