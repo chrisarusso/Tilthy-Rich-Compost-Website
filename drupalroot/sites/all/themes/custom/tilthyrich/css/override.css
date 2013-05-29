@@ -1,0 +1,14 @@
+/* Styles laid on top of other base theme inherited styles go here */
+
+.site-logo { 
+  padding-top: 13px; 
+}
+
+hgroup { 
+padding-top: 95px; 
+}
+
+#nav-menu { 
+  float: left;
+  padding: 15px 0;
+}
