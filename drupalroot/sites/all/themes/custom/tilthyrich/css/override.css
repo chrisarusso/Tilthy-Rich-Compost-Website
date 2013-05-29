@@ -1,14 +1,67 @@
 /* Styles laid on top of other base theme inherited styles go here */
 
-.site-logo { 
-  padding-top: 13px; 
+.site-logo {
+  padding-top: 13px;
+  padding-right: 10px;
 }
 
-hgroup { 
-padding-top: 95px; 
+hgroup {
+  padding-top: 20px;
 }
 
-#nav-menu { 
+hgroup h3 {
+    font-size: 1.6em;
+    line-height: 2.8em;
+}
+
+#nav-menu {
   float: left;
   padding: 15px 0;
+}
+
+.twitter {
+  background: url('../images/twitter.png') 0px -2px no-repeat;
+}
+
+.twitter:hover {
+    background-position: 0px -78px;
+}
+
+.facebook {
+  background: url('../images/facebook.png') 0px -2px no-repeat;
+}
+
+.facebook:hover {
+    background-position: 0px -78px;
+}
+
+.social-links li a {
+    height: 79px;
+    width: 73px;
+}
+
+.user-menu-wrapper {
+    background-color: inherit;
+    border-bottom-width: 3px;
+    padding: 0px;
+    line-height: inherit;
+}
+
+#social span {
+    font-size: 4em;
+    float: left;
+    top: 30px;
+    position: relative;
+}
+
+#social ul {
+    padding-left: 10px;
+}
+
+h1.site-name {
+    line-height: 3em;
+}
+
+h1.site-name a {
+    font-size: 50px;
 }
