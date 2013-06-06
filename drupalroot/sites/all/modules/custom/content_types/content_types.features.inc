@@ -9,6 +9,14 @@
  */
 function content_types_node_info() {
   $items = array(
+    'route' => array(
+      'name' => t('Route'),
+      'base' => 'node_content',
+      'description' => '',
+      'has_title' => '1',
+      'title_label' => t('Title'),
+      'help' => '',
+    ),
     'route_run' => array(
       'name' => t('Route run'),
       'base' => 'node_content',
