@@ -292,15 +292,12 @@ function _compost_customizations_hide_past_skip_days($form) {
 
 function _compost_customizations_paypal_payment_options() {
   return array(
-    "Carter level" => "Carter level : $5.00 USD - monthly",
-    "Carter + $5" => "Carter + $5 : $10.00 USD - monthly",
-    "Carter goes to middle school" => "Carter goes to middle school : $15.00 USD - monthly",
-    "Middle of the road" => "Middle of the road : $20.00 USD - monthly",
-    "Middle + $5" => "Middle + $5 : $25.00 USD - monthly",
-    "One exclamation!" => "One exclamation! : $30.00 USD - monthly",
-    "Golly, thanks!!" => "Golly, thanks!! : $35.00 USD - monthly",
-    "Big spender!!!" => "Big spender!!! : $40.00 USD - monthly",
-    "Please...?" => "Please...? : $1,000.00 USD - monthly",
+    "Sustainer" => "Sustainer : $15.00 USD - monthly",
+    "Peddling Higher" => "Peddling Higher : $20.00 USD - monthly",
+    "Gearing up" => "Gearing up : $25.00 USD - monthly",
+    "Compost Superstar" => "Compost Superstar : $30.00 USD - monthly",
+    "Soil-Makin' Hero" => "Soil-Makin' Hero : $35.00 USD - monthly",
+    "Super tilthy!" => "Super tilthy! : $40.00 USD - monthly",
   );
 }
 
