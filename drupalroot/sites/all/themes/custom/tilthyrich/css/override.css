@@ -17,6 +17,7 @@ hgroup h3 {
 #nav-menu {
   float: left;
   padding: 15px 0;
+  clear: both;
 }
 
 .twitter {
