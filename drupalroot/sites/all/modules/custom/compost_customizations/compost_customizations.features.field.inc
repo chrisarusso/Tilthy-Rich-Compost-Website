@@ -71,7 +71,7 @@ function compost_customizations_field_default_fields() {
           'display_label' => 1,
         ),
         'type' => 'options_onoff',
-        'weight' => '13',
+        'weight' => '14',
       ),
     ),
   );
@@ -604,7 +604,7 @@ function compost_customizations_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '12',
+        'weight' => '13',
       ),
     ),
   );

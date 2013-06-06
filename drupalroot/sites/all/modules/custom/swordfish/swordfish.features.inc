@@ -17,7 +17,7 @@ function swordfish_views_api() {
 function swordfish_image_default_styles() {
   $styles = array();
 
-  // Exported image style: slideshow
+  // Exported image style: slideshow.
   $styles['slideshow'] = array(
     'name' => 'slideshow',
     'effects' => array(

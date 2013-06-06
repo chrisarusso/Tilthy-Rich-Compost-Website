@@ -68,6 +68,7 @@ function compost_views_views_default_views() {
   $handler->display->display_options['fields']['field_bucket_location']['id'] = 'field_bucket_location';
   $handler->display->display_options['fields']['field_bucket_location']['table'] = 'field_data_field_bucket_location';
   $handler->display->display_options['fields']['field_bucket_location']['field'] = 'field_bucket_location';
+  $handler->display->display_options['fields']['field_bucket_location']['label'] = 'Location';
   $handler->display->display_options['fields']['field_bucket_location']['type'] = 'editable';
   $handler->display->display_options['fields']['field_bucket_location']['settings'] = array(
     'click_to_edit' => 1,
@@ -78,6 +79,7 @@ function compost_views_views_default_views() {
   $handler->display->display_options['fields']['field_bucket_size']['id'] = 'field_bucket_size';
   $handler->display->display_options['fields']['field_bucket_size']['table'] = 'field_data_field_bucket_size';
   $handler->display->display_options['fields']['field_bucket_size']['field'] = 'field_bucket_size';
+  $handler->display->display_options['fields']['field_bucket_size']['label'] = 'Size';
   $handler->display->display_options['fields']['field_bucket_size']['type'] = 'editable';
   $handler->display->display_options['fields']['field_bucket_size']['settings'] = array(
     'click_to_edit' => 1,

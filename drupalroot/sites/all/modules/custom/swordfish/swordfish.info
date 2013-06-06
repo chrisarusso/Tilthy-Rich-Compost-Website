@@ -2,6 +2,7 @@ name = swordfish
 description = Features for the Swordfish Theme by ThemeShark.com
 core = 7.x
 package = Features
+php = 5.2.4
 version = 7.x-1.0
 project = swordfish
 dependencies[] = ctools

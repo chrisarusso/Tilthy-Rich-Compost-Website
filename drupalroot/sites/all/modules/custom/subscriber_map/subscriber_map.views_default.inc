@@ -117,6 +117,7 @@ function subscriber_map_views_default_views() {
   $handler->display->display_options['filters']['rid']['operator'] = 'not';
   $handler->display->display_options['filters']['rid']['value'] = array(
     3 => '3',
+    4 => '4',
   );
   $handler->display->display_options['filters']['rid']['group'] = 1;
   /* Filter criterion: User: Active (field_active) */

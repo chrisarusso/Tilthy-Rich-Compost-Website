@@ -10,7 +10,7 @@
 function swordfish_field_default_fields() {
   $fields = array();
 
-  // Exported field: 'node-article-body'
+  // Exported field: 'node-article-body'.
   $fields['node-article-body'] = array(
     'field_config' => array(
       'active' => '1',
@@ -33,6 +33,7 @@ function swordfish_field_default_fields() {
           0 => 'format',
         ),
       ),
+      'locked' => '0',
       'module' => 'text',
       'settings' => array(),
       'translatable' => '0',
@@ -82,7 +83,7 @@ function swordfish_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-article-field_image'
+  // Exported field: 'node-article-field_image'.
   $fields['node-article-field_image'] = array(
     'field_config' => array(
       'active' => '1',
@@ -103,6 +104,7 @@ function swordfish_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'image',
       'settings' => array(
         'default_image' => FALSE,
@@ -164,7 +166,7 @@ function swordfish_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-article-field_slideshow_image'
+  // Exported field: 'node-article-field_slideshow_image'.
   $fields['node-article-field_slideshow_image'] = array(
     'field_config' => array(
       'active' => '1',
@@ -185,6 +187,7 @@ function swordfish_field_default_fields() {
           0 => 'fid',
         ),
       ),
+      'locked' => '0',
       'module' => 'image',
       'settings' => array(
         'default_image' => 0,
@@ -239,7 +242,7 @@ function swordfish_field_default_fields() {
     ),
   );
 
-  // Exported field: 'node-article-field_tags'
+  // Exported field: 'node-article-field_tags'.
   $fields['node-article-field_tags'] = array(
     'field_config' => array(
       'active' => '1',
@@ -260,6 +263,7 @@ function swordfish_field_default_fields() {
           0 => 'tid',
         ),
       ),
+      'locked' => '0',
       'module' => 'taxonomy',
       'settings' => array(
         'allowed_values' => array(

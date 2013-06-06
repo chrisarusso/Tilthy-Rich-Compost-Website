@@ -191,8 +191,7 @@ function compost_customizations_views_default_views() {
   $handler->display->display_options['filters']['field_reminders_value']['table'] = 'field_data_field_reminders';
   $handler->display->display_options['filters']['field_reminders_value']['field'] = 'field_reminders_value';
   $handler->display->display_options['filters']['field_reminders_value']['value'] = array(
-    1 => '1',
-    2 => '2',
+    'all' => 'all',
   );
   $handler->display->display_options['filters']['field_reminders_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_reminders_value']['expose']['operator_id'] = 'field_reminders_value_op';
@@ -203,7 +202,6 @@ function compost_customizations_views_default_views() {
     2 => '2',
     1 => 0,
     3 => 0,
-    4 => 0,
   );
   /* Filter criterion: User: Active (field_active) */
   $handler->display->display_options['filters']['field_active_value']['id'] = 'field_active_value';
