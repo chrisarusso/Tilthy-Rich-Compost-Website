@@ -10,3 +10,7 @@ sites/*/civicrm.settings.php
 
 # Ignore cache folder created by boost
 /cache
+
+# Do not include dreamhost staging password protect file
+.htpasswd
+
