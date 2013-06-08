@@ -298,6 +298,7 @@ function _compost_customizations_paypal_payment_options() {
     "Compost Superstar" => "Compost Superstar : $30.00 USD - monthly",
     "Soil-Makin' Hero" => "Soil-Makin' Hero : $35.00 USD - monthly",
     "Super tilthy!" => "Super tilthy! : $40.00 USD - monthly",
+    "Dropoff only (no collection)" => "Dropoff only (no collection) : $5.00 USD - monthly",
   );
 }
 
