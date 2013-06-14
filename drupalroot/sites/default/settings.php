@@ -459,3 +459,7 @@ if (file_exists(dirname(__FILE__) .'/local.settings.php')) {
   include 'local.settings.php';
 }
 
+// Per instructions of email_registration
+$conf['locale_custom_strings_en'][''] = array(
+  'Sorry, unrecognized username or password. <a href="@password">Have you forgotten your password?</a>' => 'Sorry, unrecognized e-mail or password. <a href="@password">Have you forgotten your password?</a>',
+);
