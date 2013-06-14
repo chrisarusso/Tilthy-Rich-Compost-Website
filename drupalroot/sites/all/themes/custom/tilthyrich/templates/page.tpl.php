@@ -1,17 +1,28 @@
 <div id="page">
 
-  <div class="user-menu-wrapper"><div class="user-menu-wrapper-inner <?php echo $grid_size ?>">
-    <nav id="user-menu" class="<?php echo $grid_full_width ?> clearfix">
-      <?php print render($page['user_menu']); ?>
-      <div id="social">
-        <span>Follow us:</span>
-        <ul class="social-links">
-          <li><a class="twitter" href="<?php echo $twitter ?>"></a></li>
-          <li><a class="facebook" href="<?php echo $facebook ?>"></a></li>
-        </ul>
+  <div class="user-menu-wrapper">
+    <div class="user-menu-wrapper-inner <?php echo $grid_size ?>">
+      <nav id="user-menu" class="<?php echo $grid_full_width ?> clearfix">
+        <?php print render($page['user_menu']); ?>
+        <div id="social">
+          <span>Follow us:</span>
+          <ul class="social-links">
+            <li><a class="twitter" href="<?php echo $twitter ?>"></a></li>
+            <li><a class="facebook" href="<?php echo $facebook ?>"></a></li>
+          </ul>
+        </div>
+      </nav>
     </div>
-    </nav>
-  </div></div>
+
+
+    <div id="login_name_or_link">
+      <?php if ($logged_in): ?>
+        <?php print t('Logged in as !account_link', array('!account_link' => l(compost_customizations_format_name($user), 'user/' . $user->uid))); ?>
+      <?php else: ?>
+        <?php print l('Login', 'user', array('query' => array('destination' => $_GET['q']))); ?>
+      <?php endif; ?>
+    </div>
+  </div>
 
   <div class="header-wrapper"><div class="header-wrapper-inner <?php echo $grid_size ?>">
     <header class="<?php echo $grid_full_width ?> clearfix">
