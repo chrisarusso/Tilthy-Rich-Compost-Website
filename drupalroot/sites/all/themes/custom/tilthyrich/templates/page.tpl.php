@@ -11,17 +11,15 @@
             <li><a class="facebook" href="<?php echo $facebook ?>"></a></li>
           </ul>
         </div>
-      </nav>
-    </div>
-
-
-    <div id="login_name_or_link">
-      <?php if ($logged_in): ?>
-        <?php print t('Logged in as !account_link', array('!account_link' => l(compost_customizations_format_name($user), 'user/' . $user->uid))); ?>
-      <?php else: ?>
-        <?php print l('Login', 'user', array('query' => array('destination' => $_GET['q']))); ?>
-      <?php endif; ?>
-    </div>
+        <div id="login_name_or_link">
+          <?php if ($logged_in): ?>
+            <?php print t('Logged in as !account_link', array('!account_link' => l(compost_customizations_format_name($user), 'user/' . $user->uid))); ?>
+          <?php else: ?>
+           <?php print l('Login', 'user', array('query' => array('destination' => $_GET['q']))); ?>
+         <?php endif; ?>
+        </div>
+      </div>
+    </nav>
   </div>
 
   <div class="header-wrapper"><div class="header-wrapper-inner <?php echo $grid_size ?>">

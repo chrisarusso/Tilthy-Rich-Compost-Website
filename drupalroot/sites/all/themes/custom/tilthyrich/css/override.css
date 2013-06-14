@@ -91,3 +91,10 @@ ul {
   list-style-position: inside;
   list-style-type: inherit;
 }
+
+#login_name_or_link {
+  position: relative;
+  float: right;
+  top: 65px;
+  font-size: 2em;
+}
