@@ -27,6 +27,11 @@ switch ($style) {
 /* First and Last Classes on Teasers */
 
 function swordfish_preprocess_page(&$variables) {
+  // Below is for php warning when no nodes exist on page
+  if (!isset($variables['page']['content']['system_main']['nodes'])) {
+    return;
+  }
+
   $nodes = $variables['page']['content']['system_main']['nodes'];
   $i = 1;
   $len = count($nodes);
