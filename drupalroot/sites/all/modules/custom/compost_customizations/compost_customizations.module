@@ -156,6 +156,11 @@ function _compost_customizations_user_skip_day_validate($form, $form_state) {
 
   $today = date('Y-m-d', time());
 
+  // Don't proceed if the user isn't associated to a route to avoid php warnings    
+  if (!isset($form_state['user'])) {
+      return;
+  }
+
   $route = node_load($form_state['user']->field_route[LANGUAGE_NONE][0]['target_id']);
   $pickup_day = $route->field_pickup_day[LANGUAGE_NONE][0]['value'];
 
