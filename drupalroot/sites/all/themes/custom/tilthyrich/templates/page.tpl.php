@@ -101,6 +101,15 @@
               <?php if ($title): ?><h1 class="title" id="page-title"><span><?php print $title; ?></span></h1><?php endif; ?>
             <?php print render($title_suffix); ?>
           <?php endif; ?>
+          <?php if ($messages): ?>
+            <div id="console" class="clearfix"><?php print $messages; ?></div>
+          <?php endif; ?>
+          <?php if ($page['help']): ?>
+            <div id="help">
+              <?php print render($page['help']); ?>
+            </div>
+          <?php endif; ?>
+          <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
           <?php print render($page['content']); ?>
           <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
           <?php print render($page['content_bottom']); ?>
