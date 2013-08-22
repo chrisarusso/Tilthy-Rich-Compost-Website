@@ -42,7 +42,10 @@ function compost_customizations_block_info() {
     'info' => t('Paypal payment form'),
     'cache' => DRUPAL_NO_CACHE,
   );
-
+  $blocks['paypal_commercial_payment_form'] = array(
+    'info' => t('Paypal commercial payment form'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
 
   return $blocks;
 }
@@ -61,6 +64,12 @@ function compost_customizations_block_view($delta = '') {
         '#theme' => 'paypal_payment_form'
       );
       break;
+    case 'paypal_commercial_payment_form':
+      $block['subject'] = t('Paypal commercial payment form');
+      $block['content'] = array(
+        '#theme' => 'paypal_commercial_payment_form'
+      );
+      break;
   }
   return $block;
 
@@ -77,6 +86,9 @@ function compost_customizations_theme() {
   return array(
     'paypal_payment_form' => array(
       'template' =>  "templates/" . $sandbox_string . "paypal_payment_form"
+    ),
+    'paypal_commercial_payment_form' => array(
+      'template' =>  "templates/" . $sandbox_string . "paypal_commercial_payment_form"
     ),
   );
 }
