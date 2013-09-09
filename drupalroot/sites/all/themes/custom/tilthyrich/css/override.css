@@ -98,3 +98,12 @@ ul {
   top: 65px;
   font-size: 2em;
 }
+
+#nav-menu ul.menu li span.nolink {
+  display: block;
+  padding: 0 20px;
+  margin-right: 10px;
+  line-height: 50px; 	
+  color: #ffffff;
+  background: url(../../../contrib/swordfish/images/style4/dark-trans.png);
+}
