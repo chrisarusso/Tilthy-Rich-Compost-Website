@@ -884,6 +884,72 @@ function content_types_field_default_fields() {
     ),
   );
 
+  // Exported field: 'user-user-field_how_did_you_hear_about_us_'.
+  $fields['user-user-field_how_did_you_hear_about_us_'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_how_did_you_hear_about_us_',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 18,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_how_did_you_hear_about_us_',
+      'label' => 'How Did You Hear About Us?',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => 1,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '60',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '19',
+      ),
+    ),
+  );
+
   // Exported field: 'user-user-field_mobile_carrier_provider'.
   $fields['user-user-field_mobile_carrier_provider'] = array(
     'field_config' => array(
@@ -948,6 +1014,69 @@ function content_types_field_default_fields() {
     ),
   );
 
+  // Exported field: 'user-user-field_monthly_contribution'.
+  $fields['user-user-field_monthly_contribution'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_monthly_contribution',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'locked' => '0',
+      'module' => 'number',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'number_integer',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => array(
+        0 => array(
+          'value' => '22',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => 'Minimum payment for drop-off is $5 and minimum for pick-up is $15.  Please help us grow and contribute as much as you\'re comfortable with!',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'number',
+          'settings' => array(
+            'decimal_separator' => '.',
+            'prefix_suffix' => TRUE,
+            'scale' => 0,
+            'thousand_separator' => ' ',
+          ),
+          'type' => 'number_integer',
+          'weight' => 15,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_monthly_contribution',
+      'label' => 'Monthly Contribution',
+      'required' => 1,
+      'settings' => array(
+        'max' => '',
+        'min' => '5',
+        'prefix' => '$',
+        'suffix' => '',
+        'user_register_form' => 1,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'number',
+        'settings' => array(),
+        'type' => 'number',
+        'weight' => '14',
+      ),
+    ),
+  );
+
   // Exported field: 'user-user-field_phone_number'.
   $fields['user-user-field_phone_number'] = array(
     'field_config' => array(
@@ -997,7 +1126,7 @@ function content_types_field_default_fields() {
         'module' => 'phone',
         'settings' => array(),
         'type' => 'phone_textfield',
-        'weight' => '6',
+        'weight' => '5',
       ),
     ),
   );
@@ -1137,7 +1266,137 @@ function content_types_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '15',
+        'weight' => '16',
+      ),
+    ),
+  );
+
+  // Exported field: 'user-user-field_service_type'.
+  $fields['user-user-field_service_type'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_service_type',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          1 => 'Pick-up Service (Minimum $15/month)',
+          2 => 'Drop-off Service (Minimum $5/month)',
+        ),
+        'allowed_values_function' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => array(
+        0 => array(
+          'value' => '1',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => 'Please choose the service you want: pick-up (we come get it), or drop-off (you come bring it)',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 17,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_service_type',
+      'label' => 'Service Type',
+      'required' => 1,
+      'settings' => array(
+        'user_register_form' => 1,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => '13',
+      ),
+    ),
+  );
+
+  // Exported field: 'user-user-field_stripe_customer_id'.
+  $fields['user-user-field_stripe_customer_id'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_stripe_customer_id',
+      'field_permissions' => array(
+        'type' => '1',
+      ),
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 16,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_stripe_customer_id',
+      'label' => 'Stripe Customer ID',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => 0,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '60',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '18',
       ),
     ),
   );
@@ -1203,7 +1462,7 @@ function content_types_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '16',
+        'weight' => '17',
       ),
     ),
   );
@@ -1218,17 +1477,23 @@ function content_types_field_default_fields() {
   t('Cleaner');
   t('Date');
   t('Forgotten bucket date');
+  t('How Did You Hear About Us?');
   t('If not in an obvious place visible from the street (e.g. front porch) input bucket location ');
+  t('Minimum payment for drop-off is $5 and minimum for pick-up is $15.  Please help us grow and contribute as much as you\'re comfortable with!');
   t('Mobile Carrier/Provider');
+  t('Monthly Contribution');
   t('Notes');
   t('Phone number');
   t('Pick up reminders');
   t('Pickup day');
+  t('Please choose the service you want: pick-up (we come get it), or drop-off (you come bring it)');
   t('Please include your mobile phone number.  ');
   t('Rider');
   t('Route');
   t('Route Captain');
+  t('Service Type');
   t('Special notes unique to a subscriber to help the rider provide good service');
+  t('Stripe Customer ID');
   t('Subscriber Notes');
   t('This is (s)he who will clean the buckets to be ready for the date in the event.');
   t('This is the person who is riding the bike for the route.');

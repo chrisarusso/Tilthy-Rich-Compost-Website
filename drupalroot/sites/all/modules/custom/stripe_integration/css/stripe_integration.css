@@ -1,0 +1,4 @@
+/* Let stripe button do the form triggering action */
+#user-register-form #edit-submit {
+    display: none;
+}

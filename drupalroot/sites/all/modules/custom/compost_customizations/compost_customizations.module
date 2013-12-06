@@ -33,65 +33,6 @@ function compost_customizations_mail_alter(&$message) {
   $message['headers']['From'] = $message['headers']['Sender']  = $message['from'] = $site_from_email;
 }
 
-/*
- * Implements hook_block_info()
- */
-function compost_customizations_block_info() {
-
-  $blocks['paypal_payment_form'] = array(
-    'info' => t('Paypal payment form'),
-    'cache' => DRUPAL_NO_CACHE,
-  );
-  $blocks['paypal_commercial_payment_form'] = array(
-    'info' => t('Paypal commercial payment form'),
-    'cache' => DRUPAL_NO_CACHE,
-  );
-
-  return $blocks;
-}
-
-/*
- * Implements hook_block_view()
- */
-function compost_customizations_block_view($delta = '') {
-  // This example is adapted from node.module.
-  $block = array();
-
-  switch ($delta) {
-    case 'paypal_payment_form':
-      $block['subject'] = t('Paypal payment form');
-      $block['content'] = array(
-        '#theme' => 'paypal_payment_form'
-      );
-      break;
-    case 'paypal_commercial_payment_form':
-      $block['subject'] = t('Paypal commercial payment form');
-      $block['content'] = array(
-        '#theme' => 'paypal_commercial_payment_form'
-      );
-      break;
-  }
-  return $block;
-
-}
-
-/*
- * Implements hook_theme()
- */
-function compost_customizations_theme() {
-  // Allow for easy way to swap between test payment form and production
-  // via local.settings.php, hence not DB dependent
-  global $conf;
-  $sandbox_string = ($conf['production']) ? '' : 'sandbox_';
-  return array(
-    'paypal_payment_form' => array(
-      'template' =>  "templates/" . $sandbox_string . "paypal_payment_form"
-    ),
-    'paypal_commercial_payment_form' => array(
-      'template' =>  "templates/" . $sandbox_string . "paypal_commercial_payment_form"
-    ),
-  );
-}
 
 /*
  * Implements hook_form_FORM_ID_alter()
@@ -115,10 +56,6 @@ function compost_customizations_form_user_register_form_alter(&$form, $form_stat
 
   // Add validation to ensure if user wants text messages, that they've selected a mobile carrier
   $form['#validate'][] = '_compost_customizations_mobile_carrier_validate';
-
-  // Add custom submit handling
-  $form['#submit'][] = '_compost_customizations_user_account_submit';
-
 }
 
 /*
@@ -194,48 +131,6 @@ function _compost_customizations_user_skip_day_validate($form, $form_state) {
 }
 
 /*
- * We allow users to signup and since there is no hard-fast obligation to pay, they are redirected to the payment
- * page after finishing their registration
- */
-function _compost_customizations_user_account_submit($form, &$form_state) {
-
-  // Don't redirect on admin form creation
-  if (user_access('Administer users')) {
-    return;
-  }
-  else {
-    // If a user registered herself, notify the admin, too.
-    // This is pulled from _user_mail_notify
-    $params['account'] = $form_state['user'];
-    drupal_mail('user', 'register_pending_approval_admin', variable_get('site_mail', ini_get('sendmail_from')), language_default(), $params);
-  }
-
-  $subscription_level = $form_state['values']['field_subscription_level'][LANGUAGE_NONE][0]['value'];
-  $default_value = $form['field_subscription_level'][LANGUAGE_NONE]['#default_value'];
-  // Direct them to payment if they've selected anything but FREE on registration
-  // of if they are moving from no selection to a non-free selection on an admin created account
-  if (($subscription_level  != "0" && $form['#form_id'] == 'user_register_form') ||
-    $subscription_level  != "0" && $form['#form_id'] == 'user_profile_form' && empty($default_value)) {
-    // Redirect to our pyament page which consists of a block on an empty node page
-    $form_state['redirect'] = array(
-      'payment',
-      array('query' => array('uid' => $form_state['user']->uid, 'subscription level' => $subscription_level )),
-    );
-
-    drupal_set_message(t('You\'re not done!  Please submit your payment now.  Thank you so much for subscribing.'));
-  }
-  elseif ($form['#form_id'] == 'user_register_form') {
-    drupal_set_message(t('Thank you so much for subscribing!  If later, you are able to help out financially please
-      visit !URL', array('!URL' => l(
-        'the payment page',
-        'payment',
-        array('query' => array('uid' => $form_state['user']->uid)))
-      ))
-    );
-  }
-}
-
-/*
  * Implements hook_menu_alter()
  */
 function compost_customizations_menu_alter(&$items) {
@@ -265,30 +160,6 @@ function _compost_customizations_paypal_process_ipn() {
   // Set the user's payment selection
 }
 
-/*
- * Preprocess for theme('paypal_payment_form')
- */
-function template_preprocess_paypal_payment_form(&$variables) {
-  // Set user id in the form so we can link drupal accounts with payment
-  $variables['uid'] = 0;
-  if ($GLOBALS['user']->uid) {
-    $variables['uid'] = $GLOBALS['user']->uid;
-  }
-  elseif (isset($_GET['uid']) && is_numeric($_GET['uid'])) {
-    $variables['uid'] = $_GET['uid'];
-  }
-
-  $select_element = array(
-    'element' => array(
-      '#name' => 'os0', // Paypal code needed to work
-      '#options' => _compost_customizations_paypal_payment_options(),
-      '#default_value' => isset($_GET['subscription_level']) ? $_GET['subscription_level'] : 'Gearing up',
-      '#value' => isset($_GET['subscription_level']) ? $_GET['subscription_level'] : 'Gearing up'
-    ),
-  );
-  $variables['select_list'] = theme('select', $select_element);
-}
-
 /**
  * @param $form
  *   Form variable as it passes through hook_form_alter()
@@ -305,18 +176,6 @@ function _compost_customizations_hide_past_skip_days($form) {
   }
 
   return $form;
-}
-
-function _compost_customizations_paypal_payment_options() {
-  return array(
-    "Sustainer" => "Sustainer : $15.00 USD - monthly",
-    "Peddling Higher" => "Peddling Higher : $20.00 USD - monthly",
-    "Gearing up" => "Gearing up : $25.00 USD - monthly",
-    "Compost Superstar" => "Compost Superstar : $30.00 USD - monthly",
-    "Soil-Makin' Hero" => "Soil-Makin' Hero : $35.00 USD - monthly",
-    "Super tilthy!" => "Super tilthy! : $40.00 USD - monthly",
-    "Dropoff only (no collection)" => "Dropoff only (no collection) : $5.00 USD - monthly",
-  );
 }
 
 /**

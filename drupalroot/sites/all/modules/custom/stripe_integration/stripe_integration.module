@@ -1,0 +1,122 @@
+<?php
+
+/**
+ * @file
+ * Integration of Stripe payment system.
+ */
+
+define('MINIMUM_PICKUP_PAYMENT', 15);
+define('MINIMUM_DROPOFF_PAYMENT', 5);
+
+// Plan IDs created from Stripe dashboard (can also be created from the API).
+define('RESIDENTIAL_PICKUP_SERVICE_PLAN_ID', 1);
+define('RESIDENTIAL_DROPOFF_SERVICE_PLAN_ID', 2);
+define('COMMERCIAL_PICKUP_SERVICE_PLAN_ID', 3);
+define('COMMERCIAL_DROPOFF_SERVICE_PLAN_ID', 4);
+
+/*
+ * Implements hook_form_FORM_ID_alter()
+ */
+function stripe_integration_form_user_register_form_alter(&$form, $form_state, $form_id) {
+
+  global $conf;
+  $environment = ($conf['production']) == TRUE ? 'live' : 'test';
+
+  // Add stripe checkout.js AND our custom handling
+  $form['actions']['submit']['#attached']['js'] = array(
+    drupal_get_path('module', 'stripe_integration') . "/js/stripe_integration_checkout.js" => array(
+      'scope' => 'footer',
+    ),
+    'https://checkout.stripe.com/checkout.js' => array('external'),
+    array('data' => array(
+      'stripeIntegration' => array(
+        'publishableKey' => $conf['stripe_' . $environment . '_publishable_key'],
+        'logoURL' => drupal_get_path('theme', 'tilthyrich') . "/logo.jpg"
+      )),
+      'type' => 'setting'
+    )
+  );
+
+  $form['#submit'][] = 'stripe_integration_form_submit';
+  $form['#validate'][] = 'stripe_integration_form_validate';
+}
+
+/*
+ * Custom user registration submission function to process stripe payment
+ */
+function stripe_integration_form_submit($form, &$form_state){
+
+  require_once(drupal_get_path('module', 'stripe_integration') . "/stripe-php/lib/Stripe.php");
+
+  if ($_POST) {
+    global $conf;
+    $environment = ($conf['production']) == TRUE ? 'live' : 'test';
+
+    Stripe::setApiKey($conf['stripe_' . $environment . '_secret_key']);
+
+    try {
+      if (!isset($_POST['stripeToken'])) {
+        throw new Exception("The Stripe Token was not generated correctly");
+      }
+
+      $v = $form_state['values'];
+
+      $customer = Stripe_Customer::create(array(
+        "card" => $_POST['stripeToken'],
+        "plan" => $v['field_service_type'][LANGUAGE_NONE][0]['value'],
+        "quantity" => (int)$v['field_monthly_contribution'][LANGUAGE_NONE][0]['value'],
+        "email" => $_POST['mail'],
+        "description" => "Online subscription"
+      ));
+
+      // Save customer id as hidden field for internal usage
+      $form_state['user']->field_stripe_customer_id[LANGUAGE_NONE][0]['value'] = $customer->id;
+      user_save($form_state['user']);
+
+    }
+    catch (Exception $e) {
+      $error = $e->getMessage();
+      watchdog('stripe_payment', 'Message: @message\rn Post: @Post ', array(
+        '@Post' => print_r($_POST, TRUE),
+        '@message' => $error
+      ),
+      WATCHDOG_ERROR);
+    }
+  }
+}
+
+
+/*
+ * Custom user registration validation function to handle our business rules
+ */
+function stripe_integration_form_validate($form, &$form_state){
+  // Ensure payment is sufficient for service type
+  $v = $form_state['values'];
+
+  $payment = $v['field_monthly_contribution'][LANGUAGE_NONE][0]['value'];
+  $service_type = $v['field_service_type'][LANGUAGE_NONE][0]['value'];
+
+  if ($payment < MINIMUM_PICKUP_PAYMENT && $service_type == 1) {
+    form_error($form['field_monthly_contribution'],
+      t('Please select more than @payment dollars for @service', array(
+        '@payment' => $payment,
+        '@service' => $form['field_service_type'][LANGUAGE_NONE]['#options'][$service_type]
+      )));
+  }
+  elseif ($payment < MINIMUM_DROPOFF_PAYMENT && $service_type == 2) {
+    form_error($form['field_monthly_contribution'],
+      t('Please select more than @payment dollars for @service', array(
+        '@payment' => $payment,
+        '@service' => $form['field_service_type'][LANGUAGE_NONE]['#options'][$service_type]
+      )));
+  }else {
+    // Only make them submit credit card info once if some other part of form
+    // fails and they have submitted enough money
+    if (isset($_POST['stripeToken'])) {
+
+      drupal_add_js(array('stripeIntegration' => array(
+        'stripeToken' => $_POST['stripeToken'])), 'setting');
+
+    }
+  }
+}

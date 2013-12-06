@@ -1,0 +1,4 @@
+name = Stripe Integration
+description = Integrates Stripe payment system
+core = 7.x
+package = Custom
