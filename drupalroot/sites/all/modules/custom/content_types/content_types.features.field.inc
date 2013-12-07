@@ -732,7 +732,7 @@ function content_types_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '7',
+        'weight' => '8',
       ),
     ),
   );
@@ -796,7 +796,7 @@ function content_types_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '8',
+        'weight' => '9',
       ),
     ),
   );
@@ -879,7 +879,7 @@ function content_types_field_default_fields() {
           'year_range' => '-3:+3',
         ),
         'type' => 'date_popup',
-        'weight' => '12',
+        'weight' => '13',
       ),
     ),
   );
@@ -945,7 +945,7 @@ function content_types_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '19',
+        'weight' => '20',
       ),
     ),
   );
@@ -1009,7 +1009,7 @@ function content_types_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '10',
+        'weight' => '11',
       ),
     ),
   );
@@ -1072,7 +1072,7 @@ function content_types_field_default_fields() {
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
-        'weight' => '14',
+        'weight' => '16',
       ),
     ),
   );
@@ -1187,7 +1187,7 @@ function content_types_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_buttons',
-        'weight' => '9',
+        'weight' => '10',
       ),
     ),
   );
@@ -1266,7 +1266,7 @@ function content_types_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '16',
+        'weight' => '17',
       ),
     ),
   );
@@ -1292,8 +1292,9 @@ function content_types_field_default_fields() {
       'module' => 'list',
       'settings' => array(
         'allowed_values' => array(
-          1 => 'Pick-up Service (Minimum $15/month)',
-          2 => 'Drop-off Service (Minimum $5/month)',
+          1 => 'Residential Pick-up Service (Minimum $15/month)',
+          2 => 'Residential Drop-off Service (Minimum $5/month)',
+          3 => 'Commercial Pick-up Service (Per agreement - Minimum $40/month)',
         ),
         'allowed_values_function' => '',
       ),
@@ -1330,7 +1331,7 @@ function content_types_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '13',
+        'weight' => '14',
       ),
     ),
   );
@@ -1396,7 +1397,7 @@ function content_types_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '18',
+        'weight' => '19',
       ),
     ),
   );
@@ -1462,7 +1463,7 @@ function content_types_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '17',
+        'weight' => '18',
       ),
     ),
   );
