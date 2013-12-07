@@ -39,6 +39,38 @@ function stripe_integration_form_user_register_form_alter(&$form, $form_state, $
 
   $form['#submit'][] = 'stripe_integration_form_submit';
   $form['#validate'][] = 'stripe_integration_form_validate';
+
+  // Used to pre-populate amount.
+  if (isset($_GET['amount'])) {
+    $form['field_monthly_contribution'][LANGUAGE_NONE][0]['value']['#default_value'] = $_GET['amount'];
+    $form['field_monthly_contribution'][LANGUAGE_NONE][0]['value']['#disabled'] = TRUE;
+  }
+
+  // Used to pre-populate commercial client's plan.
+  if (isset($_GET['service'])) {
+    $form['field_service_type'][LANGUAGE_NONE]['#default_value'][0] = COMMERCIAL_PICKUP_SERVICE_PLAN_ID;
+    $form['field_service_type'][LANGUAGE_NONE]['#disabled'] = TRUE;
+  }
+
+  // Used to pre-populate commercial client's name.
+  if (isset($_GET['company'])) {
+    $form['field_company_name'][LANGUAGE_NONE][0]['value']['#default_value'] = $_GET['company'];
+  }
+
+  // Hide bucket size from commercial clients.
+  $form['field_bucket_size']['#states'] = array(
+    'invisible' => array(
+      ':input[name="field_service_type[und]"]' => array('value' => 3),
+    ),
+  );
+
+  // Hide pickup reminders from commercial clients.
+  $form['field_reminders']['#states'] = array(
+    'invisible' => array(
+      ':input[name="field_service_type[und]"]' => array('value' => 3),
+    ),
+  );
+
 }
 
 /*
@@ -61,6 +93,7 @@ function stripe_integration_form_submit($form, &$form_state){
 
       $v = $form_state['values'];
 
+      // @todo: Get Commercial plans in there too
       $customer = Stripe_Customer::create(array(
         "card" => $_POST['stripeToken'],
         "plan" => $v['field_service_type'][LANGUAGE_NONE][0]['value'],
