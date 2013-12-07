@@ -801,6 +801,72 @@ function content_types_field_default_fields() {
     ),
   );
 
+  // Exported field: 'user-user-field_company_name'.
+  $fields['user-user-field_company_name'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_company_name',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
+      'foreign keys' => array(
+        'format' => array(
+          'columns' => array(
+            'format' => 'format',
+          ),
+          'table' => 'filter_format',
+        ),
+      ),
+      'indexes' => array(
+        'format' => array(
+          0 => 'format',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'text',
+      'settings' => array(
+        'max_length' => '255',
+      ),
+      'translatable' => '0',
+      'type' => 'text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'Please only fill this out if you\'re representing a business account',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'text',
+          'settings' => array(),
+          'type' => 'text_default',
+          'weight' => 19,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_company_name',
+      'label' => 'Company Name',
+      'required' => 0,
+      'settings' => array(
+        'text_processing' => '0',
+        'user_register_form' => 1,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'text',
+        'settings' => array(
+          'size' => '60',
+        ),
+        'type' => 'text_textfield',
+        'weight' => '1',
+      ),
+    ),
+  );
+
   // Exported field: 'user-user-field_forgotten_bucket_date'.
   $fields['user-user-field_forgotten_bucket_date'] = array(
     'field_config' => array(
@@ -1476,6 +1542,7 @@ function content_types_field_default_fields() {
   t('Bucket Size');
   t('Check the type of reminder you would like to receive the evening before pick up.');
   t('Cleaner');
+  t('Company Name');
   t('Date');
   t('Forgotten bucket date');
   t('How Did You Hear About Us?');
@@ -1489,6 +1556,7 @@ function content_types_field_default_fields() {
   t('Pickup day');
   t('Please choose the service you want: pick-up (we come get it), or drop-off (you come bring it)');
   t('Please include your mobile phone number.  ');
+  t('Please only fill this out if you\'re representing a business account');
   t('Rider');
   t('Route');
   t('Route Captain');
