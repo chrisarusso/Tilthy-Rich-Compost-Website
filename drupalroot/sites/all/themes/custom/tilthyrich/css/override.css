@@ -107,3 +107,7 @@ ul {
   color: #ffffff;
   background: url(../../../contrib/swordfish/images/style4/dark-trans.png);
 }
+
+.header-wrapper {
+    height: 152px;
+}
