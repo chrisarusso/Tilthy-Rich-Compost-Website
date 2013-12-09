@@ -80,9 +80,6 @@ function compost_customizations_form_user_profile_form_alter(&$form, $form_state
 
   // Hide but don't delete previous skip days
   $form = _compost_customizations_hide_past_skip_days($form);
-
-  // Add custom submit handling
-  $form['#submit'][] = '_compost_customizations_user_account_submit';
 }
 
 /*
