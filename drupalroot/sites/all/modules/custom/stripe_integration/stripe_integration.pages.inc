@@ -120,8 +120,6 @@ function stripe_integration_payment_update_form($form, &$form_state, $account) {
  */
 function stripe_integration_payment_update_form_submit($form, &$form_state) {
 
-  // If we've gotten here, we've passed other validation
-
   // Drupal set message
   drupal_set_message('Your subscription has been updated!');
   // @todo: Do something with message they include
@@ -132,37 +130,4 @@ function stripe_integration_payment_update_form_submit($form, &$form_state) {
     'user/' . $form_state['user']->uid . '/edit',
   );
 
-  /* With response from
-  global $user, $language;
-
-  $values = $form_state['values'];
-  $values['sender'] = $user;
-  $values['sender']->name = $values['name'];
-  $values['sender']->mail = $values['mail'];
-
-  // Save the anonymous user information to a cookie for reuse.
-  if (!$user->uid) {
-    user_cookie_save(array_intersect_key($values, array_flip(array('name', 'mail'))));
-  }
-
-  // Get the to and from e-mail addresses.
-  $to = $values['recipient']->mail;
-  $from = $values['sender']->mail;
-
-  // Send the e-mail in the requested user language.
-  drupal_mail('contact', 'user_mail', $to, user_preferred_language($values['recipient']), $values, $from);
-
-  // Send a copy if requested, using current page language.
-  if ($values['copy']) {
-    drupal_mail('contact', 'user_copy', $from, $language, $values, $from);
-  }
-
-  flood_register_event('contact', variable_get('contact_threshold_window', 3600));
-  watchdog('mail', '%sender-name (@sender-from) sent %recipient-name an e-mail.', array('%sender-name' => $values['name'], '@sender-from' => $from, '%recipient-name' => $values['recipient']->name));
-
-  // Jump to the contacted user's profile page.
-  drupal_set_message(t('Your message has been sent.'));
-  $form_state['redirect'] = user_access('access user profiles') ? 'user/' . $values['recipient']->uid : '';
-
-  */
 }
