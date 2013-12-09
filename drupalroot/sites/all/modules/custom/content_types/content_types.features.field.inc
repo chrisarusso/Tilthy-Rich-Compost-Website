@@ -876,7 +876,7 @@ function content_types_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_forgotten_bucket_date',
       'field_permissions' => array(
-        'type' => '1',
+        'type' => '2',
       ),
       'foreign keys' => array(),
       'indexes' => array(),
@@ -940,7 +940,6 @@ function content_types_field_default_fields() {
           'input_format' => 'Y-m-d H:i:s',
           'input_format_custom' => '',
           'label_position' => 'above',
-          'repeat_collapsed' => 0,
           'text_parts' => array(),
           'year_range' => '-3:+3',
         ),
@@ -1411,7 +1410,7 @@ function content_types_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_stripe_customer_id',
       'field_permissions' => array(
-        'type' => '1',
+        'type' => '2',
       ),
       'foreign keys' => array(
         'format' => array(
@@ -1477,7 +1476,7 @@ function content_types_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_subscriber_notes',
       'field_permissions' => array(
-        'type' => '1',
+        'type' => '2',
       ),
       'foreign keys' => array(
         'format' => array(
