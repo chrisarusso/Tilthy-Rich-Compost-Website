@@ -147,24 +147,39 @@ function stripe_integration_form_submit($form, &$form_state){
     Stripe::setApiKey($conf['stripe_' . $environment . '_secret_key']);
 
     try {
-      if (!isset($_POST['stripeToken'])) {
+      if (!isset($_POST['stripeToken']) && !isset($_POST['stripe_customer_id'])) {
         throw new Exception("The Stripe Token was not generated correctly");
       }
 
       $v = $form_state['values'];
 
-      // @todo: Get Commercial plans in there too
-      $customer = Stripe_Customer::create(array(
-        "card" => $_POST['stripeToken'],
-        "plan" => $v['field_service_type'][LANGUAGE_NONE][0]['value'],
-        "quantity" => (int)$v['field_monthly_contribution'][LANGUAGE_NONE][0]['value'],
-        "email" => $_POST['mail'],
-        "description" => "Online subscription"
-      ));
+      // Customer is already in Drupal and Stripe
+      if (isset($_POST['stripe_customer_id'])) {
+        $existing_customer = Stripe_Customer::retrieve($_POST['stripe_customer_id']);
 
-      // Save customer id as hidden field for internal usage
-      $form_state['user']->field_stripe_customer_id[LANGUAGE_NONE][0]['value'] = $customer->id;
-      user_save($form_state['user']);
+        $plan = array(
+          'plan' => $v['field_service_type'][LANGUAGE_NONE][0]['value'],
+          'quantity' => (int)$v['field_monthly_contribution'][LANGUAGE_NONE][0]['value'],
+        );
+
+        $existing_customer->updateSubscription($plan);
+      }
+      else {
+        $customer = Stripe_Customer::create(array(
+          "card" => $_POST['stripeToken'],
+          "plan" => $v['field_service_type'][LANGUAGE_NONE][0]['value'],
+          "quantity" => (int)$v['field_monthly_contribution'][LANGUAGE_NONE][0]['value'],
+          "email" => $_POST['mail'],
+          "description" => "Online subscription"
+        ));
+
+        // Save customer id as hidden field for internal usage
+        $form_state['user']->field_stripe_customer_id[LANGUAGE_NONE][0]['value'] = $customer->id;
+      }
+
+      // Run save to update customer id upon registration or
+      // subscription details upon payment update
+      user_save($form_state['user'], $v);
 
     }
     catch (Exception $e) {
@@ -202,14 +217,15 @@ function stripe_integration_form_validate($form, &$form_state){
         '@payment' => $payment,
         '@service' => $form['field_service_type'][LANGUAGE_NONE]['#options'][$service_type]
       )));
-  }else {
-    // Only make them submit credit card info once if some other part of form
-    // fails and they have submitted enough money
-    if (isset($_POST['stripeToken'])) {
-
-      drupal_add_js(array('stripeIntegration' => array(
-        'stripeToken' => $_POST['stripeToken'])), 'setting');
-
-    }
   }
+
+  // Only make them submit credit card info once if some other part of form
+  // fails and they have submitted enough money
+  if (isset($_POST['stripeToken'])) {
+
+    drupal_add_js(array('stripeIntegration' => array(
+      'stripeToken' => $_POST['stripeToken'])), 'setting');
+
+  }
+
 }
