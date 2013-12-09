@@ -82,11 +82,10 @@ function stripe_integration_payment_update_form($form, &$form_state, $account) {
     );
   }
 
+  $form['actions']['#weight'] =  99;
   $form['actions']['submit'] = array(
-    '#type' => 'actions',
     '#type' => 'submit',
     '#value' => t('Update Payment'),
-    '#weight' => 99,
   );
 
   // Only add stripe checkout js if customer doesn't exist
