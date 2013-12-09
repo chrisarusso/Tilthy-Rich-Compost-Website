@@ -121,7 +121,8 @@ function stripe_integration_payment_update_form($form, &$form_state, $account) {
 function stripe_integration_payment_update_form_submit($form, &$form_state) {
 
   // Drupal set message
-  drupal_set_message('Your subscription has been updated!');
+  drupal_set_message(t('Your subscription has been updated!'));
+
   // @todo: Do something with message they include
 
 
