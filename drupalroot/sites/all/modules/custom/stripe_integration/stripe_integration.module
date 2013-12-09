@@ -15,6 +15,66 @@ define('COMMERCIAL_PICKUP_SERVICE_PLAN_ID', 3);
 define('COMMERCIAL_DROPOFF_SERVICE_PLAN_ID', 4);
 
 /*
+ * Implements hook_menu()
+ */
+function stripe_integration_menu() {
+
+  $items = array();
+
+  /* @todo: Set up webhook listeners for events
+  // Define an always accessible path to receive IPNs.
+  $items['strip-integration/webhook'] = array(
+    'page callback' => '_compost_customizations_paypal_process_ipn',
+    'page arguments' => array(),
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  */
+
+  $items['user/%user/update-payment'] = array(
+    'title' => 'Update Payment',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('stripe_integration_payment_update_form', 1),
+    'type' => MENU_LOCAL_TASK,
+    'access callback' => '_stripe_integration_payment_tab_access',
+    'access arguments' => array(1),
+    'file' => 'stripe_integration.pages.inc',
+  );
+
+  return $items;
+
+}
+
+/**
+ * Menu access callback for a user's update payment form.
+ * This is taken from contact module _contact_personal_tab_access.
+ *
+ * @param $account
+ *   The user object of the user whose contact form is being requested.
+ */
+function _stripe_integration_payment_tab_access($account) {
+  global $user;
+
+  // Anonymous users cannot have contact forms.
+  if (!$account->uid) {
+    return FALSE;
+  }
+
+  // Administrators should see the link I suppose.
+  if (user_access('administer users')) {
+    return TRUE;
+  }
+
+  // Users MUST update themselves.
+  if ($user->uid != $account->uid) {
+    return FALSE;
+  }
+
+  return TRUE;
+}
+
+
+/*
  * Implements hook_form_FORM_ID_alter()
  */
 function stripe_integration_form_user_register_form_alter(&$form, $form_state, $form_id) {
