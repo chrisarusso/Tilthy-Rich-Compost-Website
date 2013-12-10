@@ -13,10 +13,13 @@
         </div>
         <div id="login_name_or_link">
           <?php if ($logged_in): ?>
-            <?php print t('Logged in as !account_link', array('!account_link' => l(compost_customizations_format_name($user), 'user/' . $user->uid))); ?>
+            <?php print t('!logout | !account_link', array(
+              '!logout' => l('Logout', 'user/logout'),
+              '!account_link' => l(compost_customizations_format_name($user), 'user/' . $user->uid),
+            )); ?>
           <?php else: ?>
-           <?php print l('Login', 'user', array('query' => array('destination' => $_GET['q']))); ?>
-         <?php endif; ?>
+            <?php print l('Login', 'user', array('query' => array('destination' => $_GET['q']))); ?>
+          <?php endif; ?>
         </div>
       </div>
     </nav>
