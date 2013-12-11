@@ -32,11 +32,16 @@ function stripe_integration_payment_update_form($form, &$form_state, $account) {
   require_once(drupal_get_path('module', 'user') . '/user.pages.inc');
   $profile_form = drupal_retrieve_form('user_profile_form', $form_state);
 
-  $default_payment = empty($account->field_monthly_contribution) ? 22 :
-    $account->field_monthly_contribution[LANGUAGE_NONE][0]['value'];
-
   // Use fields built in profile form
   $form['field_monthly_contribution'] = $profile_form['field_monthly_contribution'];
+
+  if (empty($form['field_monthly_contribution'][LANGUAGE_NONE][0]['value']['#default_value'])) {
+    // Retrieve amount from field default value in database
+    $field = field_info_instance('user', 'field_monthly_contribution', 'user');
+    $preselected_amount = $field['default_value'][0]['value'];
+    $form['field_monthly_contribution'][LANGUAGE_NONE][0]['value']['#default_value'] = $preselected_amount;
+  }
+
   $form['field_service_type'] = $profile_form['field_service_type'];
 
   // Used for stripe only, so hidden
