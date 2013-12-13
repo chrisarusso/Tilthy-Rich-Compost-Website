@@ -33,11 +33,109 @@ function compost_customizations_mail_alter(&$message) {
   $message['headers']['From'] = $message['headers']['Sender']  = $message['from'] = $site_from_email;
 }
 
-
 /*
  * Implements hook_form_FORM_ID_alter()
  */
 function compost_customizations_form_user_register_form_alter(&$form, $form_state, $form_id) {
+
+  if ($_GET['gift'] === 'true') {
+
+    $form['gift'] = array(
+      '#type' => 'hidden',
+      '#value' => TRUE,
+      '#attributes' => array(
+        'id' => 'gift_registration',
+      ),
+    );
+
+    $fields = array(
+      'field_first_name',
+      'field_last_name',
+      'field_phone_number',
+    );
+
+    foreach ($fields as $field) {
+      $form[$field][LANGUAGE_NONE][0]['value']['#required'] = 0;
+    }
+    $form['field_location'][LANGUAGE_NONE][0]['#required'] = 0;
+
+    $message = t('You are currently pre-paying for someone else\'s subscription,
+      so fill out his/her information below. To register yourself, please click
+      !here', array('!here' => l('here', 'subscribe')));
+
+    $form['anonymous_gift'] = array(
+      '#title' => t('Give this gift anonymously?'),
+      '#description' => t('We\'ll pay the favor forward to an interested subscriber
+        who cannot afford the service'),
+      '#weight' => -4,
+      '#type' => 'checkbox',
+    );
+
+    // Hide fields that don't apply if anonymous gift is checked
+    $fields = array(
+      'field_first_name',
+      'field_last_name',
+      'field_location',
+      'field_bucket_location',
+      'field_bucket_size',
+      'field_phone_number',
+      'field_reminders',
+      'field_service_type',
+      'field_company_name',
+    );
+
+    foreach ($fields as $field) {
+      $form[$field]['#states'] = array(
+        'invisible' => array(
+          ':input[name="anonymous_gift"]' => array('checked' => TRUE),
+        )
+      );
+
+      if (isset($form[$field][LANGUAGE_NONE])) {
+        $form[$field][LANGUAGE_NONE]['#states'] = array(
+          'invisible' => array(
+            ':input[name="anonymous_gift"]' => array('checked' => TRUE),
+          )
+        );
+      }
+    }
+
+    // One-time payment option
+    $form['gift_length'] = array(
+      '#type' => 'select',
+      '#title' => 'Months of service',
+      '#default_value' => '12',
+      '#options' => array(
+        '3' => '3',
+        '6' => '6',
+        '12' => '12',
+      ),
+      '#weight' => $form['field_monthly_contribution']['#weight'] - .001,
+    );
+
+    $email_message = t('Fill out <i>your</i> email if gifting anonymously!');
+    $form['email_helper'] = array(
+      '#type' => 'item',
+      '#markup' => '<div id="gift_email_helper">' . $email_message . '</div>',
+      '#states' => array(
+        'invisible' => array(
+          ':input[name="anonymous_gift"]' => array('checked' => FALSE),
+        ),
+      ),
+      '#weight' => -3,
+    );
+  }
+  else {
+    $message = t('Interested in giving the gift of compost?  Sign up a friend,
+    or stranger !here', array('!here' => l('here', 'subscribe', array(
+      'query' => array('gift' => 'true', 't' => time()),
+    ))));
+  }
+
+  $form['gift_message'] = array(
+    '#markup' => '<div id="gift-message">' . $message . '</div>',
+    '#weight' => -5,
+  );
 
   // Only reveal mobile carrier inquiry if user wants text reminders
   $form['field_mobile_carrier_provider']['#states'] = array(
@@ -47,9 +145,6 @@ function compost_customizations_form_user_register_form_alter(&$form, $form_stat
   );
 
   $form['field_location'][LANGUAGE_NONE][0]['#title'] = t('Address');
-  // Defaults set in UI @ admin/config/people/accounts/fields/field_location
-  // $form['field_location'][LANGUAGE_NONE][0]['#default_value']['city'] = t('Durham');
-  // $form['field_location'][LANGUAGE_NONE][0]['#default_value']['province'] = t('North Carolina');
 
   // Make non-admin registration subscription level required
   $form['field_subscription_level'][LANGUAGE_NONE]['#required'] = user_access('Administer users') ? FALSE : 1;

@@ -17,10 +17,17 @@
 
         document.getElementById('edit-submit').addEventListener('click', function(e) {
             // Open Checkout with further options
+            var gift = $('#gift_registration').val()
+            if (gift) {
+              var amount = parseInt($('#edit-gift-length').val()) *  parseInt($('#edit-field-monthly-contribution-und-0-value').val())
+            }
+            else {
+              var amount = jQuery('#edit-field-monthly-contribution-und-0-value').val();
+            }
             handler.open({
                 name: 'Tilthy Rich Compost',
                 description: 'Monthly Subscription',
-                amount: jQuery('#edit-field-monthly-contribution-und-0-value').val() * 100,
+                amount: amount * 100,
                 email: jQuery('#edit-mail').val()
             });
         e.preventDefault();

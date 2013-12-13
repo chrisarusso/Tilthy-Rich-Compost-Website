@@ -115,3 +115,10 @@ ul {
 #nav-menu ul.menu li a.active {
   background: #a3d44c;
 }
+
+#gift-message, #gift_email_helper {
+  background-color: #a3d44c;
+  padding: 17px;
+  font-size: 1.4em;
+  font-weight: bold;
+}

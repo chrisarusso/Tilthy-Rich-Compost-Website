@@ -98,6 +98,7 @@ function stripe_integration_form_user_register_form_alter(&$form, $form_state, $
   );
 
   $form['#submit'][] = 'stripe_integration_form_submit';
+  $form['#submit'][] = 'stripe_integration_gift_form_submit';
   $form['#validate'][] = 'stripe_integration_form_validate';
 
   // Used to pre-populate amount.
@@ -137,6 +138,11 @@ function stripe_integration_form_user_register_form_alter(&$form, $form_state, $
  * Custom user registration submission function to process stripe payment
  */
 function stripe_integration_form_submit($form, &$form_state){
+
+  // Let gift submission form handle gifts
+  if ($_GET['gift'] === 'true') {
+    return;
+  }
 
   require_once(drupal_get_path('module', 'stripe_integration') . "/stripe-php/lib/Stripe.php");
 
@@ -193,6 +199,68 @@ function stripe_integration_form_submit($form, &$form_state){
   }
 }
 
+
+
+/*
+ * Custom user gift submission function to process stripe payment
+ */
+function stripe_integration_gift_form_submit($form, &$form_state){
+
+  // Don't process unless this is a gift form
+  if ($_GET['gift'] !== 'true') {
+    return;
+  }
+
+  require_once(drupal_get_path('module', 'stripe_integration') . "/stripe-php/lib/Stripe.php");
+
+  if ($_POST) {
+    global $conf;
+    $environment = ($conf['production']) == TRUE ? 'live' : 'test';
+
+    Stripe::setApiKey($conf['stripe_' . $environment . '_secret_key']);
+
+    try {
+      if (!isset($_POST['stripeToken']) && !isset($_POST['stripe_customer_id'])) {
+        throw new Exception("The Stripe Token was not generated correctly");
+      }
+
+      $v = $form_state['values'];
+
+      // Create customer
+      $customer = Stripe_Customer::create(array(
+        "card" => $_POST['stripeToken'],
+        "email" => $_POST['mail'],
+        "description" => "Online gift giver"
+      ));
+
+      $amount = (int)$v['field_monthly_contribution'][LANGUAGE_NONE][0]['value']
+        * (int)$v['gift_length'] * 100;
+
+      $charge = Stripe_Charge::create(array(
+        "amount" => $amount,
+        "currency" => "usd",
+        "customer" => $customer->id,
+        "description" => "Charge for gift donation",
+      ));
+
+      // Save customer id as hidden field for internal usage
+      $form_state['user']->field_stripe_customer_id[LANGUAGE_NONE][0]['value'] = $customer->id;
+
+      // Run save to update customer id upon registration or
+      // subscription details upon payment update
+      user_save($form_state['user'], $v);
+
+    }
+    catch (Exception $e) {
+      $error = $e->getMessage();
+      watchdog('stripe_payment', 'Message: @message\rn Post: @Post ', array(
+          '@Post' => print_r($_POST, TRUE),
+          '@message' => $error
+        ),
+        WATCHDOG_ERROR);
+    }
+  }
+}
 
 /*
  * Custom user registration validation function to handle our business rules
