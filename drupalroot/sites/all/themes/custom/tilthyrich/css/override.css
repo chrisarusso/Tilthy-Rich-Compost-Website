@@ -111,3 +111,7 @@ ul {
 .header-wrapper {
     height: 152px;
 }
+
+#nav-menu ul.menu li a.active {
+  background: #a3d44c;
+}
