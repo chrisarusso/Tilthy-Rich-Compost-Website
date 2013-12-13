@@ -31,6 +31,11 @@ function compost_customizations_mail_alter(&$message) {
   $site_from_email = variable_get('site_mail',  $message['from']);
   $message['headers']['Return-Path']=  $message['from'];
   $message['headers']['From'] = $message['headers']['Sender']  = $message['from'] = $site_from_email;
+
+  if ($message['id'] == 'user_register_pending_approval' && $_POST['gift'] == 1) {
+    $message['to'] = $site_from_email;
+  }
+
 }
 
 /*
@@ -151,6 +156,7 @@ function compost_customizations_form_user_register_form_alter(&$form, $form_stat
 
   // Add validation to ensure if user wants text messages, that they've selected a mobile carrier
   $form['#validate'][] = '_compost_customizations_mobile_carrier_validate';
+  $form['#submit'][] = '_compost_customizations_gift_form_submit';
 }
 
 /*
@@ -615,4 +621,30 @@ function compost_customizations_preprocess_views_data_export_csv_body(&$variable
       $variables['themed_rows'][$id]['nothing'] = '"' . t('skip') .'"';
     }
   }
+}
+
+/*
+ * Custom submission form when user opts for a gift
+ */
+function _compost_customizations_gift_form_submit() {
+  // Don't process unless this is a gift form
+  if ($_GET['gift'] !== 'true') {
+    return;
+  }
+
+  $messages = drupal_get_messages('status');
+
+  if ($_POST['anonymous_gift']) {
+    $string = 'Thank you for your anonymous contribution!  We\'ll let you
+      know who you enabled to compost with this gift when we give on your
+      behalf.';
+  }
+  else {
+    $string = 'Thank you for your gift!  We\'ve kept the registration email
+      to ourselves, but can forward it to you to pass along when the time is
+      right.  Email us @ @email to retrieve it.';
+  }
+
+  drupal_set_message(t($string, array('@email' => variable_get('site_mail'))));
+
 }
