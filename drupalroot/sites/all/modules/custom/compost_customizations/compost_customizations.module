@@ -33,7 +33,7 @@ function compost_customizations_mail_alter(&$message) {
   if (in_array($message['id'], array('contact_page_mail', 'contact_page_copy', 'contact_user_mail', 'contact_user_copy'))) {
     // Use drush to vset lazy version of this right now
     $contact_form_email = variable_get('contact_form_email', 'info@tilthyrichcompost.com');
-    $message['headers']['reply-to'] = $message['from'];
+    $message['headers']['Reply-To'] = $message['from'];
     $message['from'] = $message['headers']['From'] = $contact_form_email;
   }
   elseif ($message['id'] == 'user_register_pending_approval' && $_POST['gift'] == 1) {
