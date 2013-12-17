@@ -1106,7 +1106,7 @@ function content_types_field_default_fields() {
         ),
       ),
       'deleted' => '0',
-      'description' => 'Minimum payment for drop-off is $5 and minimum for pick-up is $15.  Please help us grow and contribute as much as you\'re comfortable with!',
+      'description' => 'Minimum payment for drop-off is $5 and minimum for pick-up is $15.  Please help us grow and contribute as much as you\'re comfortable with!  Need more info about how much you should pay?  <a href="/how-much-to-pay" target="_blank">Read here</a>',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -1546,7 +1546,7 @@ function content_types_field_default_fields() {
   t('Forgotten bucket date');
   t('How Did You Hear About Us?');
   t('If not in an obvious place visible from the street (e.g. front porch) input bucket location ');
-  t('Minimum payment for drop-off is $5 and minimum for pick-up is $15.  Please help us grow and contribute as much as you\'re comfortable with!');
+  t('Minimum payment for drop-off is $5 and minimum for pick-up is $15.  Please help us grow and contribute as much as you\'re comfortable with!  Need more info about how much you should pay?  <a href="/how-much-to-pay" target="_blank">Read here</a>');
   t('Mobile Carrier/Provider');
   t('Monthly Contribution');
   t('Notes');
