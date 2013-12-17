@@ -27,13 +27,11 @@ function compost_customizations_menu() {
  * Implements hook_mail()
  */
 function compost_customizations_mail_alter(&$message) {
-  // Set the from address to the site's email so emails don't get blocked coming from uncontrolled sources
-  $site_from_email = variable_get('site_mail',  $message['from']);
-  $message['headers']['Return-Path']=  $message['from'];
-  $message['headers']['From'] = $message['headers']['Sender']  = $message['from'] = $site_from_email;
 
+  // Hijack gift emails so the recipient is unaware until gift is presented.
+  $site_email = variable_get('site_mail',  $message['from']);
   if ($message['id'] == 'user_register_pending_approval' && $_POST['gift'] == 1) {
-    $message['to'] = $site_from_email;
+    $message['to'] = $site_email;
   }
 
 }
