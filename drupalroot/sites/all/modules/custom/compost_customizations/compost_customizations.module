@@ -28,10 +28,19 @@ function compost_customizations_menu() {
  */
 function compost_customizations_mail_alter(&$message) {
 
-  // Hijack gift emails so the recipient is unaware until gift is presented.
-  $site_email = variable_get('site_mail',  $message['from']);
-  if ($message['id'] == 'user_register_pending_approval' && $_POST['gift'] == 1) {
-    $message['to'] = $site_email;
+  // Stolen from contact_reply_to module, but modified because it still
+  // wasn't working without sending from a different email than receiving.
+  if (in_array($message['id'], array('contact_page_mail', 'contact_page_copy', 'contact_user_mail', 'contact_user_copy'))) {
+    // Use drush to vset lazy version of this right now
+    $contact_form_email = variable_get('contact_form_email', 'info@tilthyrichcompost.com');
+    $message['headers']['reply-to'] = $message['from'];
+    $message['from'] = $message['headers']['From'] = $contact_form_email;
+  }
+  elseif ($message['id'] == 'user_register_pending_approval' && $_POST['gift'] == 1) {
+    // Hijack gift emails so the recipient is unaware until gift is presented.
+    // Per http://productforums.google.com/forum/#!topic/gmail/hZoLmPzHeWk
+    //Gmail Still ignores
+    $message['to'] = variable_get('site_mail',  $message['from']);
   }
 
 }
