@@ -801,6 +801,75 @@ function content_types_field_default_fields() {
     ),
   );
 
+  // Exported field: 'user-user-field_collection_day'.
+  $fields['user-user-field_collection_day'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_collection_day',
+      'field_permissions' => array(
+        'type' => '2',
+      ),
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          'Sunday' => 'Sunday',
+          'Monday' => 'Monday',
+          'Tuesday' => 'Tuesday',
+          'Wednesday' => 'Wednesday',
+          'Thursday' => 'Thursday',
+          'Friday' => 'Friday',
+          'Saturday' => 'Saturday',
+        ),
+        'allowed_values_function' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => array(
+        0 => array(
+          'value' => 'Thursday',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 20,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_collection_day',
+      'label' => 'Collection Day',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => 0,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => '18',
+      ),
+    ),
+  );
+
   // Exported field: 'user-user-field_company_name'.
   $fields['user-user-field_company_name'] = array(
     'field_config' => array(
@@ -1010,7 +1079,7 @@ function content_types_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '20',
+        'weight' => '21',
       ),
     ),
   );
@@ -1462,7 +1531,7 @@ function content_types_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '19',
+        'weight' => '20',
       ),
     ),
   );
@@ -1528,7 +1597,7 @@ function content_types_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '18',
+        'weight' => '19',
       ),
     ),
   );
@@ -1541,6 +1610,7 @@ function content_types_field_default_fields() {
   t('Bucket Size');
   t('Check the type of reminder you would like to receive the evening before pick up.');
   t('Cleaner');
+  t('Collection Day');
   t('Company Name');
   t('Date');
   t('Forgotten bucket date');
