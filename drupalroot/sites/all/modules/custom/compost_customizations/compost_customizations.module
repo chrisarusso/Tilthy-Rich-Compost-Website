@@ -20,6 +20,15 @@ function compost_customizations_menu() {
     'type' => MENU_CALLBACK,
   );
 
+  $items['admin/config/administration/compost_customizations'] = array(
+    'title' => 'Administration menu',
+    'description' => 'Adjust compost customization settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('compost_customizations_settings'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'compost_customizations.inc',
+  );
+
   return $items;
 
 }
@@ -357,20 +366,34 @@ function compost_customizations_get_email_reminders() {
 
   $query = new EntityFieldQuery();
 
+  $now = time();
+  $tomorrow_timestamp = $now + 60 * 60 * 24;
+  $tomorrow = date('l', $tomorrow_timestamp);
+  // Somewhat arbitrary.  Reminders ought to be once a week, but on certain
+  // weeks, like holidays, the gap will be larger or smaller.  Three days seems
+  // safe that it'll never be less than
+  $three_days_ago = $now - 3 * (60 * 60 * 24);
+
   $query->entityCondition('entity_type', 'user')
     ->fieldCondition('field_reminders', 'value', 1)
-    ->fieldCondition('field_active', 'value', 1);
+    ->fieldCondition('field_active', 'value', 1)
+    ->fieldCondition('field_collection_day', 'value', $tomorrow)
+    ->fieldCondition('field_last_reminded', 'value', $three_days_ago, '<');
 
   $result = $query->execute();
 
   if (isset($result['user'])) {
     $user_uids = array_keys($result['user']);
     $users = entity_load('user', $user_uids);
+
+    $users = _compost_customizations_remove_skippers($users);
+
+    return $users;
+  }
+  else {
+    return array();
   }
 
-  $users = _compost_customizations_remove_skippers($users);
-
-  return $users;
 }
 
 /*
@@ -422,18 +445,12 @@ function compost_customizations_mail($key, &$message, $headers) {
  * Implements hook_cron()
  */
 function compost_customizations_cron() {
-  // Timing should be controlled by elysia_cron
-  // Fill out queues now, and they get executed as queues later in the cron run
 
-  $text_queue = DrupalQueue::get('text_reminders');
-  foreach (compost_customizations_get_text_reminders() as $item) {
-    $text_queue->createItem($item);
+  if (variable_get('skip_reminders', FALSE)) {
+    return;
   }
 
-  $email_queue = DrupalQueue::get('email_reminders');
-  foreach (compost_customizations_get_email_reminders() as $item) {
-    $email_queue->createItem($item);
-  }
+  compost_customizations_queue_reminders();
 }
 
 // Implementation per http://rbayliss.net/drupal-queue-api
@@ -478,7 +495,6 @@ function compost_customizations_send_text_reminders($user) {
   $params = array('captain' => $captain);
   drupal_mail('compost_customizations', 'text_email_reminder', $text_email, $user->language, $params);
 }
-
 
 /**
  * Implements hook_field_formatter_info().
@@ -654,4 +670,54 @@ function _compost_customizations_gift_form_submit() {
 
   drupal_set_message(t($string, array('@email' => variable_get('site_mail'))));
 
+}
+
+/*
+ * Function to queue up text and email reminders from cron runs
+ */
+function compost_customizations_queue_reminders() {
+
+  $now = time();
+  $tomorrow_timestamp = $now + 60 * 60 * 24;
+  $tomorrow = date('l', $tomorrow_timestamp);
+  // Somewhat arbitrary.  Reminders ought to be once a week, but on certain
+  // weeks, like holidays, the gap will be larger or smaller.  Three days seems
+  // safe that it'll never be less than
+  $three_days_ago = $now - 3 * (60 * 60 * 24);
+
+  $query = new EntityFieldQuery();
+
+  $query->entityCondition('entity_type', 'user')
+    ->fieldCondition('field_reminders', 'value', 0, '>')
+    ->fieldCondition('field_active', 'value', 1)
+    ->fieldCondition('field_collection_day', 'value', $tomorrow)
+    ->fieldCondition('field_last_reminded', 'value', $three_days_ago, '<');
+
+  $result = $query->execute();
+
+  if (!empty($result['user'])) {
+
+    $text_queue = DrupalQueue::get('text_reminders');
+    $email_queue = DrupalQueue::get('email_reminders');
+
+    $user_uids = array_keys($result['user']);
+    $users = entity_load('user', $user_uids);
+
+    foreach($users as $user) {
+      if (!empty($user->field_reminders)) {
+        foreach($user->field_reminders[LANGUAGE_NONE] as $reminder) {
+          if ($reminder['value'] == 1) {
+            $email_queue->createItem($user);
+          }
+          elseif ($reminder['value'] == 2) {
+            $text_queue->createItem($user);
+          }
+        }
+        // Mark them as reminded here.  If the users is not marked here, and
+        // rather when the message is sent, they would be queued twice
+        $user->field_last_reminded[LANGUAGE_NONE][0]['value'] = $_SERVER['REQUEST_TIME'];
+        field_attach_update('user', $user);
+      }
+    }
+  }
 }
