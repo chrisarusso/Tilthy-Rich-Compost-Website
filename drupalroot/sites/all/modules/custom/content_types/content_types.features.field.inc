@@ -1084,6 +1084,65 @@ function content_types_field_default_fields() {
     ),
   );
 
+  // Exported field: 'user-user-field_last_reminded'.
+  $fields['user-user-field_last_reminded'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_last_reminded',
+      'field_permissions' => array(
+        'type' => '2',
+      ),
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'locked' => '0',
+      'module' => 'number',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'number_integer',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'This is a hidden field never exposed to the user but used in the back end so we know when we\'ve last sent the user a reminder to put out her bucket',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'number',
+          'settings' => array(
+            'decimal_separator' => '.',
+            'prefix_suffix' => TRUE,
+            'scale' => 0,
+            'thousand_separator' => ' ',
+          ),
+          'type' => 'number_integer',
+          'weight' => 21,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_last_reminded',
+      'label' => 'Last Reminded',
+      'required' => 0,
+      'settings' => array(
+        'max' => '',
+        'min' => '',
+        'prefix' => '',
+        'suffix' => '',
+        'user_register_form' => 0,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'number',
+        'settings' => array(),
+        'type' => 'number',
+        'weight' => '22',
+      ),
+    ),
+  );
+
   // Exported field: 'user-user-field_mobile_carrier_provider'.
   $fields['user-user-field_mobile_carrier_provider'] = array(
     'field_config' => array(
@@ -1616,6 +1675,7 @@ function content_types_field_default_fields() {
   t('Forgotten bucket date');
   t('How Did You Hear About Us?');
   t('If not in an obvious place visible from the street (e.g. front porch) input bucket location ');
+  t('Last Reminded');
   t('Minimum payment for drop-off is $5 and minimum for pick-up is $15.  Please help us grow and contribute as much as you\'re comfortable with!  Need more info about how much you should pay?  <a href="/how-much-to-pay" target="_blank">Read here</a>');
   t('Mobile Carrier/Provider');
   t('Monthly Contribution');
@@ -1634,6 +1694,7 @@ function content_types_field_default_fields() {
   t('Stripe Customer ID');
   t('Subscriber Notes');
   t('This is (s)he who will clean the buckets to be ready for the date in the event.');
+  t('This is a hidden field never exposed to the user but used in the back end so we know when we\'ve last sent the user a reminder to put out her bucket');
   t('This is the person who is riding the bike for the route.');
   t('This the person who is primarily in charge of the route.  (S)He will receive correspondence for subscribers within the route.  (S)He may not always be the one doing the route, but ');
   t('What size bucket will you need on a weekly basis?');

@@ -26,6 +26,7 @@ features[field][] = user-user-field_collection_day
 features[field][] = user-user-field_company_name
 features[field][] = user-user-field_forgotten_bucket_date
 features[field][] = user-user-field_how_did_you_hear_about_us_
+features[field][] = user-user-field_last_reminded
 features[field][] = user-user-field_mobile_carrier_provider
 features[field][] = user-user-field_monthly_contribution
 features[field][] = user-user-field_phone_number
