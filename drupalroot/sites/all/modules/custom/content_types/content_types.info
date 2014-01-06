@@ -30,6 +30,7 @@ features[field][] = user-user-field_last_reminded
 features[field][] = user-user-field_mobile_carrier_provider
 features[field][] = user-user-field_monthly_contribution
 features[field][] = user-user-field_phone_number
+features[field][] = user-user-field_reminder_time
 features[field][] = user-user-field_reminders
 features[field][] = user-user-field_route
 features[field][] = user-user-field_service_type

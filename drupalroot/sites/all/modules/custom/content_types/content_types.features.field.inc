@@ -1324,6 +1324,69 @@ function content_types_field_default_fields() {
     ),
   );
 
+  // Exported field: 'user-user-field_reminder_time'.
+  $fields['user-user-field_reminder_time'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_reminder_time',
+      'field_permissions' => array(
+        'type' => '2',
+      ),
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'locked' => '0',
+      'module' => 'number',
+      'settings' => array(),
+      'translatable' => '0',
+      'type' => 'number_integer',
+    ),
+    'field_instance' => array(
+      'bundle' => 'user',
+      'default_value' => array(
+        0 => array(
+          'value' => '17',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => 'Enter the hour of the day (1-23) you\'d like to receive your reminder.  E.g. 5PM = 17',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'number',
+          'settings' => array(
+            'decimal_separator' => '.',
+            'prefix_suffix' => TRUE,
+            'scale' => 0,
+            'thousand_separator' => ' ',
+          ),
+          'type' => 'number_integer',
+          'weight' => 22,
+        ),
+      ),
+      'entity_type' => 'user',
+      'field_name' => 'field_reminder_time',
+      'label' => 'Reminder Time',
+      'required' => 0,
+      'settings' => array(
+        'max' => '23',
+        'min' => '1',
+        'prefix' => '',
+        'suffix' => '',
+        'user_register_form' => 0,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'number',
+        'settings' => array(),
+        'type' => 'number',
+        'weight' => '23',
+      ),
+    ),
+  );
+
   // Exported field: 'user-user-field_reminders'.
   $fields['user-user-field_reminders'] = array(
     'field_config' => array(
@@ -1672,6 +1735,7 @@ function content_types_field_default_fields() {
   t('Collection Day');
   t('Company Name');
   t('Date');
+  t('Enter the hour of the day (1-23) you\'d like to receive your reminder.  E.g. 5PM = 17');
   t('Forgotten bucket date');
   t('How Did You Hear About Us?');
   t('If not in an obvious place visible from the street (e.g. front porch) input bucket location ');
@@ -1686,6 +1750,7 @@ function content_types_field_default_fields() {
   t('Please choose the service you want: pick-up (we come get it), or drop-off (you come bring it)');
   t('Please include your mobile phone number.  ');
   t('Please only fill this out if you\'re representing a business account');
+  t('Reminder Time');
   t('Rider');
   t('Route');
   t('Route Captain');
