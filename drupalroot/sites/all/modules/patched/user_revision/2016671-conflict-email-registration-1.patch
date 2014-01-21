@@ -1,0 +1,18 @@
+Index: sites/all/modules/contrib/user_revision/user_revision.module
+===================================================================
+--- sites/all/modules/contrib/user_revision/user_revision.module	(revision 39fa7e3f72415648c4319c1bdb5898fcce1febe5)
++++ sites/all/modules/contrib/user_revision/user_revision.module	(revision )
+@@ -337,7 +337,12 @@
+  * Implements hook_user_insert().
+  */
+ function user_revision_user_insert(&$edit, $account, $category){
++  // Fix bug with email_registration module
++  if (module_exists('email_registration')) {
++    db_query("UPDATE {user_revision} SET uid = :uid, name = :name WHERE vid = :vid", array(':uid' => $account->uid, ':name' => $account->name, ':vid' => $account->vid));
++  } else {
+-  db_query("UPDATE {user_revision} SET uid = :uid WHERE vid = :vid", array(':uid' => $account->uid, ':vid' => $account->vid));
++    db_query("UPDATE {user_revision} SET uid = :uid WHERE vid = :vid", array(':uid' => $account->uid, ':vid' => $account->vid));
++  }
+ }
+ 
+ /**

@@ -1,0 +1,5 @@
+Issue: Conflick with email_registration and user_revision results in github issue #40
+which is that the username gets garbled instead of remaining as everything before the
+"@" in the user's email address.
+Link: https://drupal.org/node/2016671
+Patch: https://drupal.org/files/issues/2016671-conflict-email-registration-1.patch
