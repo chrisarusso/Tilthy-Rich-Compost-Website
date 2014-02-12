@@ -21,7 +21,7 @@ function compost_customizations_menu() {
   );
 
   $items['admin/config/administration/compost_customizations'] = array(
-    'title' => 'Administration menu',
+    'title' => 'Reminder form',
     'description' => 'Adjust compost customization settings.',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('compost_customizations_settings'),
