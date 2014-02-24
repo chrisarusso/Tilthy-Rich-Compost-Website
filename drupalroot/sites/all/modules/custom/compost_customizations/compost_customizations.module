@@ -59,7 +59,7 @@ function compost_customizations_mail_alter(&$message) {
  */
 function compost_customizations_form_user_register_form_alter(&$form, $form_state, $form_id) {
 
-  if ($_GET['gift'] === 'true') {
+  if (isset($_GET['gift'])) {
 
     $form['gift'] = array(
       '#type' => 'hidden',
