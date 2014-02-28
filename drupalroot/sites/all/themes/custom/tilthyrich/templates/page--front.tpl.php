@@ -7,8 +7,8 @@
         <div id="social">
           <span>Follow us:</span>
           <ul class="social-links">
-            <li><a class="twitter" href="<?php echo $twitter ?>"></a></li>
-            <li><a class="facebook" href="<?php echo $facebook ?>"></a></li>
+            <li><a class="twitter" target="_blank" href="<?php echo $twitter ?>"></a></li>
+            <li><a class="facebook" target="_blank"  href="<?php echo $facebook ?>"></a></li>
           </ul>
         </div>
         <div id="login_name_or_link">
