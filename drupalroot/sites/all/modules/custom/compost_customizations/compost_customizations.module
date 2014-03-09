@@ -374,6 +374,10 @@ function compost_customizations_get_email_reminders() {
   // safe that it'll never be less than
   $three_days_ago = $now - 3 * (60 * 60 * 24);
 
+  // Users are created with a 0 for last reminded starting 2014-Mar-09
+  // prior to that, folks were not getting email reminders because
+  // last reminded was never being set for new accounts.
+  // This was fixed at configuration level instead of code level
   $query->entityCondition('entity_type', 'user')
     ->fieldCondition('field_reminders', 'value', 1)
     ->fieldCondition('field_active', 'value', 1)
