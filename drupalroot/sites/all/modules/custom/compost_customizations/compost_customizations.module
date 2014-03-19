@@ -436,9 +436,6 @@ function compost_customizations_mail($key, &$message, $headers) {
       $message['body'][] = t('Phone Number: @phone_number',
         array('@phone_number' => $account->field_phone_number[LANGUAGE_NONE][0]['value']));
 
-      $message['body'][] = t('If you missed pick up or are a drop-off subscriber, the drop-off address is: @addy',
-        array('@addy' => $captain->field_location[LANGUAGE_NONE][0]['street']));
-
       $message['body'][] = t('Thank you so much for your service') . ',';
       $message['body'][] = "- " . t('Your friends @') . ' ' . url('', array('absolute' => TRUE));
       $message['subject'] = t('Reminder: Put out your compost bucket(s)');
