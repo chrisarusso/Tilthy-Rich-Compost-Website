@@ -1105,7 +1105,11 @@ function content_types_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'user',
-      'default_value' => NULL,
+      'default_value' => array(
+        0 => array(
+          'value' => '0',
+        ),
+      ),
       'deleted' => '0',
       'description' => 'This is a hidden field never exposed to the user but used in the back end so we know when we\'ve last sent the user a reminder to put out her bucket',
       'display' => array(
@@ -1234,7 +1238,7 @@ function content_types_field_default_fields() {
         ),
       ),
       'deleted' => '0',
-      'description' => 'Minimum payment for drop-off is $5 and minimum for pick-up is $15.  Please help us grow and contribute as much as you\'re comfortable with!  Need more info about how much you should pay?  <a href="/how-much-to-pay" target="_blank">Read here</a>',
+      'description' => 'Minimum contribution for collection is $15/month.  Please help us grow and contribute as much as you\'re comfortable with!  Need more info about how much you should pay?  <a href="/how-much-to-pay" target="_blank">Read here</a>',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -1255,7 +1259,7 @@ function content_types_field_default_fields() {
       'required' => 1,
       'settings' => array(
         'max' => '',
-        'min' => '5',
+        'min' => '15',
         'prefix' => '$',
         'suffix' => '',
         'user_register_form' => 1,
@@ -1549,7 +1553,6 @@ function content_types_field_default_fields() {
       'settings' => array(
         'allowed_values' => array(
           1 => 'Residential Pick-up Service (Minimum $15/month)',
-          2 => 'Residential Drop-off Service (Minimum $5/month)',
           3 => 'Commercial Pick-up Service (Per agreement - Minimum $40/month)',
         ),
         'allowed_values_function' => '',
@@ -1565,7 +1568,7 @@ function content_types_field_default_fields() {
         ),
       ),
       'deleted' => '0',
-      'description' => 'Please choose the service you want: pick-up (we come get it), or drop-off (you come bring it)',
+      'description' => 'Please specify if you\'re a business or a household. ',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -1740,16 +1743,16 @@ function content_types_field_default_fields() {
   t('How Did You Hear About Us?');
   t('If not in an obvious place visible from the street (e.g. front porch) input bucket location ');
   t('Last Reminded');
-  t('Minimum payment for drop-off is $5 and minimum for pick-up is $15.  Please help us grow and contribute as much as you\'re comfortable with!  Need more info about how much you should pay?  <a href="/how-much-to-pay" target="_blank">Read here</a>');
+  t('Minimum contribution for collection is $15/month.  Please help us grow and contribute as much as you\'re comfortable with!  Need more info about how much you should pay?  <a href="/how-much-to-pay" target="_blank">Read here</a>');
   t('Mobile Carrier/Provider');
   t('Monthly Contribution');
   t('Notes');
   t('Phone number');
   t('Pick up reminders');
   t('Pickup day');
-  t('Please choose the service you want: pick-up (we come get it), or drop-off (you come bring it)');
   t('Please include your mobile phone number.  ');
   t('Please only fill this out if you\'re representing a business account');
+  t('Please specify if you\'re a business or a household. ');
   t('Reminder Time');
   t('Rider');
   t('Route');
