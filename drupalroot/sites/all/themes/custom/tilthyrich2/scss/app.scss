@@ -144,7 +144,6 @@ body {
 	}
 
 	&.services, &.commercial-services {
-		display: none;
 
 		h2 {
 			font-size: 30px;
@@ -153,7 +152,7 @@ body {
 	}
 
 	&.commercial-services {
-		display: block;
+		display: none;
 
 		h3 {
 			color: $white;

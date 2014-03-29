@@ -37,39 +37,22 @@ $(document).ready(function() {
 	$('#see-commercial-services').on('click', function(e) {
 		e.preventDefault();
 
-		$('.residential-services').toggle({
-			'duration': 400,
-			'easing': 'easeInOutCubic'
-		});
 
-		$('.commercial-services').toggle({
-			'duration': 400,
-			'easing': 'easeInOutCubic'
-		});
+		$('.residential-services').toggle({});
 
-		$.scrollTo('.commercial-services', {
-			'duration': 600,
-			'easing': 'easeInOutCubic'
-		});
+		$('.commercial-services').toggle({});
+
+
 	});
 
 	$('#see-residential-services').on('click', function(e) {
 		e.preventDefault();
 
-		$('.residential-services').toggle({
-			'duration': 400,
-			'easing': 'easeInOutCubic'
-		});
+		$('.residential-services').toggle({});
 
-		$('.commercial-services').toggle({
-			'duration': 400,
-			'easing': 'easeInOutCubic'
-		});
+		$('.commercial-services').toggle({});
 
-		$.scrollTo('.commercial-services', {
-			'duration': 600,
-			'easing': 'easeInOutCubic'
-		});
+
 	});
 
 	/* removed due to reorganization of panels
