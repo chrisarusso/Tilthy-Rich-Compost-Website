@@ -85,7 +85,7 @@ body {
 	}
 
 	&.banner {
-		background: url(../images/photo1.jpg) no-repeat center top;
+		background: url(../images/photo1.jpg) no-repeat center bottom;
 		background-size: cover;
 		text-align: center;
 		padding: 50px 0 0;
@@ -102,7 +102,7 @@ body {
 	}
 
 	&.what-goes-in {
-		background: url(../images/photo4.jpg) no-repeat center top;
+		background: url(../images/photo4.jpg) no-repeat center;
 		background-size: cover;
 		padding: 0;
 		color: $white;
@@ -171,7 +171,7 @@ body {
     }
 
     &.partner-logos {
-      background: url(../images/photo3.jpg) no-repeat center top;
+      background: url(../images/photo3.jpg) no-repeat center;
       background-size: cover;
       color: $white;
 
@@ -406,7 +406,7 @@ h3 {
 }
 
 #contact {
-	background: url(../images/photo5.jpg) no-repeat center bottom;
+	background: url(../images/photo5.jpg) no-repeat center;
 	background-size: cover;
 	padding: 0;
 

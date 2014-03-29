@@ -4098,7 +4098,7 @@ body {
 }
 /* line 87, ../scss/app.scss */
 .container.banner {
-  background: url(../images/photo1.jpg) no-repeat center top;
+  background: url(../images/photo1.jpg) no-repeat center bottom;
   background-size: cover;
   text-align: center;
   padding: 50px 0 0;
@@ -4115,7 +4115,7 @@ body {
 }
 /* line 104, ../scss/app.scss */
 .container.what-goes-in {
-  background: url(../images/photo4.jpg) no-repeat center top;
+  background: url(../images/photo4.jpg) no-repeat center;
   background-size: cover;
   padding: 0;
   color: white;
@@ -4182,7 +4182,7 @@ body {
 }
 /* line 173, ../scss/app.scss */
 .container.partner-logos {
-  background: url(../images/photo3.jpg) no-repeat center top;
+  background: url(../images/photo3.jpg) no-repeat center;
   background-size: cover;
   color: white;
 }
@@ -4452,7 +4452,7 @@ h3 {
 
 /* line 408, ../scss/app.scss */
 #contact {
-  background: url(../images/photo5.jpg) no-repeat center bottom;
+  background: url(../images/photo5.jpg) no-repeat center;
   background-size: cover;
   padding: 0;
 }
