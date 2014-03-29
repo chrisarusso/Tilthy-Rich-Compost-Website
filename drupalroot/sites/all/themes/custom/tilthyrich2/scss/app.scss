@@ -1,44 +1,12 @@
-@import "compass/css3";
 @import "settings";
-//@import "foundation";
+@import "compass/css3";
 
-// Or selectively include components
 @import
-//   "foundation/components/accordion",
-//   "foundation/components/alert-boxes",
-   "foundation/components/block-grid",
-//   "foundation/components/breadcrumbs",
-//   "foundation/components/button-groups",
-   "foundation/components/buttons",
-//   "foundation/components/clearing",
-//   "foundation/components/dropdown",
-//   "foundation/components/dropdown-buttons",
-//   "foundation/components/flex-video",
-   "foundation/components/forms",
-   "foundation/components/grid";
-//   "foundation/components/inline-lists",
-//   "foundation/components/joyride",
-//   "foundation/components/keystrokes",
-//   "foundation/components/labels",
-//   "foundation/components/magellan",
-//   "foundation/components/orbit",
-//   "foundation/components/pagination",
-//   "foundation/components/panels",
-//   "foundation/components/pricing-tables",
-//   "foundation/components/progress-bars",
-//   "foundation/components/reveal",
-//   "foundation/components/side-nav",
-//   "foundation/components/split-buttons",
-//   "foundation/components/sub-nav",
-//   "foundation/components/switch",
-//   "foundation/components/tables",
-//   "foundation/components/tabs",
-//   "foundation/components/thumbs",
-//   "foundation/components/tooltips",
-//   "foundation/components/top-bar",
-//   "foundation/components/type",
-//   "foundation/components/offcanvas",
-//   "foundation/components/visibility";
+"foundation/components/block-grid",
+"foundation/components/buttons",
+"foundation/components/forms",
+"foundation/components/grid";
+
 
 body {
 	background: $white;
@@ -74,8 +42,7 @@ body {
 			@media #{$large-up} {
 
 				> .row > .columns {
-					padding-top: 80px;
-					padding-bottom: 120px;
+					padding: 20px;
 				}
 			}
 		}
@@ -93,14 +60,12 @@ body {
 		}
 
 		@media #{$large-up} {
-			padding: 120px 0;
+			padding: 20px 0;
 
 			&.interior {
-				padding: 0 0 120px;
+				padding: 0 0 20px;
 			}
 		}
-
-
 	}
 
 	&.dark {
@@ -120,7 +85,7 @@ body {
 	}
 
 	&.banner {
-		background: url(../images/top-bg.jpg) no-repeat center top;
+		background: url(../images/photo1.jpg) no-repeat center top;
 		background-size: cover;
 		text-align: center;
 		padding: 50px 0 0;
@@ -136,8 +101,8 @@ body {
 		height: 550px;
 	}
 
-	&.accept {
-		background: url(../images/accept-bg.jpg) no-repeat center top;
+	&.what-goes-in {
+		background: url(../images/photo4.jpg) no-repeat center top;
 		background-size: cover;
 		padding: 0;
 		color: $white;
@@ -150,7 +115,7 @@ body {
 			display: none;
 
 			@media #{$large-up} {
-				padding: 80px 0;
+				padding: 20px 0;
 			}
 		}
 	}
@@ -195,17 +160,31 @@ body {
 		}
 	}
 
-	&.logos {
-		background: url(../images/partners-bg.jpg) no-repeat center top;
-		background-size: cover;
+    &.why-us {
+      background: url(../images/photo2.jpg) no-repeat center top;
+      background-size: cover;
+      color: $white;
+      ul li {
+        text-align: center;
+      }
 
-		ul li {
-			text-align: center;
-		}
-	}
 
-	&.subscribe {
-		padding-bottom: 80px;
+    }
+
+    &.partner-logos {
+      background: url(../images/photo3.jpg) no-repeat center top;
+      background-size: cover;
+      color: $white;
+
+      ul li {
+        text-align: center;
+      }
+
+    }
+
+
+  &.subscribe {
+		padding-bottom: 20px;
 
 		h2 {
 			color: $offblack;
@@ -242,11 +221,11 @@ body {
 		}
 	}
 
-	&.subscription-details {
+	&.what-goes-in {
 		padding: 0;
 
 		> .row {
-			padding: 60px 0 0;
+			padding: 20px 0 0;
 
 			&.bottom {
 				padding-bottom: 80px;
@@ -256,7 +235,7 @@ body {
 
 	@media #{$large-up} {
 		background: url(../images/black-line-bg.png) repeat-y center top;
-		padding: 80px 0;
+		padding: 2f0px 0;
 	}
 
 	&.interior-footer {
@@ -428,7 +407,7 @@ h3 {
 }
 
 #contact {
-	background: url(../images/footer-bg.jpg) no-repeat center bottom;
+	background: url(../images/photo5.jpg) no-repeat center bottom;
 	background-size: cover;
 	padding: 0;
 
@@ -468,6 +447,11 @@ h3 {
 			}
 		}
 	}
+
+  a {
+    text-decoration: none;
+    color: $white;
+  }
 }
 
 a.social-icon {

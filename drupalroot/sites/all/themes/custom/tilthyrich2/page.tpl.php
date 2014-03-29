@@ -50,39 +50,6 @@
 	</div>
 </div>
 
-<div class="container green commercial-services">
-	<div class="row">
-		<div class="small-12 large-4 columns">
-			<h2>Commercial Services</h2>
-		</div>
-		<div class="small-12 large-4 columns end text-center">
-			<a href="#" id="see-residential-services"><img src="<?php echo path_to_theme();?>/images/see-residential-services.png" /></a>
-		</div>
-	</div>
-	<div class="row services-content">
-		<div class="small-12 large-2 columns">
-			<img src="<?php echo path_to_theme();?>/images/icon-bike-right.png" />
-			<h3>We</h3>
-			<p>After contacting us we visit your business/restaurant to assess your wants and needs for a composting system.</p>
-		</div>
-		<div class="small-12 large-2 large-offset-1 columns">
-			<img src="<?php echo path_to_theme();?>/images/icon-shovel.png" />
-			<h3>We</h3>
-			<p>We collect the contents of your tote(s), leaving you shiny clean ones.</p>
-		</div>
-		<div class="small-12 large-2 large-offset-2 columns">
-			<img src="<?php echo path_to_theme();?>/images/icon-bike-left.png" />
-			<h3>You</h3>
-			<p>If there’s a need we return compost bi-annually. We also feature you on our as a partner, and blow you up on social media</p>
-		</div>
-		<div class="small-12 large-2 large-offset-1 columns">
-			<img src="<?php echo path_to_theme();?>/images/icon-face.png" />
-			<h3>You</h3>
-			<p>Maecenas non erat feugiat, porta felis quis, egestas est. Quisque id libero id quam interdum dapibus a at risus.</p>
-		</div>
-	</div>
-</div>
-
 <div class="container services residential-services">
 	<div class="row">
 		<div class="small-12 large-4 columns">
@@ -118,7 +85,40 @@
 	</div>
 </div>
 
-<div class="container">
+<div class="container green commercial-services">
+  <div class="row">
+    <div class="small-12 large-4 columns">
+      <h2>Commercial Services</h2>
+    </div>
+    <div class="small-12 large-4 columns end text-center">
+      <a href="#" id="see-residential-services"><img src="<?php echo path_to_theme();?>/images/see-residential-services.png" /></a>
+    </div>
+  </div>
+  <div class="row services-content">
+    <div class="small-12 large-2 columns">
+      <img src="<?php echo path_to_theme();?>/images/icon-bike-right.png" />
+      <h3>We</h3>
+      <p>After contacting us we visit your business/restaurant to assess your wants and needs for a composting system.</p>
+    </div>
+    <div class="small-12 large-2 large-offset-1 columns">
+      <img src="<?php echo path_to_theme();?>/images/icon-shovel.png" />
+      <h3>We</h3>
+      <p>We collect the contents of your tote(s), leaving you shiny clean ones.</p>
+    </div>
+    <div class="small-12 large-2 large-offset-2 columns">
+      <img src="<?php echo path_to_theme();?>/images/icon-bike-left.png" />
+      <h3>You</h3>
+      <p>If there’s a need we return compost bi-annually. We also feature you on our as a partner, and blow you up on social media</p>
+    </div>
+    <div class="small-12 large-2 large-offset-1 columns">
+      <img src="<?php echo path_to_theme();?>/images/icon-face.png" />
+      <h3>You</h3>
+      <p>Maecenas non erat feugiat, porta felis quis, egestas est. Quisque id libero id quam interdum dapibus a at risus.</p>
+    </div>
+  </div>
+</div>
+
+<div class="container why-us">
 	<div class="row">
 		<div class="small-12 large-5 columns">
 			<h2>Why compost?</h2>
@@ -167,7 +167,7 @@
 	</div>
 </div>
 
-<div class="container logos">
+<div class="container partner-logos">
 	<div class="row">
 		<div class="small-12 columns text-center">
 			<ul class="small-block-grid-2 large-block-grid-4">
@@ -190,7 +190,7 @@
 	</div>
 </div>
 
-<div class="container accept">
+<div class="container what-goes-in">
 	<div class="row">
 		<div class="small-12 large-5 columns">
 			<h2>What do we accept?</h2>
@@ -304,7 +304,7 @@
 	</div>
 </div>
 
-<div class="container subscription-details">
+<div class="container">
 	<div class="row bottom">
 		<div class="small-12 large-5 columns">
 			<h2>Support the compost revolution!</h2>

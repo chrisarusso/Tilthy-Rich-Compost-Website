@@ -14,3 +14,5 @@ sites/*/civicrm.settings.php
 # Do not include dreamhost staging password protect file
 .htpasswd
 
+# Ignore sassy-ness
+.sass-cache

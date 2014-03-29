@@ -96,12 +96,12 @@ $(document).ready(function() {
 
 	$('#subscription-details').on('click', function(e) {
 		e.preventDefault();
-		$.scrollTo('.accept', {
+		$.scrollTo('.what-goes-in', {
 			'duration': 600,
 			'easing': 'easeInOutCubic'
 		});
-		$('.container.accept > .row .columns').css('opacity', 0);
-		$('.container.accept > .row').toggle({
+		$('.container.what-goes-in > .row .columns').css('opacity', 0);
+		$('.container.what-goes-in > .row').toggle({
 			'duration': 400,
 			'easing': 'easeInOutCubic',
 			'complete': function() {
