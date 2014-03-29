@@ -1,0 +1,12 @@
+name = Tilthy Rich
+description = Custom theme for Tilthy Rich Compost designed by Cuberis with help from Natalia Weedy Photography
+core = 7.x
+engine = phptemplate
+screenshot = screenshot.png
+
+stylesheets[all][]   = stylesheets/main.css
+
+scripts[] = js/jquery.scrollTo.min.js
+scripts[] = js/jquery.localScroll.min.js
+scripts[] = js/foundation.min.js
+scripts[] = js/app.js

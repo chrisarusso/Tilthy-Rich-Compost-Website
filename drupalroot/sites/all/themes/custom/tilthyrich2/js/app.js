@@ -1,3 +1,5 @@
+(function ($) {
+
 // initialize foundation
 $(document).foundation();
 
@@ -122,3 +124,5 @@ $(document).ready(function() {
 	});
 
 });
+
+})(jQuery);

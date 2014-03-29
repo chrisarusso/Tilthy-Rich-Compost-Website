@@ -16,8 +16,9 @@
 <div class="container banner">
 	<div class="row">
 		<div class="small-12 columns">
-			<img src="images/logo.png" id="logo" /><br />
-			<a id="more-about-us" href="#"><img src="images/more-about-us.png" /></a>
+          <a href="<?php print check_url($front_page); ?>"><img src="<?php print $logo ?>" alt="<?php print $site_name; ?>" /></a>
+          <br />
+			<a id="more-about-us" href="#"><img src="<?php echo path_to_theme();?>/images/more-about-us.png" /></a>
 		</div>
 	</div>
 </div>
@@ -55,27 +56,27 @@
 			<h2>Commercial Services</h2>
 		</div>
 		<div class="small-12 large-4 columns end text-center">
-			<a href="#" id="see-residential-services"><img src="images/see-residential-services.png" /></a>
+			<a href="#" id="see-residential-services"><img src="<?php echo path_to_theme();?>/images/see-residential-services.png" /></a>
 		</div>
 	</div>
 	<div class="row services-content">
 		<div class="small-12 large-2 columns">
-			<img src="images/icon-bike-right.png" />
+			<img src="<?php echo path_to_theme();?>/images/icon-bike-right.png" />
 			<h3>We</h3>
 			<p>After contacting us we visit your business/restaurant to assess your wants and needs for a composting system.</p>
 		</div>
 		<div class="small-12 large-2 large-offset-1 columns">
-			<img src="images/icon-shovel.png" />
+			<img src="<?php echo path_to_theme();?>/images/icon-shovel.png" />
 			<h3>We</h3>
 			<p>We collect the contents of your tote(s), leaving you shiny clean ones.</p>
 		</div>
 		<div class="small-12 large-2 large-offset-2 columns">
-			<img src="images/icon-bike-left.png" />
+			<img src="<?php echo path_to_theme();?>/images/icon-bike-left.png" />
 			<h3>You</h3>
 			<p>If there’s a need we return compost bi-annually. We also feature you on our as a partner, and blow you up on social media</p>
 		</div>
 		<div class="small-12 large-2 large-offset-1 columns">
-			<img src="images/icon-face.png" />
+			<img src="<?php echo path_to_theme();?>/images/icon-face.png" />
 			<h3>You</h3>
 			<p>Maecenas non erat feugiat, porta felis quis, egestas est. Quisque id libero id quam interdum dapibus a at risus.</p>
 		</div>
@@ -88,29 +89,29 @@
 			<h2>Residential Services</h2>
 		</div>
 		<div class="small-12 large-4 columns end text-center">
-			<a href="#" id="see-commercial-services"><img src="images/see-commercial-services.png" /></a>
+			<a href="#" id="see-commercial-services"><img src="<?php echo path_to_theme();?>/images/see-commercial-services.png" /></a>
 		</div>
 	</div>
 	<div class="row services-content">
 	</div>
 	<div class="row services-content">
 		<div class="small-12 large-2 columns">
-			<img src="images/icon-bike-right.png" />
+			<img src="<?php echo path_to_theme();?>/images/icon-bike-right.png" />
 			<h3>You</h3>
 			<p>You sign up here. We deliver a bucket with instructions to your house (a picture of a bucket or house with our logo?)</p>
 		</div>
 		<div class="small-12 large-2 large-offset-1 columns">
-			<img src="images/icon-shovel.png" />
+			<img src="<?php echo path_to_theme();?>/images/icon-shovel.png" />
 			<h3>We</h3>
 			<p>We collect the contents of your bucket weekly, leaving you a shiny clean one (this should have the picture of the bike above it)</p>
 		</div>
 		<div class="small-12 large-2 large-offset-2 columns">
-			<img src="images/icon-bike-left.png" />
+			<img src="<?php echo path_to_theme();?>/images/icon-bike-left.png" />
 			<h3>You</h3>
 			<p>You receive nutrient dense vermi-compost twice annually.</p>
 		</div>
 		<div class="small-12 large-2 large-offset-1 columns">
-			<img src="images/icon-face.png" />
+			<img src="<?php echo path_to_theme();?>/images/icon-face.png" />
 			<h3>You</h3>
 			<p>Maecenas non erat feugiat, porta felis quis, egestas est. Quisque id libero id quam interdum dapibus a at risus.</p>
 		</div>
@@ -141,7 +142,7 @@
 <div id="where" class="container dark">
 	<div class="row">
 		<div class="small-12 columns">
-		<h2>Where We Operate</h2>	
+		<h2>Where We Operate</h2>
 		</div>
 	</div>
 </div>
@@ -170,10 +171,12 @@
 	<div class="row">
 		<div class="small-12 columns text-center">
 			<ul class="small-block-grid-2 large-block-grid-4">
-				<li><a href="#"><img src="images/logo1.png" /></a></li>
-				<li><a href="#"><img src="images/logo2.png" /></a></li>
-				<li><a href="#"><img src="images/logo3.png" /></a></li>
-				<li><a href="#"><img src="images/logo4.png" /></a></li>
+              <?php echo views_embed_view('homepage_partners'); ?>
+              <?php // @todo: Do this better ?>
+				<li><a href="#"><img src="<?php echo path_to_theme();?>/images/logo1.png" /></a></li>
+				<li><a href="#"><img src="<?php echo path_to_theme();?>/images/logo2.png" /></a></li>
+				<li><a href="#"><img src="<?php echo path_to_theme();?>/images/logo3.png" /></a></li>
+				<li><a href="#"><img src="<?php echo path_to_theme();?>/images/logo4.png" /></a></li>
 			</ul>
 		</div>
 	</div>
@@ -203,7 +206,7 @@
 <div class="container green subscribe">
 	<div class="row text-center">
 		<div class="small-12 columns">
-			<a href="#" id="subscription-details"><img src="images/subscription-details.png" /></a>
+			<a href="#" id="subscription-details"><img src="<?php echo path_to_theme();?>/images/subscription-details.png" /></a>
 		</div>
 	</div>
 	<div class="row">
@@ -328,13 +331,12 @@
 	</div>
 	<div class="row">
 		<div class="small-12 columns text-center">
-			<h2>Start Composting Today</h2>
+          <?php //@todo: text-no decoration, white, visited white ?>
+			<h2><a href="#subscribe">Start Composting Today</a></h2>
 			<div class="footer-text">
-				Chris@tilthyrichcompost.com<br />
-				<img src="images/bullet.png" />
+				info[at]tilthyrichcompost.com<br />
+				<img src="<?php echo path_to_theme();?>/images/bullet.png" />
 				919.497.5584<br />
-				<img src="images/bullet.png" />
-				313 Main Street Durham, NC 27701
 			</div>
 		</div>
 	</div>
@@ -342,15 +344,5 @@
 </div>
 <!-- /page -->
 
-
-<!-- Javascript -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+<?php // @todo: Put this in the right place! ?>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-<script>window.jQuery.ui || document.write('<script src="js/jquery-ui.min.js"><\/script>')</script>
-<script src="js/jquery.scrollTo.min.js"></script>
-<script src="js/jquery.localScroll.min.js"></script>
-<script src="js/foundation.min.js"></script>
-<script src="js/app.js"></script>
-
-
