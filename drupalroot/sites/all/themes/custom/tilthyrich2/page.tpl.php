@@ -14,7 +14,7 @@
 </div>
 
 <div class="container banner">
-	<div class="row">
+	<div class="row logo">
 		<div class="small-12 columns">
           <a href="<?php print check_url($front_page); ?>"><img src="<?php print $logo ?>" alt="<?php print $site_name; ?>" /></a>
           <br />

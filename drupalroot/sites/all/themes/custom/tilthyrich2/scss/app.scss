@@ -11,7 +11,7 @@
 body {
 	background: $white;
 	color: $black;
-	font-family: Quicksand;
+	font-family: GR;
 }
 
 .container {
@@ -89,6 +89,8 @@ body {
 		background-size: cover;
 		text-align: center;
 		padding: 50px 0 0;
+        position: relative;
+        min-height: 600px;
 
 		img {
 			margin: 30px 0 0;
@@ -193,7 +195,7 @@ body {
 
 			span {
 				display: block;
-				font-family: Quicksand;
+				font-family: GR;
 				font-weight: normal;
 				color: $white;
 				font-size: 38px;
@@ -294,7 +296,7 @@ img.diagram {
 
 
 h2 {
-	font-family: Oswald;
+	font-family: GR;
 	font-weight: bold;
 	font-size: 36px;
 	padding: 0;
@@ -310,7 +312,7 @@ p {
 	margin: 0;
 	padding: 0 0 30px;
 	font-size: 16px;
-	font-family: Quicksand;
+	font-family: GR;
 	line-height: 1.5;
 
 	&.question {
@@ -343,7 +345,7 @@ p {
 }
 
 h3 {
-	font-family: Oswald;
+	font-family: GR;
 	font-weight: bold;
 	font-size: 25px;
 	text-transform: uppercase;
@@ -371,7 +373,7 @@ h3 {
 			text-decoration: none;
 			color: $white;
 			text-transform: uppercase;
-			font-family: Quicksand;
+			font-family: GR;
 			font-weight: bold;
 			font-size: 17px;
 			@include transition(color .3s);
@@ -491,7 +493,7 @@ a.social-icon {
 form.tilthyform {
 
 	label {
-		font-family: Quicksand;
+		font-family: GR;
 		font-weight: normal;
 		font-size: 14px;
 		line-height: 40px;
@@ -509,7 +511,7 @@ form.tilthyform {
 	input[type="submit"] {
 		height: 36px;
 		line-height: 36px;
-		font-family: Quicksand;
+		font-family: GR;
 		color: $white;
 		text-transform: uppercase;
 		background: $offblack;
@@ -539,7 +541,7 @@ a.footer-link {
 	font-size: 14px;
 	color: $white;
 	text-decoration: none;
-	font-family: Quicksand;
+	font-family: GR;
 	font-weight: normal;
 	line-height: 30px;
 	@include inline-block;
@@ -559,4 +561,10 @@ a.footer-link {
 			padding-left: 30px;
 		}
 	}
+}
+
+.row.logo {
+  position: absolute;
+  bottom: 0;
+  max-width: 100%;
 }
