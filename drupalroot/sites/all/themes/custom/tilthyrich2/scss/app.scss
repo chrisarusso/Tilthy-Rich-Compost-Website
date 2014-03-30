@@ -8,6 +8,16 @@
 "foundation/components/grid";
 
 
+@font-face {
+  font-family: GG;
+  src: url(../typefaces/garage_gothic/GarageGothicBlack.ttf) format('opentype');
+}
+
+@font-face {
+  font-family: GR;
+  src: url(../typefaces/Gotham%20Rounded/GothamRnd-Book.otf) format('opentype');
+}
+
 body {
 	background: $white;
 	color: $black;
