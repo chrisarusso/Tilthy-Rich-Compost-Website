@@ -18,8 +18,9 @@
 		<div class="small-12 columns">
           <a href="<?php print check_url($front_page); ?>"><img src="<?php print $logo ?>" alt="<?php print $site_name; ?>" /></a>
           <br />
-			<a id="more-about-us" href="#"><img src="<?php echo path_to_theme();?>/images/more-about-us.png" /></a>
-		</div>
+			<a id="more-about-us" href="#"><img src="<?php echo base_path() . path_to_theme();?>/images/more-about-us.png" /></a>
+            <span class="toggle-text"><?php echo t('Less about us'); ?></span>
+        </div>
 	</div>
 </div>
 
@@ -56,29 +57,32 @@
 			<h2>Residential Services</h2>
 		</div>
 		<div class="small-12 large-4 columns end text-center">
-			<a href="#" id="see-commercial-services"><img src="<?php echo path_to_theme();?>/images/see-commercial-services.png" /></a>
-		</div>
+			<a href="#" id="see-commercial-services">
+              <img src="<?php echo base_path() . path_to_theme();?>/images/plus.png" />
+            </a>
+            <span class="toggle-text"><?php echo t('See commercial services'); ?></span>
+        </div>
 	</div>
 	<div class="row services-content">
 	</div>
 	<div class="row services-content">
 		<div class="small-12 large-2 columns">
-			<img src="<?php echo path_to_theme();?>/images/icon-bike-right.png" />
+			<img src="<?php echo base_path() . path_to_theme();?>/images/icon-bike-right.png" />
 			<h3>You</h3>
 			<p>You sign up here. We deliver a bucket with instructions to your house (a picture of a bucket or house with our logo?)</p>
 		</div>
 		<div class="small-12 large-2 large-offset-1 columns">
-			<img src="<?php echo path_to_theme();?>/images/icon-shovel.png" />
+			<img src="<?php echo base_path() . path_to_theme();?>/images/icon-shovel.png" />
 			<h3>We</h3>
 			<p>We collect the contents of your bucket weekly, leaving you a shiny clean one (this should have the picture of the bike above it)</p>
 		</div>
 		<div class="small-12 large-2 large-offset-2 columns">
-			<img src="<?php echo path_to_theme();?>/images/icon-bike-left.png" />
+			<img src="<?php echo base_path() . path_to_theme();?>/images/icon-bike-left.png" />
 			<h3>You</h3>
 			<p>You receive nutrient dense vermi-compost twice annually.</p>
 		</div>
 		<div class="small-12 large-2 large-offset-1 columns">
-			<img src="<?php echo path_to_theme();?>/images/icon-face.png" />
+			<img src="<?php echo base_path() . path_to_theme();?>/images/icon-face.png" />
 			<h3>You</h3>
 			<p>Maecenas non erat feugiat, porta felis quis, egestas est. Quisque id libero id quam interdum dapibus a at risus.</p>
 		</div>
@@ -91,27 +95,28 @@
       <h2>Commercial Services</h2>
     </div>
     <div class="small-12 large-4 columns end text-center">
-      <a href="#" id="see-residential-services"><img src="<?php echo path_to_theme();?>/images/see-residential-services.png" /></a>
+      <a href="#" id="see-residential-services"><img src="<?php echo base_path() . path_to_theme();?>/images/plus.png" /></a>
+      <span class="toggle-text"><?php echo t('See residential services'); ?></span>
     </div>
   </div>
   <div class="row services-content">
     <div class="small-12 large-2 columns">
-      <img src="<?php echo path_to_theme();?>/images/icon-bike-right.png" />
+      <img src="<?php echo base_path() . path_to_theme();?>/images/icon-bike-right.png" />
       <h3>We</h3>
       <p>After contacting us we visit your business/restaurant to assess your wants and needs for a composting system.</p>
     </div>
     <div class="small-12 large-2 large-offset-1 columns">
-      <img src="<?php echo path_to_theme();?>/images/icon-shovel.png" />
+      <img src="<?php echo base_path() . path_to_theme();?>/images/icon-shovel.png" />
       <h3>We</h3>
       <p>We collect the contents of your tote(s), leaving you shiny clean ones.</p>
     </div>
     <div class="small-12 large-2 large-offset-2 columns">
-      <img src="<?php echo path_to_theme();?>/images/icon-bike-left.png" />
+      <img src="<?php echo base_path() . path_to_theme();?>/images/icon-bike-left.png" />
       <h3>You</h3>
       <p>If there’s a need we return compost bi-annually. We also feature you on our as a partner, and blow you up on social media</p>
     </div>
     <div class="small-12 large-2 large-offset-1 columns">
-      <img src="<?php echo path_to_theme();?>/images/icon-face.png" />
+      <img src="<?php echo base_path() . path_to_theme();?>/images/icon-face.png" />
       <h3>You</h3>
       <p>Maecenas non erat feugiat, porta felis quis, egestas est. Quisque id libero id quam interdum dapibus a at risus.</p>
     </div>
@@ -173,10 +178,10 @@
 			<ul class="small-block-grid-2 large-block-grid-4">
               <?php echo views_embed_view('homepage_partners'); ?>
               <?php // @todo: Do this better ?>
-				<li><a href="#"><img src="<?php echo path_to_theme();?>/images/logo1.png" /></a></li>
-				<li><a href="#"><img src="<?php echo path_to_theme();?>/images/logo2.png" /></a></li>
-				<li><a href="#"><img src="<?php echo path_to_theme();?>/images/logo3.png" /></a></li>
-				<li><a href="#"><img src="<?php echo path_to_theme();?>/images/logo4.png" /></a></li>
+				<li><a href="#"><img src="<?php echo base_path() . path_to_theme();?>/images/logo1.png" /></a></li>
+				<li><a href="#"><img src="<?php echo base_path() . path_to_theme();?>/images/logo2.png" /></a></li>
+				<li><a href="#"><img src="<?php echo base_path() . path_to_theme();?>/images/logo3.png" /></a></li>
+				<li><a href="#"><img src="<?php echo base_path() . path_to_theme();?>/images/logo4.png" /></a></li>
 			</ul>
 		</div>
 	</div>
@@ -206,100 +211,19 @@
 <div class="container green subscribe">
 	<div class="row text-center">
 		<div class="small-12 columns">
-			<a href="#" id="subscription-details"><img src="<?php echo path_to_theme();?>/images/subscription-details.png" /></a>
+			<a href="#" id="subscription-details"><img src="<?php echo base_path() . path_to_theme();?>/images/plus.png" /></a>
+          <span class="toggle-text"><?php echo t('What goes in the bucket?'); ?></span>
 		</div>
-	</div>
+	  </div>
 	<div class="row">
 		<div class="small-12 columns">
 			<h2><span>Zero-hassle compost<br /> services starting at just</span> $15 a month</h2>
 		</div>
 	</div>
 	<div class="row">
+      <?php $form = drupal_get_form('user_register_form');
+      $html = drupal_render($form); ?>
 
-		<form id="subscribe-form" class="tilthyform">
-		<div class="small-12 large-5 columns">
-			<br /><br /><br />
-			<div class="row">
-				<div class="small-9 columns">
-					<input type="text" name="form-name" id="form-name">
-				</div>
-				<div class="small-3 columns">
-					<label for="form-name">Name</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="small-9 columns">
-					<input type="email" name="form-email" id="form-email">
-				</div>
-				<div class="small-3 columns">
-					<label for="form-email">Email</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="small-9 columns">
-					<input type="text" name="form-phone" id="form-phone">
-				</div>
-				<div class="small-3 columns">
-					<label for="form-phone">Phone</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="small-9 columns">
-					<input type="text" name="form-address" id="form-address">
-				</div>
-				<div class="small-3 columns">
-					<label for="form-address">Address</label>
-				</div>
-			</div>
-			<div class="row">
-				<div class="small-9 columns">
-					<input type="text" name="form-zip" id="form-zip">
-				</div>
-				<div class="small-3 columns">
-					<label for="form-zip">Zip Code</label>
-				</div>
-			</div>
-		</div>
-
-		<div class="small-12 large-5 large-offset-2 columns form-right">
-			<label for="form-where">Where is your bucket located?</label>
-			<input type="text" name="form-where" id="form-where" placeholder="ex. front porch, left of the door">
-
-			<label>Bucket Size</label>
-			<div class="row">
-				<div class="small-4 columns">
-					<label class="checkbox"><input type="checkbox" name="form-bucket-size">2 Gallon</label>
-				</div>
-				<div class="small-4 columns">
-					<label class="checkbox"><input type="checkbox" name="form-bucket-size">5 Gallons</label>
-				</div>
-				<div class="small-4 columns">
-					<label class="checkbox"><input type="checkbox" name="form-bucket-size">10+ Gallons</label>
-				</div>
-			</div>
-
-			<label>Pick-up reminders</label>
-			<div class="row">
-				<div class="small-4 columns">
-					<label class="checkbox"><input type="checkbox" name="form-reminders">Email</label>
-				</div>
-				<div class="small-8 columns">
-					<label class="checkbox"><input type="checkbox" name="form-reminders">Text Message</label>
-				</div>
-			</div>
-
-			<label for="form-service-type">Service Type</label>
-			<select id="form-service-type" name="form-service-type">
-				<option value="1">Option 1</option>
-				<option value="2">Option 2</option>
-				<option value="3">Option 3</option>
-				<option value="4">Option 4</option>
-			</select>
-			<!-- dropdown -->
-
-			<input type="submit" value="Subscribe" id="form-submit">
-		</div>
-		</form>
 
 	</div>
 </div>
@@ -335,8 +259,8 @@
 			<h2><a href="#subscribe">Start Composting Today</a></h2>
 			<div class="footer-text">
 				info[at]tilthyrichcompost.com<br />
-				<img src="<?php echo path_to_theme();?>/images/bullet.png" />
-				919.497.5584<br />
+				<img src="<?php echo base_path() . path_to_theme();?>/images/bullet.png" />
+				860.987.9887<br />
 			</div>
 		</div>
 	</div>
