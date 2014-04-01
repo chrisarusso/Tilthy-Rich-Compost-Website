@@ -12,7 +12,7 @@ $(document).ready(function() {
 	});
 
 	// "more about us" link below logo
-	$('#more-about-us').on('click', function(e) {
+	$('#about-us').on('click', function(e) {
 		e.preventDefault();
 		$.scrollTo('.about-us', {
 			'duration': 600,
@@ -24,6 +24,16 @@ $(document).ready(function() {
 			'duration': 400,
 			'easing': 'easeInOutCubic',
 			'complete': function() {
+                if ($('.about-us-text').html() == 'More about us') {
+                    $('.about-us-text').html('Less about us')
+                    $('#about-us-img').attr('src', Drupal.settings.basePath + 'sites/all/themes/custom/tilthyrich2/images/less-about-us.png')
+
+                }
+                else {
+                    $('.about-us-text').html('More about us')
+                    $('#about-us-img').attr('src', Drupal.settings.basePath + 'sites/all/themes/custom/tilthyrich2/images/more-about-us.png')
+
+                }
 				$(this).find('.columns').animate({
 					'opacity': 1
 				}, {
@@ -77,7 +87,7 @@ $(document).ready(function() {
 		});
 	}); */
 
-	$('#subscription-details').on('click', function(e) {
+	$('#what-goes-in').on('click', function(e) {
 		e.preventDefault();
 		$.scrollTo('.what-goes-in', {
 			'duration': 600,
@@ -94,6 +104,12 @@ $(document).ready(function() {
 					'duration': 400,
 					'easing': 'easeInOutCubic'
 				});
+                if ($('.container.what-goes-in > .row').css('display') == 'none') {
+                    $('#what-goes-in-img').attr('src', Drupal.settings.basePath + 'sites/all/themes/custom/tilthyrich2/images/green-plus.png')
+                }
+                else {
+                    $('#what-goes-in-img').attr('src', Drupal.settings.basePath + 'sites/all/themes/custom/tilthyrich2/images/green-minus.png')
+                }
 			}
 		});
 	});
