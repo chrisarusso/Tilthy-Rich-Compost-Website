@@ -114,8 +114,8 @@ echo render($form['form_id']);
       </div>
     </div>
 
-    <?php $form['field_reminders'][LANGUAGE_NONE]['#theme_wrappers'] = array(); ?>
-    <?php echo render($form['field_reminders'][LANGUAGE_NONE]); ?>
+    <?php echo render($form['field_reminders']); ?>
+    <?php echo render($form['field_mobile_carrier_provider']); ?>
 
     <label for="form-service-type">Service Type</label>
     <?php $form['field_service_type'][LANGUAGE_NONE]['#theme_wrappers'] = array(); ?>
