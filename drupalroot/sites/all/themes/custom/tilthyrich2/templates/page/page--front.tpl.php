@@ -267,69 +267,70 @@
 		</div>
 	</div>
 </div>
-
-<div id="subscribe" class="container dark">
-	<div class="row">
-		<div class="small-12 columns">
-			<h2>Subscribe</h2>
-		</div>
-	</div>
-</div>
-
-<div id="what-goes-in" class="container what-goes-in">
-	<div class="row">
-		<div class="small-12 large-5 columns">
-			<h2>What we <i>do</i> accept?</h2>
-          <ul>
-            <li>Food & Food Prep Scraps</li>
-            <li>Fruit, vegetable (trimmings, rotten ones)</li>
-            <li>Coffee and tea (including bags and filters if they’re paper)</li>
-            <li>Bread, pasta, prepared foods</li>
-            <li>Eggshells</li>
-            <li>Any food at all, seriously</li>
-            <li>Soiled Paper</li>
-            <li>Paper towels from the kitchen area</li>
-            <li>Paper cups, plates and napkins</li>
-            <li>Pizza boxes, waxed paper</li>
-            <li>Corn-based Cups, Utensils & Bags</li>
-            <li>Dead plants, bouquets</li>
-          </ul>
-
-        </div>
-		<div class="small-12 large-5 large-offset-2 columns">
-			<h2>What we <i>don't</i> accept?</h2>
-          <ul>
-            <li>Bad attitudes</li>
-            <li>Plastics of any kind (containers, wraps, bags, takeout coffee lids)</li>
-            <li>Metals, including forks and foil</li>
-            <li>Rubber bands, latex gloves</li>
-            <li>Large amounts of oil</li>
-          </ul>
+<?php // @todo: What do we do for subscribers ?>
+<?php // consider doing the below if (!$logged_in): ?>
+  <div id="subscribe" class="container dark">
+      <div class="row">
+          <div class="small-12 columns">
+              <h2>Subscribe</h2>
+          </div>
       </div>
-	</div>
-</div>
+  </div>
 
-<div class="container green subscribe">
-	<div class="row text-center">
-		<div class="small-12 columns">
-			<a href="#" id="what-goes-in-plus"><img id="what-goes-in-img" src="<?php echo base_path() . path_to_theme();?>/images/white-plus.png" /></a>
-          <span class="toggle-text"><?php echo t('What goes in the bucket?'); ?></span>
-		</div>
-	  </div>
-	<div class="row">
-		<div class="small-12 columns">
-			<h2><span>Zero-hassle compost<br /> services starting at just</h2>
-			<h2>$15 a month</h2>
-		</div>
-	</div>
-	<div class="row">
-    <?php if ($messages): ?>
-      <div id="console" class="clearfix"><?php print $messages; ?></div>
-    <?php endif; ?>
-      <?php echo $registration_form; ?>
-	</div>
-</div>
+  <div id="what-goes-in" class="container what-goes-in">
+      <div class="row">
+          <div class="small-12 large-5 columns">
+              <h2>What we <i>do</i> accept?</h2>
+            <ul>
+              <li>Food & Food Prep Scraps</li>
+              <li>Fruit, vegetable (trimmings, rotten ones)</li>
+              <li>Coffee and tea (including bags and filters if they’re paper)</li>
+              <li>Bread, pasta, prepared foods</li>
+              <li>Eggshells</li>
+              <li>Any food at all, seriously</li>
+              <li>Soiled Paper</li>
+              <li>Paper towels from the kitchen area</li>
+              <li>Paper cups, plates and napkins</li>
+              <li>Pizza boxes, waxed paper</li>
+              <li>Corn-based Cups, Utensils & Bags</li>
+              <li>Dead plants, bouquets</li>
+            </ul>
 
+          </div>
+          <div class="small-12 large-5 large-offset-2 columns">
+              <h2>What we <i>don't</i> accept?</h2>
+            <ul>
+              <li>Bad attitudes</li>
+              <li>Plastics of any kind (containers, wraps, bags, takeout coffee lids)</li>
+              <li>Metals, including forks and foil</li>
+              <li>Rubber bands, latex gloves</li>
+              <li>Large amounts of oil</li>
+            </ul>
+        </div>
+      </div>
+  </div>
+
+  <div class="container green subscribe">
+      <div class="row text-center">
+          <div class="small-12 columns">
+              <a href="#" id="what-goes-in-plus"><img id="what-goes-in-img" src="<?php echo base_path() . path_to_theme();?>/images/white-plus.png" /></a>
+            <span class="toggle-text"><?php echo t('What goes in the bucket?'); ?></span>
+          </div>
+        </div>
+      <div class="row">
+          <div class="small-12 columns">
+              <h2><span>Zero-hassle compost<br /> services starting at just</h2>
+              <h2>$15 a month</h2>
+          </div>
+      </div>
+      <div class="row">
+      <?php if ($messages): ?>
+        <div id="console" class="clearfix"><?php print $messages; ?></div>
+      <?php endif; ?>
+        <?php echo $registration_form; ?>
+      </div>
+  </div>
+<?php //consider doing this endif; ?>
 <div class="container">
 	<div class="row bottom">
 		<div class="small-12 large-5 columns">
