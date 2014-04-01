@@ -14,11 +14,7 @@ $(document).ready(function() {
 	// "more about us" link below logo
 	$('#about-us').on('click', function(e) {
 		e.preventDefault();
-		$.scrollTo('.about-us', {
-			'duration': 600,
-			'easing': 'easeInOutCubic',
-			'offset': -110
-		});
+
 		$('.container.about-us > .row .columns').css('opacity', 0);
 		$('.container.about-us > .row').toggle({
 			'duration': 400,
@@ -27,7 +23,11 @@ $(document).ready(function() {
                 if ($('.about-us-text').html() == 'More about us') {
                     $('.about-us-text').html('Less about us')
                     $('#about-us-img').attr('src', Drupal.settings.basePath + 'sites/all/themes/custom/tilthyrich2/images/less-about-us.png')
-
+                    $.scrollTo('.about-us', {
+                        'duration': 600,
+                        'easing': 'easeInOutCubic',
+                        'offset': -110
+                    });
                 }
                 else {
                     $('.about-us-text').html('More about us')
