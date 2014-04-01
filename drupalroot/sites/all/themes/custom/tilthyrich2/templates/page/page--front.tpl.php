@@ -36,9 +36,9 @@
             use.
           </p>
 
-          <p>We affordably service households, apartments, condos and more. Sign
-            up now to join our weekly collection service of residential food
-            scraps by bicycle.
+          <p>We affordably service households, apartments, condos and more.
+            <a href="#subscribe">Sign up now</a> to join our weekly collection
+            service of residential food scraps by bicycle.
           </p>
 
           <p>If you are a restaurant, cafe, or other kind of business we also
