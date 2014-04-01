@@ -129,6 +129,7 @@ echo render($form['form_id']);
     <?php $form['field_how_did_you_hear_about_us_'][LANGUAGE_NONE][0]['value']['#theme_wrappers'] = array(); ?>
     <?php echo render($form['field_how_did_you_hear_about_us_'][LANGUAGE_NONE][0]['value']); ?>
 
+    <?php $form['actions']['submit']['#value'] = t('Subscribe'); ?>
     <?php echo render($form['actions']['submit']); ?>
 
   </div>
