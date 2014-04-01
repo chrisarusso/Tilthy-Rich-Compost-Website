@@ -44,7 +44,7 @@ function tilthyrich2_get_partners() {
     $partners[] = array(
       'title' => $partner_node->title,
       'img' => image_style_url('thumbnail', $partner_node->field_icon[LANGUAGE_NONE][0]['uri']),
-      'url' => 'http://google.com',
+      'url' => $partner_node->field_web_url[LANGUAGE_NONE][0]['value'],
     );
   }
 
