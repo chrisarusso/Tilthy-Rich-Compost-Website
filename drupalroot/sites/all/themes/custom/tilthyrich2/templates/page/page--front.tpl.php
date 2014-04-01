@@ -231,7 +231,7 @@
           <img src="<?php echo base_path() . path_to_theme();?>/images/map.jpg" />
         </div>
 		<div class="small-12 large-5 large-offset-1 columns">
-          <h2>Help us grow</h2>
+          <h2>Where we are <i>today</i></h2>
           <p>
             We are growing! Currently we service roughly the area outlined in
             the map in and around downtown Durham, but if you are currently
