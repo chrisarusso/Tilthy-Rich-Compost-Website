@@ -33,13 +33,19 @@
  *
  * @ingroup themeable
  */
+// Take care of necessary items
+echo render($form['form_build_id']);
+echo render($form['form_token']);
+echo render($form['form_id']);
+
 ?>
 <div>
   <div class="small-12 large-5 columns">
     <br /><br /><br />
     <div class="row">
       <div class="small-9 columns">
-        <input type="text" name="form-name" id="form-name">
+        <?php $form['field_first_name'][LANGUAGE_NONE][0]['value']['#theme_wrappers'] = array(); ?>
+        <?php echo render($form['field_first_name'][LANGUAGE_NONE][0]['value']); ?>
       </div>
       <div class="small-3 columns">
         <label for="form-name">First Name</label>
@@ -47,7 +53,8 @@
     </div>
     <div class="row">
       <div class="small-9 columns">
-        <input type="text" name="form-name" id="form-name">
+        <?php $form['field_last_name'][LANGUAGE_NONE][0]['value']['#theme_wrappers'] = array(); ?>
+        <?php echo render($form['field_last_name'][LANGUAGE_NONE][0]['value']); ?>
       </div>
       <div class="small-3 columns">
         <label for="form-name">Last Name</label>
@@ -55,7 +62,8 @@
     </div>
     <div class="row">
       <div class="small-9 columns">
-        <input type="email" name="form-email" id="form-email">
+        <?php $form['account']['mail']['#theme_wrappers'] = array(); ?>
+        <?php echo render($form['account']['mail']); ?>
       </div>
       <div class="small-3 columns">
         <label for="form-email">Email</label>
@@ -63,7 +71,8 @@
     </div>
     <div class="row">
       <div class="small-9 columns">
-        <input type="text" name="form-phone" id="form-phone">
+        <?php $form['field_phone_number'][LANGUAGE_NONE][0]['value']['#theme_wrappers'] = array(); ?>
+        <?php echo render($form['field_phone_number'][LANGUAGE_NONE][0]['value']); ?>
       </div>
       <div class="small-3 columns">
         <label for="form-phone">Phone</label>
@@ -71,7 +80,8 @@
     </div>
     <div class="row">
       <div class="small-9 columns">
-        <input type="text" name="form-address" id="form-address"  placeholder="824 Burch Ave.">
+        <?php $form['field_location'][LANGUAGE_NONE][0]['street']['#theme_wrappers'] = array(); ?>
+        <?php echo render($form['field_location'][LANGUAGE_NONE][0]['street']); ?>
       </div>
       <div class="small-3 columns">
         <label for="form-address">Street</label>
@@ -79,7 +89,8 @@
     </div>
     <div class="row">
       <div class="small-9 columns">
-        <input type="text" name="form-zip" id="form-zip">
+        <?php $form['field_location'][LANGUAGE_NONE][0]['postal_code']['#theme_wrappers'] = array(); ?>
+        <?php echo render($form['field_location'][LANGUAGE_NONE][0]['postal_code']); ?>
       </div>
       <div class="small-3 columns">
         <label for="form-zip">Zip Code</label>
@@ -89,35 +100,36 @@
 
   <div class="small-12 large-5 large-offset-2 columns form-right">
     <label for="form-where">Where will you put your bucket?</label>
-    <input type="text" name="form-where" id="form-where" placeholder="ex. front porch, left of the door">
+    <?php $form['field_bucket_location'][LANGUAGE_NONE][0]['value']['#theme_wrappers'] = array(); ?>
+    <?php echo render($form['field_bucket_location'][LANGUAGE_NONE][0]['value']); ?>
 
-    <label for="form-service-type">Bucket Size</label>
-    <select id="form-service-type" name="form-service-type">
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-      <option value="4">Option 4</option>
-    </select>
 
-    <label>Collection day reminders</label>
     <div class="row">
-      <div class="small-4 columns">
-        <label class="checkbox"><input type="checkbox" name="form-reminders">Email</label>
+      <div class="small-3 columns">
+        <label for="form-service-type">Bucket Size</label>
       </div>
-      <div class="small-8 columns">
-        <label class="checkbox"><input type="checkbox" name="form-reminders">Text Message</label>
+      <div class="small-9 columns">
+        <?php $form['field_bucket_size'][LANGUAGE_NONE]['#theme_wrappers'] = array(); ?>
+        <?php echo render($form['field_bucket_size'][LANGUAGE_NONE]); ?>
       </div>
     </div>
 
-    <label for="form-service-type">Service Type</label>
-    <select id="form-service-type" name="form-service-type">
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-      <option value="4">Option 4</option>
-    </select>
-    <!-- dropdown -->
+    <?php $form['field_reminders'][LANGUAGE_NONE]['#theme_wrappers'] = array(); ?>
+    <?php echo render($form['field_reminders'][LANGUAGE_NONE]); ?>
 
-    <input type="submit" value="Subscribe" id="form-submit">
+    <label for="form-service-type">Service Type</label>
+    <?php $form['field_service_type'][LANGUAGE_NONE]['#theme_wrappers'] = array(); ?>
+    <?php echo render($form['field_service_type'][LANGUAGE_NONE]); ?>
+
+    <label for="form-service-type">Monthly Contribution ($/month)</label>
+    <?php $form['field_monthly_contribution'][LANGUAGE_NONE][0]['value']['#theme_wrappers'] = array(); ?>
+    <?php echo render($form['field_monthly_contribution'][LANGUAGE_NONE][0]['value']); ?>
+
+    <label for="form-service-type">How Did You Hear About Us?</label>
+    <?php $form['field_how_did_you_hear_about_us_'][LANGUAGE_NONE][0]['value']['#theme_wrappers'] = array(); ?>
+    <?php echo render($form['field_how_did_you_hear_about_us_'][LANGUAGE_NONE][0]['value']); ?>
+
+    <?php echo render($form['actions']['submit']); ?>
+
   </div>
 </div>
