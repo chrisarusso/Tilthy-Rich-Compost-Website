@@ -59,7 +59,7 @@
 		</div>
 		<div class="small-12 large-4 columns end text-center">
 			<a href="#" id="see-commercial-services">
-              <img src="<?php echo base_path() . path_to_theme();?>/images/plus.png" />
+              <img src="<?php echo base_path() . path_to_theme();?>/images/green-plus.png" />
             </a>
             <span class="toggle-text"><?php echo t('See commercial services'); ?></span>
         </div>
@@ -96,7 +96,7 @@
       <h2>Commercial Services</h2>
     </div>
     <div class="small-12 large-4 columns end text-center">
-      <a href="#" id="see-residential-services"><img src="<?php echo base_path() . path_to_theme();?>/images/plus.png" /></a>
+      <a href="#" id="see-residential-services"><img src="<?php echo base_path() . path_to_theme();?>/images/white-plus.png" /></a>
       <span class="toggle-text"><?php echo t('See residential services'); ?></span>
     </div>
   </div>
@@ -212,7 +212,7 @@
 <div class="container green subscribe">
 	<div class="row text-center">
 		<div class="small-12 columns">
-			<a href="#" id="subscription-details"><img src="<?php echo base_path() . path_to_theme();?>/images/plus.png" /></a>
+			<a href="#" id="what-goes-in"><img id="what-goes-in-img" src="<?php echo base_path() . path_to_theme();?>/images/white-plus.png" /></a>
           <span class="toggle-text"><?php echo t('What goes in the bucket?'); ?></span>
 		</div>
 	  </div>
