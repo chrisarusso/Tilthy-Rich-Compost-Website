@@ -87,7 +87,7 @@ $(document).ready(function() {
 		});
 	}); */
 
-	$('#what-goes-in').on('click', function(e) {
+	$('#what-goes-in-plus').on('click', function(e) {
 		e.preventDefault();
 		$.scrollTo('.what-goes-in', {
 			'duration': 600,
@@ -105,10 +105,10 @@ $(document).ready(function() {
 					'easing': 'easeInOutCubic'
 				});
                 if ($('.container.what-goes-in > .row').css('display') == 'none') {
-                    $('#what-goes-in-img').attr('src', Drupal.settings.basePath + 'sites/all/themes/custom/tilthyrich2/images/green-plus.png')
+                    $('#what-goes-in-img').attr('src', Drupal.settings.basePath + 'sites/all/themes/custom/tilthyrich2/images/white-plus.png')
                 }
                 else {
-                    $('#what-goes-in-img').attr('src', Drupal.settings.basePath + 'sites/all/themes/custom/tilthyrich2/images/green-minus.png')
+                    $('#what-goes-in-img').attr('src', Drupal.settings.basePath + 'sites/all/themes/custom/tilthyrich2/images/white-minus.png')
                 }
 			}
 		});
