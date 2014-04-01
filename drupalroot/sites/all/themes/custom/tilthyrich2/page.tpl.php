@@ -218,12 +218,14 @@
 	  </div>
 	<div class="row">
 		<div class="small-12 columns">
-			<h2><span>Zero-hassle compost<br /> services starting at just</span> $15 a month</h2>
+			<h2><span>Zero-hassle compost<br /> services starting at just</h2>
+			<h2>$15 a month</h2>
 		</div>
 	</div>
 	<div class="row">
       <?php $form = drupal_get_form('user_register_form');
-      $html = drupal_render($form); ?>
+      $html = drupal_render($form);
+      echo $html; ?>
 
 
 	</div>
