@@ -18,8 +18,9 @@
 		<div class="small-12 columns">
           <a href="<?php print check_url($front_page); ?>"><img src="<?php print $logo ?>" alt="<?php print $site_name; ?>" /></a>
           <br />
-			<a id="more-about-us" href="#"><img src="<?php echo base_path() . path_to_theme();?>/images/more-about-us.png" /></a>
-            <span class="toggle-text"><?php echo t('Less about us'); ?></span>
+			<a id="about-us" href="#"><img id="about-us-img" src="<?php echo base_path() . path_to_theme();?>/images/less-about-us.png" />
+              <span class="about-us-text toggle-text less"><?php echo t('Less about us'); ?></span>
+            </a>
         </div>
 	</div>
 </div>
