@@ -53,24 +53,8 @@ body {
 			}
 		}
 
-		&.interior {
-			padding: 0 0 40px;
-
-			h2 {
-				margin-top: 20px;
-
-				@media #{$large-up} {
-					margin-top: 80px;
-				}
-			}
-		}
-
 		@media #{$large-up} {
 			padding: 20px 0;
-
-			&.interior {
-				padding: 0 0 20px;
-			}
 		}
 	}
 
@@ -177,11 +161,19 @@ body {
       background: url(../images/photo2.jpg) no-repeat center top;
       background-size: cover;
       color: $white;
-      ul li {
-        text-align: center;
+      ul {
+        list-style-type: none;
+        padding: 0px;
+        margin: 0px;
+
+        li {
+          background-image: url("../images/bullet.png");
+          background-repeat: no-repeat;
+          background-position: -24px 0px;
+          padding-left: 24px;
+          margin: 20px 0;
+        }
       }
-
-
     }
 
     &.partner-logos {
@@ -192,7 +184,6 @@ body {
       ul li {
         text-align: center;
       }
-
     }
 
 
@@ -244,6 +235,20 @@ body {
 				padding-bottom: 80px;
 			}
 		}
+
+      ul {
+        list-style-type: none;
+        padding: 0px;
+        margin: 0px;
+
+        li {
+          background-image: url("../images/bullet.png");
+          background-repeat: no-repeat;
+          background-position: -24px 0px;
+          padding-left: 24px;
+          margin: 20px 0;
+        }
+      }
 	}
 
 	@media #{$large-up} {
@@ -507,7 +512,7 @@ form#user-register-form {
 	label {
 		font-family: GR;
 		font-weight: normal;
-		font-size: 14px;
+		font-size: 13px;
 		line-height: 40px;
 		color: $white;
 
@@ -584,4 +589,29 @@ a.footer-link {
 .toggle-text {
   position: absolute;
   margin: 5px 0 0 10px;
+}
+
+input.error,
+textarea.error {
+  border: 3px solid #ff0000;
+  margin-bottom: 1rem;
+}
+
+.form-type-checkbox {
+  display: inline-block;
+}
+
+.form-item {
+  margin: 0;
+}
+
+.not-front {
+
+  .container {
+    background-image: none;
+  }
+
+  h2 {
+    margin: 0;
+  }
 }
