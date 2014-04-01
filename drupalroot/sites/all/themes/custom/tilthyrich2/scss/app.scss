@@ -201,9 +201,15 @@ body {
 
 		h2 {
 			color: $offblack;
-			font-size: 70px;
-			line-height: 90px;
+			font-size: 50px;
 			margin-bottom: 0px;
+            text-align: center;
+
+
+          @media #{$large-up} {
+              float: left;
+              width: 48%;
+            }
 
 			span {
 				display: block;
@@ -220,13 +226,7 @@ body {
 				}
 			}
 
-			@media #{$large-up} {
-				margin-bottom: 70px;
 
-				span br {
-					display: block;
-				}
-			}
 		}
 
 		.row.text-center {
