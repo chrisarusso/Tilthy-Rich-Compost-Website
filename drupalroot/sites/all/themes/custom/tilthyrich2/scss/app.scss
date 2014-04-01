@@ -99,12 +99,11 @@ body {
         min-height: 600px;
         color: $white;
 
-		img {
-			margin: 30px 0 0;
-		}
+        a {
+          color: $white;
+        }
 
-
-        &.toggle-text {
+        .toggle-text {
           bottom: 42px;
           margin-left: -20px;
         }
