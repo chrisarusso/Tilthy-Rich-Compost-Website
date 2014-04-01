@@ -19,6 +19,8 @@ function tilthyrich2_preprocess_page(&$variables) {
   $variables['partners'] = tilthyrich2_get_partners();
 
   $form = drupal_get_form('user_register_form');
+  // Return to subscribe panel upon processing
+  $form['#action'] = base_path() . '#subscribe';
   $variables['registration_form'] = drupal_render($form);
 
 }
