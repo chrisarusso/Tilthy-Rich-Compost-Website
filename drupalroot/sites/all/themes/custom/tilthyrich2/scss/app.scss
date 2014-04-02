@@ -275,6 +275,9 @@ body {
 
    &.white {
      a {
+
+       color: $brown;
+
        &:visited {
          color: $brown;
        }
