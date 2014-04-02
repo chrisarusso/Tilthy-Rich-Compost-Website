@@ -97,27 +97,27 @@
 		<div class="small-12 large-2 columns">
 			<img src="<?php echo base_path() . path_to_theme();?>/images/icon-house.png" />
 			<h3>You</h3>
-			<p>You sign up <a href="#subscribe">here</a>. We deliver a bucket
-              with instructions to your house
+			<p> sign up <a href="#subscribe">here</a>. We deliver a bucket to
+              your front door in a jiffy.
             </p>
 		</div>
 		<div class="small-12 large-2 large-offset-1 columns">
 			<img src="<?php echo base_path() . path_to_theme();?>/images/icon-bike-right.png" />
 			<h3>We</h3>
-			<p>We collect the contents of your bucket weekly, clean your bucket
+			<p> collect the contents of your bucket weekly, clean your bucket
               and leave you with a clean liner
             </p>
 		</div>
 		<div class="small-12 large-2 large-offset-2 columns">
 			<img src="<?php echo base_path() . path_to_theme();?>/images/icon-shovel.png" />
 			<h3>You</h3>
-			<p>You receive nutrient dense vermi-compost twice annually.</p>
+			<p> receive nutrient dense vermi-compost twice annually.</p>
 		</div>
 		<div class="small-12 large-2 large-offset-1 columns">
 			<img src="<?php echo base_path() . path_to_theme();?>/images/icon-face.png" />
 			<h3>You</h3>
 			<p>
-              You feel good about your choice to responsibly deal with your
+              feel good about your choice to responsibly deal with your
               food scraps and encourage your friends and neighbors to do the
               same
             </p>
@@ -139,20 +139,23 @@
     <div class="small-12 large-2 columns">
       <img src="<?php echo base_path() . path_to_theme();?>/images/icon-restaurant.png" />
       <h3>We</h3>
-      <p>After contacting us we visit your business/restaurant to assess your wants and needs for a composting system.</p>
+      <p>visit your business/restaurant to assess your wants and needs for a
+        composting system, provide you a monthly cost for collection, and you
+        say thank you.
+      </p>
     </div>
     <div class="small-12 large-2 large-offset-1 columns">
       <img src="<?php echo base_path() . path_to_theme();?>/images/icon-truck.png" />
       <h3>We</h3>
       <p>
-        We collect the contents of your tote(s), and leave you shiny clean ones.
+        collect the contents of your tote(s), and leave you shiny clean ones.
       </p>
     </div>
     <div class="small-12 large-2 large-offset-2 columns">
       <img src="<?php echo base_path() . path_to_theme();?>/images/icon-shovel.png" />
       <h3>You</h3>
       <p>
-        You have the option to receive a bi-annual return of compost. We also
+        have the option to receive a bi-annual return of compost. We also
         feature you on our website as a partner, and blow you up on social media
       </p>
     </div>
@@ -160,8 +163,8 @@
       <img src="<?php echo base_path() . path_to_theme();?>/images/icon-face.png" />
       <h3>You</h3>
       <p>
-        You contribute to a growing trend in Durham of waste accountability and
-        your people love you for it.
+        support a growing trend in Durham of waste reduction, diversion, and
+        accountability and your people love you for it.
       </p>
     </div>
   </div>
@@ -195,9 +198,8 @@
               We bike: That’s awesome!
             </li>
             <li>
-              We manage the process: Automatic payments from your debit card are
-              hassle free. All you have to do is put your food scraps into your
-              bucket!
+              We manage the process: Monthly recurring payments are hassle free.
+              All you have to do is put your food scraps into your bucket!
             </li>
             <li>
               We keep the loop local: We make sure your food scraps are
@@ -234,11 +236,11 @@
           <h2>Where we are <i>today</i></h2>
           <p>
             We are growing! Currently we service roughly the area outlined in
-            the map in and around downtown Durham, but if you are currently
-            outside of our range don’t hesitate to <a href="contact">contact us</a>.
+            the map, in and around downtown Durham, but if you are currently
+            outside of our range don’t hesitate to <a href="#contact">contact us</a>.
             If you can corral some neighborly support, we're happy to extend our
-            coverage. <a href="contact">Contact</a> us to see if we can access
-            your neighborhood safely by bicycle.
+            coverage. Please reach out to see if we can access
+            your neighborhood safely by bicycle!
           </p>
         </div>
 	</div>
@@ -288,7 +290,7 @@
               <li>Bread, pasta, prepared foods</li>
               <li>Eggshells</li>
               <li>Any food at all, seriously</li>
-              <li>Soiled Paper</li>
+              <li>Food-soiled Paper</li>
               <li>Paper towels from the kitchen area</li>
               <li>Paper cups, plates and napkins</li>
               <li>Pizza boxes, waxed paper</li>
@@ -337,9 +339,9 @@
 			<h2>Food Scraps are not Waste!</h2>
 			<p>
               We are dedicated to advancing the process of composting in the
-              Triangle. We work with incredible local organizations <a href="http://www.brookscontractor.com/">
-              Brooks Contractor</a>, <a href="http://foodfwdnc.com/">FoodFWD</a>
-              and <a href="http://compostnow.org/">CompostNow</a> as well as
+              Triangle. We work with incredible local organizations <a target="_blank" href="http://www.brookscontractor.com/">
+              Brooks Contractor</a>, <a target="_blank" href="http://foodfwdnc.com/">FoodFWD</a>
+              and <a target="_blank" href="http://compostnow.org/">CompostNow</a> as well as
               consult with other operations nationwide.
               Every dollar you spend with us will be dedicated to advancing the
               local food (recovery) movement and composting specifically, whether
@@ -349,7 +351,7 @@
 		</div>
 		<div class="small-12 large-5 large-offset-2 columns">
 			<h2>FAQs</h2>
-			<p class="question">How much waste do americans create annually?</p>
+			<p class="question">How much waste do Americans create annually?</p>
 			<p class="answer">An astounding 250 million tons of waste every year
               heads to landfills nationwide.
             </p>
@@ -375,7 +377,7 @@
           <?php //@todo: text-no decoration, white, visited white ?>
 			<h2><a href="#subscribe">Start Composting Today</a></h2>
 			<div class="footer-text">
-				info[at]tilthyrichcompost.com<br />
+				<a href="mailto:info@tilthyrichcompost.com">info@tilthyrichcompost.com</a><br />
 				<img src="<?php echo base_path() . path_to_theme();?>/images/bullet.png" />
 				860.987.9887<br />
 			</div>
