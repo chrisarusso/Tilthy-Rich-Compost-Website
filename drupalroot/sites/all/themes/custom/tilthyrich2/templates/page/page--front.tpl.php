@@ -85,7 +85,7 @@
 	</div>
 </div>
 
-<div class="container services residential-services">
+<div class="container services residential-services white">
 	<div class="row">
 		<div class="small-12 large-4 columns">
 			<h2>Residential Services</h2>
@@ -233,7 +233,7 @@
 	</div>
 </div>
 
-<div class="container map">
+<div class="container map white">
 	<div class="row">
 		<div class="small-12 large-6 columns" id="map-container">
           <img src="<?php echo base_path() . path_to_theme();?>/images/map.jpg" />
@@ -339,7 +339,7 @@
       </div>
   </div>
 <?php //consider doing this endif; ?>
-<div class="container">
+<div class="container white">
 	<div class="row bottom">
 		<div class="small-12 large-5 columns">
 			<h2>Food Scraps are not Waste!</h2>
@@ -381,7 +381,7 @@
 	<div class="row">
 		<div class="small-12 columns text-center">
           <?php //@todo: text-no decoration, white, visited white ?>
-			<h2><a href="#subscribe">Start Composting Today</a></h2>
+			<h2><a class="no-hover" href="#subscribe">Start Composting Today</a></h2>
 			<div class="footer-text">
 				<a href="mailto:info@tilthyrichcompost.com">info@tilthyrichcompost.com</a><br />
 				<img src="<?php echo base_path() . path_to_theme();?>/images/bullet.png" />

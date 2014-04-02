@@ -56,6 +56,14 @@ body {
 		@media #{$large-up} {
 			padding: 20px 0;
 		}
+
+        a {
+          color: $white;
+
+          &:hover {
+            color: $brown;
+          }
+        }
 	}
 
 	&.dark {
@@ -264,6 +272,18 @@ body {
 			background: $offblack url(../images/interior-footer-bg.png) no-repeat center top;
 		}
 	}
+
+   &.white {
+     a {
+       &:visited {
+         color: $brown;
+       }
+
+       &:hover {
+         text-decoration: underline;
+       }
+     }
+   }
 }
 
 .bottom-padding {
@@ -281,12 +301,6 @@ body {
 
 .text-center {
 	text-align: center;
-}
-
-.white {
-	background: $white;
-	padding-bottom: 60px;
-	margin-top: 60px;
 }
 
 h3 {
@@ -469,10 +483,31 @@ h3 {
 	}
 
   a {
-    text-decoration: none;
-    color: $white;
+    &:link, &:visited {
+      color: $white;
+    }
+
+    &:hover {
+      color: $brown;
+
+    }
+
+    &.no-hover {
+      &:hover {
+        color: $white;
+      }
+    }
   }
 }
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    color: $brown;
+  }
+}
+
 
 a.social-icon {
 	@include inline-block;
