@@ -12,7 +12,6 @@
           <?php print render($title_prefix); ?>
           <h2><?php echo $title; ?></h2>
           <?php print render($title_suffix); ?>
-
         </div>
 	</div>
 </div>
@@ -26,6 +25,10 @@
         <div id="help">
           <?php print render($page['help']); ?>
         </div>
+      <?php endif; ?>
+      <?php print render($tabs); ?>
+      <?php if ($secondary_menu): ?>
+        <div class="tabs-secondary clearfix"><?php print render($secondary_menu); ?></div>
       <?php endif; ?>
       <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>
       <?php print render($page['content']); ?>
