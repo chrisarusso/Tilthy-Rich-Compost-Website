@@ -1,20 +1,26 @@
 <!-- Page -->
 <div class="container dark">
-	<div class="row">
-		<nav class="small-12 columns" role="navigation">
-			<ul id="menu">
-				<li><a href="#how">How</a></li>
-				<li><a href="#where">Where</a></li>
-				<li><a href="#partners">Partners</a></li>
-				<li><a href="#subscribe">Subscribe</a></li>
-				<li><a href="#contact">Contact</a></li>
-			</ul>
-		</div>
-	</div>
+  <div class="row">
+    <nav class="small-12 columns" role="navigation">
+      <ul id="menu">
+        <li><a href="#how">How</a></li>
+        <li><a href="#where">Where</a></li>
+        <li><a href="#partners">Partners</a></li>
+        <li><a href="#subscribe">Subscribe</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <?php if($logged_in): ?>
+          <li><a href="user">Profile</a></li>
+        <?php else: ?>
+          <li><a class="login" href="/user">login</a></li>
+        <?php endif; ?>
+          <!-- <li><a href="/">The breakdown</a></li> -->
+      </ul>
+    </nav>
+  </div>
 </div>
 
 <div class="container banner">
-	<div class="row logo">
+  <div class="row logo">
 		<div class="small-12 columns">
           <a href="<?php print check_url($front_page); ?>"><img src="<?php print $logo ?>" alt="<?php print $site_name; ?>" /></a>
           <br />
