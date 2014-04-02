@@ -16,6 +16,9 @@ function tilthyrich2_theme($existing, $type, $theme, $path){
  * Implements hook_preprocess_page().
  */
 function tilthyrich2_preprocess_page(&$variables) {
+
+  $url_pieces = explode("/", $_GET['q']);
+
   if ($variables['is_front']) {
     $variables['partners'] = tilthyrich2_get_partners();
 
@@ -23,6 +26,12 @@ function tilthyrich2_preprocess_page(&$variables) {
     // Return to subscribe panel upon processing
     $form['#action'] = base_path() . '#subscribe';
     $variables['registration_form'] = drupal_render($form);
+  }
+  elseif (count($url_pieces) > 1 && $url_pieces[0] == 'user') {
+    $account = user_load($variables['user']->uid);
+    $first_name =  $account->field_first_name[LANGUAGE_NONE][0]['value'];
+    $last_name =  $account->field_last_name[LANGUAGE_NONE][0]['value'];
+    drupal_set_title($first_name . ' ' . $last_name . "'s profile");
   }
 }
 
