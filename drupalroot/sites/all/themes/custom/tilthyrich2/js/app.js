@@ -122,6 +122,17 @@ $(document).ready(function() {
 		});
 	});
 
+    $('.open-what-goes-in').on('click', function(e) {
+        e.preventDefault();
+        $('.container.what-goes-in > .row').show();
+        $.scrollTo('.what-goes-in', {
+            'duration': 600,
+            'easing': 'easeInOutCubic'
+        });
+        $('#what-goes-in-img').attr('src', Drupal.settings.basePath + 'sites/all/themes/custom/tilthyrich2/images/white-minus.png')
+    });
+
+
 });
 
 })(jQuery);

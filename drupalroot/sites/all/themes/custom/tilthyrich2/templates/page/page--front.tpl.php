@@ -358,7 +358,7 @@
 			<p class="question">Where does Durham’s waste go?</p>
 			<p class="answer">Roseboro, NC.  Well over 100 miles away</p>
 			<p class="question">What can we compost with TRC?</p>
-			<p class="answer">Everything edible! As well as <a href="#what-goes-in">these items</a></p>
+			<p class="answer">Everything edible! As well as <a class="open-what-goes-in" href="#what-goes-in">these items</a></p>
 		</div>
 	</div>
 </div>
