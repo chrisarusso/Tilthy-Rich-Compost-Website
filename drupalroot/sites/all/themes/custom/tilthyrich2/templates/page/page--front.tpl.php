@@ -385,7 +385,7 @@
 			<div class="footer-text">
 				<a href="mailto:info@tilthyrichcompost.com">info@tilthyrichcompost.com</a><br />
 				<img src="<?php echo base_path() . path_to_theme();?>/images/bullet.png" />
-				860.987.9887<br />
+				860.987.9887
 			</div>
 		</div>
 	</div>

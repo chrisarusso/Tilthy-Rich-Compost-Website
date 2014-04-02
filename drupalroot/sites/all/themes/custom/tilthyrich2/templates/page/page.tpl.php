@@ -38,7 +38,7 @@
 <div id="how" class="container dark interior-footer">
 	<div class="row">
 		<div class="small-12 large-5 columns">
-			<a id="back-home" class="footer-link" href="index.html">back home</a>
+			<a id="back-home" class="footer-link" href="<?php echo base_path(); ?>">back home</a>
 		</div>
 		<div class="small-12 large-3 columns end">
 			<a id="back-to-top" class="footer-link" href="#">back to top</a>
