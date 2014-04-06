@@ -392,6 +392,3 @@
 	</div>
 </div>
 <!-- /page -->
-
-<?php // @todo: Put this in the right place! ?>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>

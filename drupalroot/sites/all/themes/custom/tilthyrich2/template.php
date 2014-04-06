@@ -33,6 +33,8 @@ function tilthyrich2_preprocess_page(&$variables) {
     $last_name =  $account->field_last_name[LANGUAGE_NONE][0]['value'];
     drupal_set_title($first_name . ' ' . $last_name . "'s profile");
   }
+
+  drupal_add_js('http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js', 'external');
 }
 
 /**
