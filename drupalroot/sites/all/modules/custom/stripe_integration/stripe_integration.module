@@ -79,6 +79,11 @@ function _stripe_integration_payment_tab_access($account) {
  */
 function stripe_integration_form_user_register_form_alter(&$form, $form_state, $form_id) {
 
+  // Don't force admins creating new accounts to pay!
+  if (!empty($form['administer_users']) && $form['administer_users']['#value']) {
+    return;
+  }
+
   global $conf;
   $environment = ($conf['production']) == TRUE ? 'live' : 'test';
 
