@@ -404,6 +404,7 @@ nav ul.sf-menu {
 
 
   li {
+        float: none;
 		margin: 0;
 		padding: 0 20px;
 		@include inline-block;

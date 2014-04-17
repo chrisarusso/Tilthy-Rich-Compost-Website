@@ -4422,6 +4422,7 @@ nav ul.sf-menu ul {
 }
 /* line 406, ../scss/app.scss */
 nav ul.sf-menu li {
+  float: none;
   margin: 0;
   padding: 0 20px;
   display: -moz-inline-stack;
@@ -4431,7 +4432,7 @@ nav ul.sf-menu li {
   zoom: 1;
   *display: inline;
 }
-/* line 411, ../scss/app.scss */
+/* line 412, ../scss/app.scss */
 nav ul.sf-menu li a, nav ul.sf-menu li span {
   position: relative;
   margin: 0;
@@ -4455,18 +4456,18 @@ nav ul.sf-menu li a, nav ul.sf-menu li span {
   -o-transition: color 0.3s;
   transition: color 0.3s;
 }
-/* line 426, ../scss/app.scss */
+/* line 427, ../scss/app.scss */
 nav ul.sf-menu li a.sf-depth-2, nav ul.sf-menu li span.sf-depth-2 {
   height: auto;
 }
 @media only screen and (min-width: 54.063em) {
-  /* line 431, ../scss/app.scss */
+  /* line 432, ../scss/app.scss */
   nav ul.sf-menu li a.sf-depth-1, nav ul.sf-menu li span.sf-depth-1 {
     padding: 0 20px;
     line-height: 90px;
     height: 60px;
   }
-  /* line 436, ../scss/app.scss */
+  /* line 437, ../scss/app.scss */
   nav ul.sf-menu li a.sf-depth-1:before, nav ul.sf-menu li span.sf-depth-1:before {
     content: "";
     position: absolute;
@@ -4483,27 +4484,27 @@ nav ul.sf-menu li a.sf-depth-2, nav ul.sf-menu li span.sf-depth-2 {
     transition: opacity 0.5s;
   }
 }
-/* line 452, ../scss/app.scss */
+/* line 453, ../scss/app.scss */
 nav ul.sf-menu li a:hover, nav ul.sf-menu li span:hover {
   color: #99694b;
 }
-/* line 455, ../scss/app.scss */
+/* line 456, ../scss/app.scss */
 nav ul.sf-menu li a:hover:before, nav ul.sf-menu li span:hover:before {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
 }
-/* line 460, ../scss/app.scss */
+/* line 461, ../scss/app.scss */
 nav ul.sf-menu li a.active, nav ul.sf-menu li span.active {
   color: white;
 }
 
-/* line 467, ../scss/app.scss */
+/* line 468, ../scss/app.scss */
 #contact {
   background: url(../images/photo5.jpg) no-repeat center;
   background-size: cover;
   padding: 0;
 }
-/* line 472, ../scss/app.scss */
+/* line 473, ../scss/app.scss */
 #contact h2 {
   margin: 40px 0;
   color: white;
@@ -4512,13 +4513,13 @@ nav ul.sf-menu li a.active, nav ul.sf-menu li span.active {
   line-height: 1.3;
 }
 @media only screen and (min-width: 54.063em) {
-  /* line 472, ../scss/app.scss */
+  /* line 473, ../scss/app.scss */
   #contact h2 {
     text-align: center;
     font-size: 62px;
   }
 }
-/* line 485, ../scss/app.scss */
+/* line 486, ../scss/app.scss */
 #contact .footer-text {
   color: white;
   font-size: 20px;
@@ -4526,47 +4527,47 @@ nav ul.sf-menu li a.active, nav ul.sf-menu li span.active {
   line-height: 30px;
   text-align: left;
 }
-/* line 492, ../scss/app.scss */
+/* line 493, ../scss/app.scss */
 #contact .footer-text img {
   display: none;
 }
 @media only screen and (min-width: 54.063em) {
-  /* line 485, ../scss/app.scss */
+  /* line 486, ../scss/app.scss */
   #contact .footer-text {
     text-align: center;
   }
-  /* line 499, ../scss/app.scss */
+  /* line 500, ../scss/app.scss */
   #contact .footer-text img {
     display: inline;
   }
-  /* line 503, ../scss/app.scss */
+  /* line 504, ../scss/app.scss */
   #contact .footer-text br {
     display: none;
   }
 }
-/* line 510, ../scss/app.scss */
+/* line 511, ../scss/app.scss */
 #contact a:link, #contact a:visited {
   color: white;
 }
-/* line 514, ../scss/app.scss */
+/* line 515, ../scss/app.scss */
 #contact a:hover {
   color: #99694b;
 }
-/* line 520, ../scss/app.scss */
+/* line 521, ../scss/app.scss */
 #contact a.no-hover:hover {
   color: white;
 }
 
-/* line 527, ../scss/app.scss */
+/* line 528, ../scss/app.scss */
 a {
   text-decoration: none;
 }
-/* line 530, ../scss/app.scss */
+/* line 531, ../scss/app.scss */
 a:hover {
   color: #99694b;
 }
 
-/* line 536, ../scss/app.scss */
+/* line 537, ../scss/app.scss */
 a.social-icon {
   display: -moz-inline-stack;
   display: inline-block;
@@ -4583,36 +4584,36 @@ a.social-icon {
   -o-transition: background-color 0.3s;
   transition: background-color 0.3s;
 }
-/* line 544, ../scss/app.scss */
+/* line 545, ../scss/app.scss */
 a.social-icon.facebook {
   background: transparent url(../images/facebook.png) no-repeat center center;
 }
-/* line 547, ../scss/app.scss */
+/* line 548, ../scss/app.scss */
 a.social-icon.facebook:hover {
   background-color: rgba(151, 106, 77, 0.7);
 }
 @media only screen and (min-width: 54.063em) {
-  /* line 536, ../scss/app.scss */
+  /* line 537, ../scss/app.scss */
   a.social-icon {
     border-right: 1px solid white;
     border-bottom: 2px solid white;
   }
-  /* line 556, ../scss/app.scss */
+  /* line 557, ../scss/app.scss */
   a.social-icon.twitter {
     border-right: 0;
     border-left: 1px solid white;
   }
 }
-/* line 562, ../scss/app.scss */
+/* line 563, ../scss/app.scss */
 a.social-icon.twitter {
   background: transparent url(../images/twitter.png) no-repeat center center;
 }
-/* line 565, ../scss/app.scss */
+/* line 566, ../scss/app.scss */
 a.social-icon.twitter:hover {
   background-color: rgba(151, 106, 77, 0.7);
 }
 
-/* line 573, ../scss/app.scss */
+/* line 574, ../scss/app.scss */
 form#user-register-form label {
   font-family: GR;
   font-weight: normal;
@@ -4621,16 +4622,16 @@ form#user-register-form label {
   color: white;
 }
 @media only screen and (min-width: 54.063em) {
-  /* line 573, ../scss/app.scss */
+  /* line 574, ../scss/app.scss */
   form#user-register-form label {
     font-size: 18px;
   }
 }
-/* line 585, ../scss/app.scss */
+/* line 586, ../scss/app.scss */
 form#user-register-form input[type="text"], form#user-register-form input[type="email"] {
   height: 40px;
 }
-/* line 589, ../scss/app.scss */
+/* line 590, ../scss/app.scss */
 form#user-register-form input[type="submit"] {
   height: 36px;
   line-height: 36px;
@@ -4650,19 +4651,19 @@ form#user-register-form input[type="submit"] {
   -o-transition: all 0.2s;
   transition: all 0.2s;
 }
-/* line 605, ../scss/app.scss */
+/* line 606, ../scss/app.scss */
 form#user-register-form input[type="submit"]:hover {
   color: #242425;
   background: white;
 }
-/* line 611, ../scss/app.scss */
+/* line 612, ../scss/app.scss */
 form#user-register-form input[type="checkbox"] {
   margin: 0 10px;
   width: 20px;
   height: 20px;
 }
 
-/* line 618, ../scss/app.scss */
+/* line 619, ../scss/app.scss */
 a.footer-link {
   font-size: 14px;
   color: white;
@@ -4680,62 +4681,62 @@ a.footer-link {
   width: 100%;
 }
 @media only screen and (min-width: 54.063em) {
-  /* line 618, ../scss/app.scss */
+  /* line 619, ../scss/app.scss */
   a.footer-link {
     line-height: 100px;
   }
-  /* line 632, ../scss/app.scss */
+  /* line 633, ../scss/app.scss */
   a.footer-link#back-to-top {
     text-align: right;
     padding-right: 50px;
   }
-  /* line 637, ../scss/app.scss */
+  /* line 638, ../scss/app.scss */
   a.footer-link#back-home {
     text-align: left;
     padding-left: 30px;
   }
 }
 
-/* line 644, ../scss/app.scss */
+/* line 645, ../scss/app.scss */
 .row.logo {
   position: absolute;
   bottom: 0;
   max-width: 100%;
 }
 
-/* line 650, ../scss/app.scss */
+/* line 651, ../scss/app.scss */
 .toggle-text {
   position: absolute;
   margin: 5px 0 0 10px;
 }
 
-/* line 656, ../scss/app.scss */
+/* line 657, ../scss/app.scss */
 input.error,
 textarea.error {
   border: 3px solid #ff0000;
   margin-bottom: 1rem;
 }
 
-/* line 661, ../scss/app.scss */
+/* line 662, ../scss/app.scss */
 .form-type-checkbox {
   display: inline-block;
 }
 
-/* line 665, ../scss/app.scss */
+/* line 666, ../scss/app.scss */
 .form-item {
   margin: 0;
 }
 
-/* line 671, ../scss/app.scss */
+/* line 672, ../scss/app.scss */
 .not-front .container {
   background-image: none;
 }
-/* line 675, ../scss/app.scss */
+/* line 676, ../scss/app.scss */
 .not-front h2 {
   margin: 0;
 }
 
-/* line 680, ../scss/app.scss */
+/* line 681, ../scss/app.scss */
 .calendar-calendar .inner .view-item {
   padding: 10px 5px;
 }
