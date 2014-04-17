@@ -10,3 +10,4 @@ scripts[] = js/jquery.scrollTo.min.js
 scripts[] = js/jquery.localScroll.min.js
 scripts[] = js/foundation.min.js
 scripts[] = js/app.js
+scripts[] = js/jquery-browser-plugin/dist/jquery.browser.min.js
