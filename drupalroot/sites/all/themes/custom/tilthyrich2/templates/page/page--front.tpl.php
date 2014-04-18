@@ -136,8 +136,8 @@
       <img src="<?php echo base_path() . path_to_theme();?>/images/icon-restaurant.png" />
       <h3>We</h3>
       <p>visit your business/restaurant to assess your wants and needs for a
-        composting system, provide you a monthly cost for collection, and you
-        say thank you.
+        composting system, propose a monthly cost for collection to which you
+        indubitably oblige, and we provide you receptacles for your organics.
       </p>
     </div>
     <div class="small-12 large-2 large-offset-1 columns">
