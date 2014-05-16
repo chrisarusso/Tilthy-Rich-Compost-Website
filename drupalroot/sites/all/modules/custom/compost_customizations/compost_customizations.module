@@ -405,16 +405,21 @@ function compost_customizations_get_email_reminders() {
  */
 function compost_customizations_mail($key, &$message, $headers) {
 
+  $account = $message['params']['user'];
+  $captain = $message['params']['captain'];
+
   switch ($key) {
     case 'text_email_reminder':
-      $message['body'][] = t('Put your compost bucket(s) out tonight please!  Text back @cell_phone with any issues',
-        array('@cell_phone' => $message['params']['captain']->field_phone_number[LANGUAGE_NONE][0]['value']));
+      $message['body'][] = t('Put your compost bucket(s) out tonight please! Text back @cell_phone with any issues. Intended for @name, @address',
+        array(
+          '@cell_phone' => $captain->field_phone_number[LANGUAGE_NONE][0]['value'],
+          '@name' => compost_customizations_format_name($account),
+          '@address' => $account->field_location[LANGUAGE_NONE][0]['street'],
+        )
+      );
       $message['subject'] = t('Compost Bucket Reminder');
       break;
     case 'email_reminder':
-      $account = $message['params']['user'];
-      $captain = $message['params']['captain'];
-
       $message['body'][] = t('Dearest @name, Put your compost bucket(s) out tonight please!',
         array('@name' => compost_customizations_format_name($account)));
 
@@ -493,7 +498,7 @@ function compost_customizations_send_text_reminders($user) {
   $text_email = compost_customizations_retrieve_text_email($user);
   $route = node_load($user->field_route[LANGUAGE_NONE][0]['target_id']);
   $captain = user_load($route->field_route_captain[LANGUAGE_NONE][0]['target_id']);
-  $params = array('captain' => $captain);
+  $params = array('user' => $user, 'captain' => $captain);
   drupal_mail('compost_customizations', 'text_email_reminder', $text_email, $user->language, $params);
 }
 
