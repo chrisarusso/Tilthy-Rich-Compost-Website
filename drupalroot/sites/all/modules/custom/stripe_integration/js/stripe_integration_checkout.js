@@ -1,5 +1,7 @@
 (function ($) {
 
+    // Custom Stripe checkout handler for both the user registration and update payment forms.
+
     var handler = StripeCheckout.configure({
         key: Drupal.settings.stripeIntegration.publishableKey,
         image: Drupal.settings.basePath + Drupal.settings.stripeIntegration.logoURL,
@@ -24,13 +26,18 @@
             else {
               var amount = jQuery('#edit-field-monthly-contribution-und-0-value').val();
             }
-            handler.open({
+
+            // On the update payment form, only open Checkout if update existing credit card is checked.
+            if ($('#user-register-form').length || $('#edit-update-existing-credit-card').is(':checked')) {
+              // Mail is a hidden field on the update payment form.
+              handler.open({
                 name: 'Tilthy Rich Compost',
                 description: 'Monthly Subscription',
                 amount: amount * 100,
                 email: jQuery('#edit-mail').val()
-            });
-        e.preventDefault();
+              });
+              e.preventDefault();
+            }
         });
     } else{
         var form = $('#user-register-form, #stripe-integration-payment-update-form');

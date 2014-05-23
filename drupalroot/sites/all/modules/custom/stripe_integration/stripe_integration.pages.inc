@@ -8,13 +8,13 @@
 /**
  * Form constructor for the update payment form.
  *
- * Path: user/%user/contact
+ * Path: user/%user/update-payment
  *
  *
  * Two cases for arriving here:
  * Current subscriber updating payment / moving to paypal
  * Current subscriber (existing customer in Stripe) changing service
- *  type or amount paid.
+ *  type, amount paid, or updating credit card.
  *
  * Borrowed from personal contact form
  */
@@ -64,10 +64,6 @@ function stripe_integration_payment_update_form($form, &$form_state, $account) {
     $form['reason_for_update']['#default_value'] = $_GET['reason'];
   }
 
-  // Check when building form for existence of customer.  No need to
-  // prompt for card if customer exists.
-  // @todo: May have to do some advanced checking for active card
-
   if (!empty($account->field_stripe_customer_id) && empty($_POST)) {
     // @todo: Tuck this into stripe_init function of sorts
     require_once(drupal_get_path('module', 'stripe_integration') . "/stripe-php/lib/Stripe.php");
@@ -77,7 +73,11 @@ function stripe_integration_payment_update_form($form, &$form_state, $account) {
     Stripe::setApiKey($conf['stripe_' . $environment . '_secret_key']);
 
     $customer_id = $form_state['user']->field_stripe_customer_id[LANGUAGE_NONE][0]['value'];
-    $existing_customer = Stripe_Customer::retrieve($customer_id);
+    // Populate the existing customer object with the default card information.
+    $existing_customer = Stripe_Customer::retrieve(array(
+      "id" => $customer_id,
+      "expand" => array("default_card")
+    ));
   }
 
   if ($existing_customer) {
@@ -85,7 +85,38 @@ function stripe_integration_payment_update_form($form, &$form_state, $account) {
       '#type' => 'hidden',
       '#value' => $customer_id,
     );
+
+    // Get last four digits of default credit card.
+    $type = $existing_customer->default_card->type;
+    $exp_year = $existing_customer->default_card->exp_year;
+    $exp_month = $existing_customer->default_card->exp_month;
+    $last4 = $existing_customer->default_card->last4;
+
+
+    // Display the current credit card information for existing customers.
+    $form['current_card'] = array(
+      '#markup' => '<div>' . t('Credit Card: @type ending in @last4. Expires on @month/@year',
+          array(
+            '@type' => $type,
+            '@last4' => $last4,
+            '@month' => $exp_month,
+            '@year' => $exp_year,
+          )
+        ) . '</div>',
+      '#weight' => 80,
+    );
   }
+
+  // Require the user to update their credit card information if they are not an existing customer.
+  // @todo: Are there customers that pay in cash or check. If so, this should not be disabled for those customers.
+  // @todo: Require if the credit card expiration date has passed.
+  $form['update_existing_credit_card'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Check to update credit card information. You will be prompted for your new card information on the next screen'),
+    '#weight' => 90,
+    '#disabled' => $existing_customer ? 0 : 1,
+    '#default_value' => $existing_customer ? 0 : 1,
+  );
 
   $form['actions']['#weight'] =  99;
   $form['actions']['submit'] = array(
@@ -93,24 +124,22 @@ function stripe_integration_payment_update_form($form, &$form_state, $account) {
     '#value' => t('Update Payment'),
   );
 
-  // Only add stripe checkout js if customer doesn't exist
-  if(!$existing_customer) {
-    $form['actions']['submit']['#attached'] = array(
-      'js' => array(
-        drupal_get_path('module', 'stripe_integration') . "/js/stripe_integration_checkout.js" => array(
-          'scope' => 'footer',
-        ),
-        'https://checkout.stripe.com/checkout.js' => array('external'),
-        array('data' => array(
-          'stripeIntegration' => array(
-            'publishableKey' => $conf['stripe_' . $environment . '_publishable_key'],
-            'logoURL' => drupal_get_path('theme', 'tilthyrich') . "/logo.jpg"
-          )),
-          'type' => 'setting'
-        )
+  // Add stripe checkout.js and our custom handling, which checks if the user wants to update their card info.
+  $form['actions']['submit']['#attached'] = array(
+    'js' => array(
+      drupal_get_path('module', 'stripe_integration') . "/js/stripe_integration_checkout.js" => array(
+        'scope' => 'footer',
+      ),
+      'https://checkout.stripe.com/checkout.js' => array('external'),
+      array('data' => array(
+        'stripeIntegration' => array(
+          'publishableKey' => $conf['stripe_' . $environment . '_publishable_key'],
+          'logoURL' => drupal_get_path('theme', 'tilthyrich') . "/logo.jpg"
+        )),
+        'type' => 'setting'
       )
-    );
-  }
+    )
+  );
 
   $form['#validate'][] = 'stripe_integration_form_validate';
   $form['#submit'][] = 'stripe_integration_form_submit';
@@ -118,7 +147,6 @@ function stripe_integration_payment_update_form($form, &$form_state, $account) {
 
   return $form;
 }
-
 
 /*
  * Form submission handler for stripe_integration_payment_update_form().

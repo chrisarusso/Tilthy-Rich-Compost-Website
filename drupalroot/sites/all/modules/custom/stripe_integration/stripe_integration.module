@@ -175,6 +175,12 @@ function stripe_integration_form_submit($form, &$form_state){
 
         $existing_customer->updateSubscription($plan);
 
+        // Update user's credit card if entered.
+        if (isset($_POST['stripeToken'])) {
+          $existing_customer->card = $_POST['stripeToken'];
+          $existing_customer->save();
+        }
+
         // Run save to update subscription details upon payment update
         user_save($form_state['user'], $v);
       }
