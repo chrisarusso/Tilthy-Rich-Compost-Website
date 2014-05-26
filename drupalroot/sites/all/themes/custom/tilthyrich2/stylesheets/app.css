@@ -4614,7 +4614,7 @@ a.social-icon.twitter:hover {
 }
 
 /* line 574, ../scss/app.scss */
-form#user-register-form label {
+form#user-register-form label, form#stripe-integration-payment-update-form label {
   font-family: GR;
   font-weight: normal;
   font-size: 13px;
@@ -4623,16 +4623,16 @@ form#user-register-form label {
 }
 @media only screen and (min-width: 54.063em) {
   /* line 574, ../scss/app.scss */
-  form#user-register-form label {
+  form#user-register-form label, form#stripe-integration-payment-update-form label {
     font-size: 18px;
   }
 }
 /* line 586, ../scss/app.scss */
-form#user-register-form input[type="text"], form#user-register-form input[type="email"] {
+form#user-register-form input[type="text"], form#user-register-form input[type="email"], form#stripe-integration-payment-update-form input[type="text"], form#stripe-integration-payment-update-form input[type="email"] {
   height: 40px;
 }
 /* line 590, ../scss/app.scss */
-form#user-register-form input[type="submit"] {
+form#user-register-form input[type="submit"], form#stripe-integration-payment-update-form input[type="submit"] {
   height: 36px;
   line-height: 36px;
   font-family: GR;
@@ -4652,18 +4652,23 @@ form#user-register-form input[type="submit"] {
   transition: all 0.2s;
 }
 /* line 606, ../scss/app.scss */
-form#user-register-form input[type="submit"]:hover {
+form#user-register-form input[type="submit"]:hover, form#stripe-integration-payment-update-form input[type="submit"]:hover {
   color: #242425;
   background: white;
 }
 /* line 612, ../scss/app.scss */
-form#user-register-form input[type="checkbox"] {
+form#user-register-form input[type="checkbox"], form#stripe-integration-payment-update-form input[type="checkbox"] {
   margin: 0 10px;
   width: 20px;
   height: 20px;
 }
 
-/* line 619, ../scss/app.scss */
+/* line 622, ../scss/app.scss */
+form#stripe-integration-payment-update-form label {
+  color: black;
+}
+
+/* line 627, ../scss/app.scss */
 a.footer-link {
   font-size: 14px;
   color: white;
@@ -4681,62 +4686,62 @@ a.footer-link {
   width: 100%;
 }
 @media only screen and (min-width: 54.063em) {
-  /* line 619, ../scss/app.scss */
+  /* line 627, ../scss/app.scss */
   a.footer-link {
     line-height: 100px;
   }
-  /* line 633, ../scss/app.scss */
+  /* line 641, ../scss/app.scss */
   a.footer-link#back-to-top {
     text-align: right;
     padding-right: 50px;
   }
-  /* line 638, ../scss/app.scss */
+  /* line 646, ../scss/app.scss */
   a.footer-link#back-home {
     text-align: left;
     padding-left: 30px;
   }
 }
 
-/* line 645, ../scss/app.scss */
+/* line 654, ../scss/app.scss */
 .row.logo {
   position: absolute;
   bottom: 0;
   max-width: 100%;
 }
 
-/* line 651, ../scss/app.scss */
+/* line 660, ../scss/app.scss */
 .toggle-text {
   position: absolute;
   margin: 5px 0 0 10px;
 }
 
-/* line 657, ../scss/app.scss */
+/* line 666, ../scss/app.scss */
 input.error,
 textarea.error {
   border: 3px solid #ff0000;
   margin-bottom: 1rem;
 }
 
-/* line 662, ../scss/app.scss */
+/* line 671, ../scss/app.scss */
 .form-type-checkbox {
   display: inline-block;
 }
 
-/* line 666, ../scss/app.scss */
+/* line 675, ../scss/app.scss */
 .form-item {
   margin: 0;
 }
 
-/* line 672, ../scss/app.scss */
+/* line 681, ../scss/app.scss */
 .not-front .container {
   background-image: none;
 }
-/* line 676, ../scss/app.scss */
+/* line 685, ../scss/app.scss */
 .not-front h2 {
   margin: 0;
 }
 
-/* line 681, ../scss/app.scss */
+/* line 690, ../scss/app.scss */
 .calendar-calendar .inner .view-item {
   padding: 10px 5px;
 }

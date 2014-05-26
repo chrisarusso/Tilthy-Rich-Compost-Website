@@ -569,7 +569,7 @@ a.social-icon {
 	}
 }
 
-form#user-register-form {
+form#user-register-form, form#stripe-integration-payment-update-form {
 
 	label {
 		font-family: GR;
@@ -614,6 +614,14 @@ form#user-register-form {
 		width: 20px;
 		height: 20px;
 	}
+}
+
+
+form#stripe-integration-payment-update-form {
+
+    label {
+      color: $black;
+    }
 }
 
 a.footer-link {
