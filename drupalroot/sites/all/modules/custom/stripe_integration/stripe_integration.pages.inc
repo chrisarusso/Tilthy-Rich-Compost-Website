@@ -114,7 +114,7 @@ function stripe_integration_payment_update_form($form, &$form_state, $account) {
   // @todo: Require if the credit card expiration date has passed.
   $form['update_existing_credit_card'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Check to update credit card information. You will be prompted for your new card information on the next screen'),
+    '#title' => t('Add/update card information.'),
     '#weight' => 90,
     '#disabled' => $existing_customer ? 0 : 1,
     '#default_value' => $existing_customer ? 0 : 1,
