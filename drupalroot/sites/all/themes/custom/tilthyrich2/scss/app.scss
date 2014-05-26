@@ -624,6 +624,14 @@ form#stripe-integration-payment-update-form {
     }
 }
 
+form#user-register-form {
+
+  .form-type-checkbox {
+    display: inline-block;
+  }
+
+}
+
 a.footer-link {
 	font-size: 14px;
 	color: $white;
@@ -665,10 +673,6 @@ input.error,
 textarea.error {
   border: 3px solid #ff0000;
   margin-bottom: 1rem;
-}
-
-.form-type-checkbox {
-  display: inline-block;
 }
 
 .form-item {

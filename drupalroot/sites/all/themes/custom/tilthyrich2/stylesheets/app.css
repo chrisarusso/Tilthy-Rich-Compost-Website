@@ -4668,7 +4668,12 @@ form#stripe-integration-payment-update-form label {
   color: black;
 }
 
-/* line 627, ../scss/app.scss */
+/* line 629, ../scss/app.scss */
+form#user-register-form .form-type-checkbox {
+  display: inline-block;
+}
+
+/* line 635, ../scss/app.scss */
 a.footer-link {
   font-size: 14px;
   color: white;
@@ -4686,62 +4691,57 @@ a.footer-link {
   width: 100%;
 }
 @media only screen and (min-width: 54.063em) {
-  /* line 627, ../scss/app.scss */
+  /* line 635, ../scss/app.scss */
   a.footer-link {
     line-height: 100px;
   }
-  /* line 641, ../scss/app.scss */
+  /* line 649, ../scss/app.scss */
   a.footer-link#back-to-top {
     text-align: right;
     padding-right: 50px;
   }
-  /* line 646, ../scss/app.scss */
+  /* line 654, ../scss/app.scss */
   a.footer-link#back-home {
     text-align: left;
     padding-left: 30px;
   }
 }
 
-/* line 654, ../scss/app.scss */
+/* line 661, ../scss/app.scss */
 .row.logo {
   position: absolute;
   bottom: 0;
   max-width: 100%;
 }
 
-/* line 660, ../scss/app.scss */
+/* line 667, ../scss/app.scss */
 .toggle-text {
   position: absolute;
   margin: 5px 0 0 10px;
 }
 
-/* line 666, ../scss/app.scss */
+/* line 673, ../scss/app.scss */
 input.error,
 textarea.error {
   border: 3px solid #ff0000;
   margin-bottom: 1rem;
 }
 
-/* line 671, ../scss/app.scss */
-.form-type-checkbox {
-  display: inline-block;
-}
-
-/* line 675, ../scss/app.scss */
+/* line 678, ../scss/app.scss */
 .form-item {
   margin: 0;
 }
 
-/* line 681, ../scss/app.scss */
+/* line 684, ../scss/app.scss */
 .not-front .container {
   background-image: none;
 }
-/* line 685, ../scss/app.scss */
+/* line 688, ../scss/app.scss */
 .not-front h2 {
   margin: 0;
 }
 
-/* line 690, ../scss/app.scss */
+/* line 693, ../scss/app.scss */
 .calendar-calendar .inner .view-item {
   padding: 10px 5px;
 }
