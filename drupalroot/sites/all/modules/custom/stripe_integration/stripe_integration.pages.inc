@@ -95,7 +95,9 @@ function stripe_integration_payment_update_form($form, &$form_state, $account) {
 
     // Display the current credit card information for existing customers.
     $form['current_card'] = array(
-      '#markup' => '<div>' . t('Credit Card: @type ending in @last4. Expires on @month/@year',
+      '#type' => 'item',
+      '#title' => t('Current Credit Card'),
+      '#markup' => '<div class="existing-card">' . t('@type ending in @last4. Expires on @month/@year',
           array(
             '@type' => $type,
             '@last4' => $last4,
