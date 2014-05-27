@@ -22,10 +22,16 @@ function tilthyrich2_preprocess_page(&$variables) {
   if ($variables['is_front']) {
     $variables['partners'] = tilthyrich2_get_partners();
 
-    $form = drupal_get_form('user_register_form');
-    // Return to subscribe panel upon processing
-    $form['#action'] = base_path() . '#subscribe';
-    $variables['registration_form'] = drupal_render($form);
+    // Only add registration form for non-registered users
+    // When the form is called, it causes a redirect to the profile
+    // page which prevents a logged in user from going to
+    // the home page ever
+    if (user_is_anonymous()) {
+      $form = drupal_get_form('user_register_form');
+      // Return to subscribe panel upon processing
+      $form['#action'] = base_path() . '#subscribe';
+      $variables['registration_form'] = drupal_render($form);
+    }
   }
   elseif (count($url_pieces) > 1 && $url_pieces[0] == 'user') {
     $account = user_load($variables['user']->uid);
