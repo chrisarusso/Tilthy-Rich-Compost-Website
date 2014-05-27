@@ -283,9 +283,11 @@ function _compost_customizations_hide_past_skip_days($form) {
   $children = element_children($form['field_skip_day'][LANGUAGE_NONE]);
 
   foreach ($children as $key) {
-    $value = $form['field_skip_day'][LANGUAGE_NONE][$key]['#default_value']['value'];
-    if (is_numeric($key) && !empty($value) && $value < $today) {
-      $form['field_skip_day'][LANGUAGE_NONE][$key]['#type'] = 'hidden';
+    if ($key !== t('add_more')) {
+      $value = $form['field_skip_day'][LANGUAGE_NONE][$key]['#default_value']['value'];
+      if (is_numeric($key) && !empty($value) && $value < $today) {
+        $form['field_skip_day'][LANGUAGE_NONE][$key]['#type'] = 'hidden';
+      }
     }
   }
 
