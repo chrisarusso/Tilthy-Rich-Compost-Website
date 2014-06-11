@@ -3,6 +3,7 @@
   <div class="row">
     <nav class="small-12 columns" role="navigation">
       <?php if ($page['header']): ?>
+        <?php render($page['content']['metatags']); ?>
         <?php print render($page['header']); ?>
       <?php endif; ?>
     </nav>
