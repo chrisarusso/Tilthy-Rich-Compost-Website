@@ -122,6 +122,7 @@ echo render($form['form_id']);
     <?php echo render($form['field_service_type'][LANGUAGE_NONE]); ?>
 
     <label for="form-service-type">Monthly Contribution ($/month)</label>
+    $15/month keeps us afloat. If you can afford more, please consider <a href="/how-much-to-pay" target="_blank">fueling the movement</a>
     <?php $form['field_monthly_contribution'][LANGUAGE_NONE][0]['value']['#theme_wrappers'] = array(); ?>
     <?php echo render($form['field_monthly_contribution'][LANGUAGE_NONE][0]['value']); ?>
 
