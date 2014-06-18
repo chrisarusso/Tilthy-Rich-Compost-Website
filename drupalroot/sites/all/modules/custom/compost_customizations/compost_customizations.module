@@ -589,15 +589,18 @@ function compost_customizations_views_pre_render(&$view) {
     case 'addresses':
       // Use eight days to be safe
       $eight_days_ago = 60 * 60 * 24 * 8;
+      $six_days_in_seconds = $eight_days_ago * 3/4;
       $now = time();
       $date_format = 'Y-m-d';
       $today = date($date_format, $now);
+      $six_days_from_now = date($date_format, $now + $six_days_in_seconds);
 
       foreach ($view->result as $id => $subscriber) {
-        // If skip day is today, show "skip"
+        // If skip day is this week, show "skip"
         if (!empty($subscriber->field_field_skip_day)) {
           foreach ($subscriber->field_field_skip_day as $skip_day) {
-            if (date($date_format, strtotime($skip_day['raw']['value'])) == $today) {
+            $skip_date = date($date_format, strtotime($skip_day['raw']['value']));
+            if ($skip_date >= $today && $skip_date < $six_days_from_now) {
               $view->result[$id]->skip = TRUE;
             }
           }
@@ -607,31 +610,16 @@ function compost_customizations_views_pre_render(&$view) {
         if ($subscriber->users_created > $now - $eight_days_ago) {
           $view->result[$id]->new = TRUE;
         }
+
+        // If the user was updating in the last 8 days, note that
+        if ($subscriber->user_revision_timestamp > $now - $eight_days_ago) {
+          $view->result[$id]->updated = TRUE;
+        }
       }
 
     break;
   }
 
-}
-
-/*
- * Implements hook_preprocess_views_view()
- */
-function compost_customizations_preprocess_views_view(&$variables, $hook) {
-
-  if ($variables['view']->name != 'addresses') {
-    return;
-  }
-
-  foreach ($variables['view']->result as $id => $result) {
-    if ($result->new == TRUE) {
-      $variables['row_classes'][$id][] = t('new');
-    }
-
-    if ($result->skip == TRUE) {
-      $variables['row_classes'][$id][] = t('skip');
-    }
-  }
 }
 
 /*
