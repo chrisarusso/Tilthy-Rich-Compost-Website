@@ -32,18 +32,6 @@ function subscriber_map_views_pre_render(&$view) {
             'address' => drupal_render($result->field_field_location[0]['rendered']),
             'bucket_location' => empty($result->field_field_bucket_location) ? '' : $result->field_field_bucket_location[0]['raw']['safe_value'],
           );
-
-          // If user is skipping next day, add that to the data
-          if (!empty($result->field_field_skip_day)) {
-            // This is a timestamp for the next pick up, whether today or sometime in the next week
-            $next_pickup_day = strtotime("This " . $result->field_field_pickup_day[0]['raw']['value']);
-
-            foreach ($result->field_field_skip_day as $data) {
-              if (strtotime($data['raw']['value']) == $next_pickup_day) {
-                $locations[$key]['next_day_off'] = TRUE;
-              }
-            }
-          }
         }
       }
       // Add Google maps API.

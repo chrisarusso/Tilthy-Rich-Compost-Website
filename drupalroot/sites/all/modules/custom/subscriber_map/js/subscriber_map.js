@@ -83,8 +83,8 @@
       var count = 1;
       $.each(markers, function(i){
 
-        // If user is inactive, or is skipping the day, we don't show her on the map
-        if (this.status == 0 || this.next_day_off == true) {
+        // If user is inactive we don't show her on the map
+        if (this.status == 0) {
             // Do nothing
         }
         else {
