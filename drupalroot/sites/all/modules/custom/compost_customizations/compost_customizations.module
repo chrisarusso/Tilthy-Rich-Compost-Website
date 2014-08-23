@@ -548,34 +548,6 @@ function _compost_customizations_remove_skippers($users) {
 
 }
 
-/*
- * Implements hook_form_FORM_ID_alter()
- */
-function compost_customizations_form_views_exposed_form_alter(&$form, $form_state, $form_id) {
-  // Inject our routes as a select option instead of leaving it to text input
-  $name = $form_state['view']->name;
-  if (isset($form_state['view']) && ($name == 'map' || $name == 'addresses' || $name == 'schedule')){
-
-    $results = db_select('node','n')
-      ->fields('n',array('title'))
-      ->condition('type','route')
-      ->condition('status', 1)
-      ->execute()
-      ->fetchAllKeyed(0, 0);
-
-    $default['All'] = t('All routes');
-
-    $options = array_merge($default, $results);
-
-    $form['title'] = array(
-      '#type' => 'select',
-      '#options' => $options,
-      '#default_value' => 'All',
-    );
-  }
-}
-
-
 /**
  * Implements hook_views_pre_render().
  * @param type $view
