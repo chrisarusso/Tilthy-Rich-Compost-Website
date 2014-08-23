@@ -44,7 +44,8 @@
           next_day_off: this.next_day_off,
           bucket_location: this.bucket_location,
           uid: this.uid,
-          content: '<strong><a href="' + Drupal.settings.basePath + 'user/' + this.uid + '/edit">' + this.title + '</a></strong><br/>' + this.address + '<br />' + this.bucket_location
+          content: '<strong><a href="' + Drupal.settings.basePath + 'user/' + this.uid + '/edit">' + this.title + '</a></strong><br/>' + this.address + '<br />' + this.bucket_location,
+          color: this.color
         };
 
         markers[i] = new google.maps.Marker(opts);
@@ -88,7 +89,7 @@
             // Do nothing
         }
         else {
-            var marker_path = 'sites/all/modules/custom/subscriber_map/images/lwt_map_icons/blue/' + count + '.png'
+            var marker_path = 'sites/all/modules/custom/subscriber_map/images/lwt_map_icons/' + this.color + '/' + count + '.png'
             var icon = new google.maps.MarkerImage(marker_path, new google.maps.Size(32, 36));
             count++;
             this.setIcon(icon);

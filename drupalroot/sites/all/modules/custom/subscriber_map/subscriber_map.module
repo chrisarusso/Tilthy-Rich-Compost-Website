@@ -31,6 +31,7 @@ function subscriber_map_views_pre_render(&$view) {
             'title'   => check_plain($result->field_field_first_name[0]['raw']['safe_value'] . " " . $result->field_field_last_name[0]['raw']['safe_value']),
             'address' => drupal_render($result->field_field_location[0]['rendered']),
             'bucket_location' => empty($result->field_field_bucket_location) ? '' : $result->field_field_bucket_location[0]['raw']['safe_value'],
+            'color' => empty($result->field_field_route) ? 'blue' : _subscriber_map_get_color($result->field_field_route[0]['rendered']['#markup']),
           );
         }
       }
@@ -51,3 +52,19 @@ function subscriber_map_views_pre_render(&$view) {
 
 }
 
+/**
+ * @param $route_name
+ *  The name of the route
+ * @return string
+ *  Returns a color for the map pin to distinguish routes on the map
+ *  when viewing all of them.
+ */
+function _subscriber_map_get_color($route_name) {
+  static $route_names = array();
+  $colors = array('blue', 'brown', 'green');
+  if (!isset($route_names[$route_name])) {
+    $route_names[$route_name] = $colors[count($route_names)];
+  }
+
+  return $route_names[$route_name];
+}
