@@ -31,6 +31,10 @@
 <?php endif; ?>
 
 
-<?php if ($row->updated == TRUE): ?>
-  RECENTLY UPDATED
-<?php endif; ?>
+<?php if ($row->updated == TRUE) {
+  // @todo: Think about how to show a rider that some action needs to be taken
+  // This mostly stems from folks switching their bucket size. This may be
+  // fixed by standardizing bucket size, or utilizing the potentially new
+  // "user_has_bucket" field.
+  }
+?>
