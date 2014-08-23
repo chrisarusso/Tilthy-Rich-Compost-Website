@@ -349,6 +349,18 @@ function data_export_import_batch_export_nodes_to_file($content_type, $file_path
       }
     }
 
+    // Here we will get the comments for a node and attach them to the node
+    // object.
+    if (module_exists('comment')) {
+
+      $comments_result = db_query("SELECT cid FROM {comment} WHERE nid = :comment_node ORDER BY cid ASC", array(':comment_node' => $row->nid));
+      foreach ($comments_result as $comment_row) {
+
+        $whole_comment = comment_load($comment_row->cid, TRUE);
+        $node->comments[] = $whole_comment;
+      }
+    }
+
     // Here we will serialize the array to convert it to a string
     // which can then be output to a file.
     $node_serialized = serialize($node);
@@ -834,7 +846,7 @@ function data_export_import_batch_import_dataset_lines($file_path, $fields_of_ty
 
   // Check if file pointer position exists in the sandbox, and jump to
   // location in file.
-  if ($context['sandbox']['file_pointer_position']) {
+  if (isset($context['sandbox']['file_pointer_position'])) {
     fseek($file_handle, $context['sandbox']['file_pointer_position']);
   }
 
@@ -870,17 +882,19 @@ function data_export_import_batch_import_dataset_lines($file_path, $fields_of_ty
 
         // Here we are going to loop through all of the files which
         // may have been attached to this field.
-        foreach ($dataset_node->{$file_field_data}[LANGUAGE_NONE] as $file_array_key => $file_array_data) {
+        if (isset($dataset_node->{$file_field_data}[LANGUAGE_NONE])) {
+          foreach ($dataset_node->{$file_field_data}[LANGUAGE_NONE] as $file_array_key => $file_array_data) {
 
-          $file_data = base64_decode($file_array_data['data_export_import_file_data']);
-          $dest = $file_array_data['uri'];
+            $file_data = base64_decode($file_array_data['data_export_import_file_data']);
+            $dest = $file_array_data['uri'];
 
-          // Actually save the file to the file system.
-          $file_object = file_save_data($file_data, $dest, FILE_EXISTS_REPLACE);
+            // Actually save the file to the file system.
+            $file_object = file_save_data($file_data, $dest, FILE_EXISTS_REPLACE);
 
-          // Set the node object to use the returned fid value as this
-          // may be from the original fid value.
-          $dataset_node->{$file_field_data}[LANGUAGE_NONE][$file_array_key]['fid'] = $file_object->fid;
+            // Set the node object to use the returned fid value as this
+            // may be from the original fid value.
+            $dataset_node->{$file_field_data}[LANGUAGE_NONE][$file_array_key]['fid'] = $file_object->fid;
+          }
         }
       }
 
@@ -900,6 +914,43 @@ function data_export_import_batch_import_dataset_lines($file_path, $fields_of_ty
       // issued a new ID number.
       unset($dataset_node->vid);
       data_export_import_node_save_with_defined_id($dataset_node);
+
+      // Here we wll re-create all of the comments which were exported into the
+      // dataset.  First we will delete all existing comments for the node -
+      // this should probably not be necessary but there may be excess comments/
+      // replies which are attached to the node which need to be removed.
+      // Remember that this module is designed to end up with identical data on
+      // the receiving site as the sending site.
+      if (module_exists('comment')) {
+
+        $comments_result = db_query("SELECT cid FROM {comment} WHERE nid = :comment_node ORDER BY cid ASC", array(':comment_node' => $dataset_node->nid));
+        foreach ($comments_result as $comment_row) {
+
+          comment_delete($comment_row->cid);
+        }
+
+        if (property_exists($dataset_node, 'comments')) {
+          foreach ($dataset_node->comments as $attached_comment) {
+
+            $attached_comment->is_anonymous = 0;
+
+            // Before we save the record we are going to create a placeholder record
+            // with the defined id value.  That way - when the comment_save function
+            // tries to save the comment with a specified cid value the underlying
+            // functions will be able to update an existing record and will not fail
+            // to carry out the SQL UPDATE statement.
+            db_merge('comment')
+              ->key(array('cid' => $attached_comment->cid))
+              ->fields(array(
+                  'thread' => "",
+                ))
+              ->execute();
+
+            comment_submit($attached_comment);
+            comment_save($attached_comment);
+          }
+        }
+      }
     }
 
     else {
@@ -927,6 +978,16 @@ function data_export_import_batch_import_dataset_lines($file_path, $fields_of_ty
       unset($dataset_node->changed);
       unset($existing_node->changed);
 
+      // There is an important tweak RE comments attached to the node.  If there
+      // were any comments attached to the original node then these are attached
+      // to the node object as an array on the 'comments' attribute.  As the
+      // existing_node will never have this attribute then the nodes will never
+      // match and so the node will be updated.  This is fine as it saves us
+      // from having to check that the comments from the existing node are an
+      // exact match for the comments on the node being imported.  As for import
+      // times - it is probably better to recreate the comments as checking
+      // existing comments would probably add more overhead than simply updating
+      // the node.
       if ($dataset_node != $existing_node) {
 
         // Create a new revision. The dataset node may be from several
@@ -944,21 +1005,63 @@ function data_export_import_batch_import_dataset_lines($file_path, $fields_of_ty
 
           // Here we are going to loop through all of the files which
           // may have been attached to this field and re-import them.
-          foreach ($dataset_node->{$file_field_data}[LANGUAGE_NONE] as $file_array_key => $file_array_data) {
+          if (isset($dataset_node->{$file_field_data}[LANGUAGE_NONE])) {
+            foreach ($dataset_node->{$file_field_data}[LANGUAGE_NONE] as $file_array_key => $file_array_data) {
 
-            $file_data = base64_decode($file_array_data['data_export_import_file_data']);
-            $dest = $file_array_data['uri'];
+              $file_data = base64_decode($file_array_data['data_export_import_file_data']);
+              $dest = $file_array_data['uri'];
 
-            // Actually save the file to the file system.
-            $file_object = file_save_data($file_data, $dest, FILE_EXISTS_REPLACE);
+              // Actually save the file to the file system.
+              $file_object = file_save_data($file_data, $dest, FILE_EXISTS_REPLACE);
 
-            // Set the node object to use the returned fid value as
-            // this may be from the original fid value.
-            $dataset_node->{$file_field_data}[LANGUAGE_NONE][$file_array_key]['fid'] = $file_object->fid;
+              // Set the node object to use the returned fid value as
+              // this may be from the original fid value.
+              $dataset_node->{$file_field_data}[LANGUAGE_NONE][$file_array_key]['fid'] = $file_object->fid;
+            }
           }
         }
 
         node_save($dataset_node);
+
+        // Here we wll re-create all of the comments which were
+        // exported into the dataset.  First we will delete all
+        // existing comments for the node - this should probably not
+        // be necessary but there may be excess comments/replies which
+        // are attached to the node which need to be removed. Remember
+        // that this module is designed to end up with identical data
+        // on the receiving site as the sending site.
+        if (module_exists('comment')) {
+
+          $comments_result = db_query("SELECT cid FROM {comment} WHERE nid = :comment_node ORDER BY cid ASC", array(':comment_node' => $dataset_node->nid));
+
+          foreach ($comments_result as $comment_row) {
+            comment_delete($comment_row->cid);
+          }
+
+          if (property_exists($dataset_node, 'comments')) {
+            foreach ($dataset_node->comments as $attached_comment) {
+
+              // This is needed to get the comment_save to work - not sure why.
+              $attached_comment->is_anonymous = 0;
+
+              // Before we save the record we are going to create a
+              // placeholder record with the defined id value.  That way -
+              // when the comment_save function tries to save the comment
+              // with a specified cid value the underlying functions will
+              // be able to update an existing record and will not fail to
+              // carry out the SQL UPDATE statement.
+              db_merge('comment')
+                ->key(array('cid' => $attached_comment->cid))
+                ->fields(array(
+                    'thread' => "",
+                  ))
+                ->execute();
+
+              comment_submit($attached_comment);
+              comment_save($attached_comment);
+            }
+          }
+        }
       }
     }
   }
