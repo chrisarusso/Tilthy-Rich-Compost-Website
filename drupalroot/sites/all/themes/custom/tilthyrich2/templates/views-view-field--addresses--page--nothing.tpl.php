@@ -21,14 +21,13 @@
  * regardless of any changes in the aliasing that might happen if
  * the view is modified.
  */
-$yeah = 'man';
 ?>
 <?php if ($row->new == TRUE): ?>
-  NEWIZZLE
+  New Subscriber
 <?php endif; ?>
 
 <?php if ($row->skip == TRUE): ?>
-  SKIP THIS WEEK
+  Skip
 <?php endif; ?>
 
 
