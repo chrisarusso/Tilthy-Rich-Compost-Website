@@ -80,6 +80,10 @@ body {
 				margin: 40px 0 30px;
 			}
 		}
+
+        .row {
+          max-width: none;
+        }
 	}
 
 	&.banner {

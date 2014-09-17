@@ -1,0 +1,17 @@
+#mailchimp_signup_wrapper {
+  display: none;
+
+  #mc_embed_signup {
+    .mc-title {
+      text-align: center;
+      font-size: 1.3em;
+    }
+
+    .mc-field-group {
+      padding-bottom: 0;
+      input {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

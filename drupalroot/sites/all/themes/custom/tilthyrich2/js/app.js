@@ -132,6 +132,10 @@ $(document).ready(function() {
         $('#what-goes-in-img').attr('src', Drupal.settings.basePath + 'sites/all/themes/custom/tilthyrich2/images/white-minus.png')
     });
 
+    $('nav .last').click(function(){
+        $('#mailchimp_signup_wrapper').toggle();
+    })
+
 
 });
 

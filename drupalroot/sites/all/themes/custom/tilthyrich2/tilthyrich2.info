@@ -5,6 +5,7 @@ engine = phptemplate
 screenshot = screenshot.png
 
 stylesheets[all][]   = stylesheets/app.css
+stylesheets[all][]   = stylesheets/mailchimp.css
 
 scripts[] = js/jquery.scrollTo.min.js
 scripts[] = js/jquery.localScroll.min.js
