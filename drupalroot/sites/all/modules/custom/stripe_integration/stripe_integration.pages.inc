@@ -167,3 +167,32 @@ function stripe_integration_payment_update_form_submit($form, &$form_state) {
   );
 
 }
+
+/**
+ * @param string $event
+ *  The web event POSTed to Drupal from Stripe
+ */
+function _stripe_integration_webhook_consume($event = 'e') {
+  _stripe_integration_stripe_init();
+
+  $input = @file_get_contents("php://input");
+  $event = json_decode($input);
+
+  switch ($event->type) {
+    case 'invoice.payment_failed' :
+
+      $stripe_customer_id = $event->data->object->customer;
+      $query = new EntityFieldQuery();
+      $query->entityCondition('entity_type', 'user')
+        ->fieldCondition('field_stripe_customer_id', 'value', $stripe_customer_id);
+
+      $result = $query->execute();
+      $uid = key($result['user']);
+
+      $user = user_load($uid);
+      $params['user'] = $user;
+
+      drupal_mail('stripe_integration', 'invoice_failed', $user->mail, $user->language, $params);
+      break;
+  }
+}

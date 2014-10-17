@@ -21,15 +21,13 @@ function stripe_integration_menu() {
 
   $items = array();
 
-  /* @todo: Set up webhook listeners for events
-  // Define an always accessible path to receive IPNs.
-  $items['strip-integration/webhook'] = array(
-    'page callback' => '_compost_customizations_paypal_process_ipn',
-    'page arguments' => array(),
-    'access callback' => TRUE,
-    'type' => MENU_CALLBACK,
+  $items['stripe/webhook'] = array(
+    'title' => 'Stripe Webook Consumer',
+    'description' => 'Consume Stripe Webhook.',
+    'page callback' => '_stripe_integration_webhook_consume',
+    'access callback' => array(TRUE),
+    'file' => 'stripe_integration.pages.inc',
   );
-  */
 
   $items['user/%user/update-payment'] = array(
     'title' => 'Update Payment',
@@ -212,8 +210,6 @@ function stripe_integration_form_submit($form, &$form_state){
   }
 }
 
-
-
 /*
  * Custom user gift submission function to process stripe payment
  */
@@ -309,4 +305,62 @@ function stripe_integration_form_validate($form, &$form_state){
 
   }
 
+}
+
+/**
+ * Implements hook_mail
+ */
+function stripe_integration_mail($key, &$message, $params) {
+
+  switch ($key) {
+    case 'invoice_failed':
+      $user = $params['user'];
+      $first_name = $user->field_first_name[LANGUAGE_NONE][0]['value'];
+      $message['subject'] = t('Your @site_name payment has failed!', array(
+        '@site_name' => variable_get('site_name', 'Tilthy Rich Compost')
+      ));
+
+      $message['body'][] = t('Hey @first_name,', array(
+        '@first_name' => $first_name
+      ));
+
+      $message['body'][] = t('Y​our credit card information is no longer valid
+      with @site_name.  We need you to take immediate action to update
+      your billing information by visit​ing​ this link: @update_link', array(
+        '@update_link' => url('user/' . $user->uid . '/update-payment', array(
+          'absolute' => TRUE)),
+        '@site_name' => variable_get('site_name', 'Tilthy Rich Compost'),
+      ));
+
+      $message['body'][] = t('You must be logged in to do this. If you have
+      forgotten your password, you may visit: @reset_link to reset it.', array(
+        '@reset_link' => url('user/password', array('absolute' => TRUE))
+      ));
+
+      $message['body'][] = t('If you need any help completing this process,
+      please feel free to email us at @email or call us at @phone', array(
+        'email' => 'info@tilthyrichcompost.com',
+        'phone' => '(919) 937 - 2692',
+      ));
+
+      $message['body'][] = t('Thank you for your cooperation!');
+      $message['body'][] = t('- The @site_name team', array(
+        '@site_name' => variable_get('site_name', 'Tilthy Rich Compost')
+      ));
+
+      // BCC info@ to keep record
+      $message['headers']['Bcc'] = 'info@tilthyrichcompost.com';
+
+      break;
+  }
+}
+
+/**
+ * Initialize Stripe and set API key
+ */
+function _stripe_integration_stripe_init() {
+  global $conf;
+  require_once(drupal_get_path('module', 'stripe_integration') . "/stripe-php/lib/Stripe.php");
+  $environment = ($conf['production']) == TRUE ? 'live' : 'test';
+  $result = Stripe::setApiKey($conf['stripe_' . $environment . '_secret_key']);
 }
