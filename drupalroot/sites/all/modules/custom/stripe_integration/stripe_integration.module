@@ -339,8 +339,8 @@ function stripe_integration_mail($key, &$message, $params) {
 
       $message['body'][] = t('If you need any help completing this process,
       please feel free to email us at @email or call us at @phone', array(
-        'email' => 'info@tilthyrichcompost.com',
-        'phone' => '(919) 937 - 2692',
+        '@email' => 'info@tilthyrichcompost.com',
+        '@phone' => '(919) 937 - 2692',
       ));
 
       $message['body'][] = t('Thank you for your cooperation!');
