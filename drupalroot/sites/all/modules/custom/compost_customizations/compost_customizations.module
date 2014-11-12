@@ -640,8 +640,8 @@ function _compost_customizations_gift_form_submit() {
 
 }
 
-/*
- * Function to queue up text and email reminders from cron runs
+/**
+ * Function to queue up text and email reminders from cron runs.
  */
 function compost_customizations_queue_reminders() {
 
