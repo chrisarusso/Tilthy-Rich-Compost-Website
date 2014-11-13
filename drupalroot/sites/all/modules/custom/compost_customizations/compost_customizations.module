@@ -652,7 +652,7 @@ function compost_customizations_queue_reminders() {
   // weeks, like holidays, the gap will be larger or smaller.  Three days seems
   // safe that it'll never be less than
   $three_days_ago = $now - 3 * (60 * 60 * 24);
-  $hour_of_the_day = date('G', $now);
+  $hour_of_the_day = "0000-01-01 " . date('G', $now) . ":00:00";
 
   $query = new EntityFieldQuery();
 
@@ -661,7 +661,7 @@ function compost_customizations_queue_reminders() {
     ->fieldCondition('field_active', 'value', 1)
     ->fieldCondition('field_collection_day', 'value', $tomorrow)
     ->fieldCondition('field_last_reminded', 'value', $three_days_ago, '<')
-    ->fieldCondition('field_reminder_time', 'value', $hour_of_the_day, '<=');
+    ->fieldCondition('field_reminder_time', 'value', $hour_of_the_day, '=');
 
   $result = $query->execute();
 
