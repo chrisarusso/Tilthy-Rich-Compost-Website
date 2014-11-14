@@ -488,6 +488,7 @@ function content_types_field_default_fields() {
         'active' => 1,
         'module' => 'date',
         'settings' => array(
+          'display_all_day' => 0,
           'increment' => '15',
           'input_format' => 'Y-m-d H:i:s',
           'input_format_custom' => '',
@@ -617,7 +618,7 @@ function content_types_field_default_fields() {
         'handler_settings' => array(
           'behaviors' => array(
             'views-select-list' => array(
-              'status' => 0,
+              'status' => 1,
             ),
           ),
           'sort' => array(
@@ -1005,10 +1006,12 @@ function content_types_field_default_fields() {
         'active' => 1,
         'module' => 'date',
         'settings' => array(
+          'display_all_day' => 0,
           'increment' => '15',
           'input_format' => 'Y-m-d H:i:s',
           'input_format_custom' => '',
           'label_position' => 'above',
+          'repeat_collapsed' => 0,
           'text_parts' => array(),
           'year_range' => '-3:+3',
         ),
@@ -1232,13 +1235,9 @@ function content_types_field_default_fields() {
     ),
     'field_instance' => array(
       'bundle' => 'user',
-      'default_value' => array(
-        0 => array(
-          'value' => '22',
-        ),
-      ),
+      'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'Minimum contribution for collection is $15/month.  Please help us grow and contribute as much as you\'re comfortable with!  Need more info about how much you should pay?  <a href="/how-much-to-pay" target="_blank">Read here</a>',
+      'description' => 'Minimum contribution for collection to cover costs is $15/month.  Please help us grow and contribute as much as you\'re comfortable with!  Need more info about how much you should pay?  <a href="/how-much-to-pay" target="_blank">Read here</a>',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -1337,36 +1336,48 @@ function content_types_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_reminder_time',
       'field_permissions' => array(
-        'type' => '2',
+        'type' => '0',
       ),
       'foreign keys' => array(),
       'indexes' => array(),
       'locked' => '0',
-      'module' => 'number',
-      'settings' => array(),
+      'module' => 'date',
+      'settings' => array(
+        'cache_count' => '4',
+        'cache_enabled' => 0,
+        'granularity' => array(
+          'day' => 0,
+          'hour' => 'hour',
+          'minute' => 0,
+          'month' => 0,
+          'second' => 0,
+          'year' => 'year',
+        ),
+        'repeat' => '0',
+        'timezone_db' => '',
+        'todate' => '',
+        'tz_handling' => 'none',
+      ),
       'translatable' => '0',
-      'type' => 'number_integer',
+      'type' => 'datetime',
     ),
     'field_instance' => array(
       'bundle' => 'user',
-      'default_value' => array(
-        0 => array(
-          'value' => '17',
-        ),
-      ),
       'deleted' => '0',
-      'description' => 'Enter the hour of the day (1-23) you\'d like to receive your reminder.  E.g. 5PM = 17',
+      'description' => 'Enter the time you would like to receive your text or email reminder the day before collection.',
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'number',
+          'module' => 'date',
           'settings' => array(
-            'decimal_separator' => '.',
-            'prefix_suffix' => TRUE,
-            'scale' => 0,
-            'thousand_separator' => ' ',
+            'format_type' => 'long',
+            'fromto' => 'both',
+            'multiple_from' => '',
+            'multiple_number' => '',
+            'multiple_to' => '',
+            'show_repeat_rule' => 'show',
           ),
-          'type' => 'number_integer',
+          'type' => 'date_default',
           'weight' => 22,
         ),
       ),
@@ -1375,18 +1386,27 @@ function content_types_field_default_fields() {
       'label' => 'Reminder Time',
       'required' => 0,
       'settings' => array(
-        'max' => '23',
-        'min' => '1',
-        'prefix' => '',
-        'suffix' => '',
+        'default_value' => 'blank',
+        'default_value2' => 'same',
+        'default_value_code' => '',
+        'default_value_code2' => '',
         'user_register_form' => 0,
       ),
       'widget' => array(
-        'active' => 0,
-        'module' => 'number',
-        'settings' => array(),
-        'type' => 'number',
-        'weight' => '23',
+        'active' => 1,
+        'module' => 'date',
+        'settings' => array(
+          'display_all_day' => 0,
+          'increment' => '15',
+          'input_format' => 'custom',
+          'input_format_custom' => 'h a',
+          'label_position' => 'above',
+          'repeat_collapsed' => 0,
+          'text_parts' => array(),
+          'year_range' => '-3:+3',
+        ),
+        'type' => 'date_select',
+        'weight' => '41',
       ),
     ),
   );
@@ -1399,6 +1419,9 @@ function content_types_field_default_fields() {
       'deleted' => '0',
       'entity_types' => array(),
       'field_name' => 'field_reminders',
+      'field_permissions' => array(
+        'type' => '0',
+      ),
       'foreign keys' => array(),
       'indexes' => array(
         'value' => array(
@@ -1425,7 +1448,7 @@ function content_types_field_default_fields() {
         ),
       ),
       'deleted' => '0',
-      'description' => 'Check the type of reminder you would like to receive the evening before pick up.',
+      'description' => '',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -1437,7 +1460,7 @@ function content_types_field_default_fields() {
       ),
       'entity_type' => 'user',
       'field_name' => 'field_reminders',
-      'label' => 'Pick up reminders',
+      'label' => 'Collection Day Reminders',
       'required' => 0,
       'settings' => array(
         'user_register_form' => 1,
@@ -1483,7 +1506,7 @@ function content_types_field_default_fields() {
         'handler_settings' => array(
           'behaviors' => array(
             'views-select-list' => array(
-              'status' => 0,
+              'status' => 1,
             ),
           ),
           'sort' => array(
@@ -1733,22 +1756,21 @@ function content_types_field_default_fields() {
   t('Body');
   t('Bucket Location');
   t('Bucket Size');
-  t('Check the type of reminder you would like to receive the evening before pick up.');
   t('Cleaner');
   t('Collection Day');
+  t('Collection Day Reminders');
   t('Company Name');
   t('Date');
-  t('Enter the hour of the day (1-23) you\'d like to receive your reminder.  E.g. 5PM = 17');
+  t('Enter the time you would like to receive your text or email reminder the day before collection.');
   t('Forgotten bucket date');
   t('How Did You Hear About Us?');
   t('If not in an obvious place visible from the street (e.g. front porch) input bucket location ');
   t('Last Reminded');
-  t('Minimum contribution for collection is $15/month.  Please help us grow and contribute as much as you\'re comfortable with!  Need more info about how much you should pay?  <a href="/how-much-to-pay" target="_blank">Read here</a>');
+  t('Minimum contribution for collection to cover costs is $15/month.  Please help us grow and contribute as much as you\'re comfortable with!  Need more info about how much you should pay?  <a href="/how-much-to-pay" target="_blank">Read here</a>');
   t('Mobile Carrier/Provider');
   t('Monthly Contribution');
   t('Notes');
   t('Phone number');
-  t('Pick up reminders');
   t('Pickup day');
   t('Please include your mobile phone number.  ');
   t('Please only fill this out if you\'re representing a business account');
