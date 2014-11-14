@@ -652,7 +652,7 @@ function compost_customizations_queue_reminders() {
   // weeks, like holidays, the gap will be larger or smaller.  Three days seems
   // safe that it'll never be less than
   $three_days_ago = $now - 3 * (60 * 60 * 24);
-  $hour_of_the_day = date('G', $now);
+  $hour_of_the_day = "0000-01-01 " . date('G', $now) . ":00:00";
 
   $query = new EntityFieldQuery();
 
