@@ -77,12 +77,14 @@
 		<div class="small-12 large-5 columns">
 		<h2>Our Story</h2>
           <p>
-            Tilthy Rich Compost was born out of necessity. With Durham’s urban
-            agriculture movement and resulting zone changes taking hold in early
-            2013 we observed there was a crucial component lacking. Chris and
-            Jodi were involved in their own composting endeavors when they first
-            met (we know! LOVE!). After realizing their shared passion they
-            decided to join forces and create Tilthy Rich Compost.
+            Tilthy Rich Compost was born out of necessity. Durham’s urban
+            agriculture movement and resulting zone changes were taking hold in early
+            2013. Many people, including top-level city governing officials, worked
+            together  to bring urban agriculture to Durham. However, the crucial
+            component of resource recycling through composting was largely
+            lacking in the conversation. "Farm-to-table" is now commonplace, but
+            what about "table-to-farm"? Chris Russo, with great support and effort
+            of many others, sought to change this.
           </p>
 
           <p>
