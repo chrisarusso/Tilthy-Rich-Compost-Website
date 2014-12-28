@@ -33,8 +33,8 @@ function tilthyrich2_preprocess_page(&$variables) {
       $variables['registration_form'] = drupal_render($form);
     }
   }
-  elseif (count($url_pieces) > 1 && $url_pieces[0] == 'user') {
-    $account = user_load($variables['user']->uid);
+  elseif (user_is_logged_in() && count($url_pieces) > 1 && $url_pieces[0] == 'user') {
+    $account = user_load($url_pieces[1]);
     $first_name =  $account->field_first_name[LANGUAGE_NONE][0]['value'];
     $last_name =  $account->field_last_name[LANGUAGE_NONE][0]['value'];
     drupal_set_title($first_name . ' ' . $last_name . "'s profile");
