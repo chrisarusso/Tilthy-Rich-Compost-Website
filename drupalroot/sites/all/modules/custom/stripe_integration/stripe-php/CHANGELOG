@@ -1,3 +1,30 @@
+=== 1.15.0 2014-05-28
+
+* Support canceling transfers
+
+=== 1.14.1 2014-05-21
+
+* Support cards for recipients.
+
+=== 1.13.1 2014-05-15
+
+* Fix bug in account resource where `id` wasn't in the result
+
+=== 1.13.0 2014-04-10
+
+* Add support for certificate blacklisting
+* Update ca bundle
+* Drop support for HHVM (Temporarily)
+
+=== 1.12.0 2014-04-01
+
+* Add Stripe_RateLimitError for catching rate limit errors.
+* Update to Zend coding style (thanks,  @jpiasetz)
+
+=== 1.11.0 2014-01-29
+
+* Add support for multiple subscriptions per customer
+
 === 1.10.1 2013-12-02
 
 * Add new ApplicationFee
@@ -86,7 +113,7 @@
 
 === 1.7.5 2012-08-23
 
-* Change internal function names so that Stripe_SingletonApiRequst is
+* Change internal function names so that Stripe_SingletonApiRequest is
   E_STRICT-clean (github issue #16)
 
 === 1.7.4 2012-08-21
@@ -107,7 +134,7 @@
 
 * Add missing argument to Stripe_InvalidRequestError constructor in
   Stripe_ApiResource::instanceUrl. Fixes a warning when
-  Stripe_ApiResource::instanceUrl is called on a resouce with no ID
+  Stripe_ApiResource::instanceUrl is called on a resource with no ID
   (github issue #12)
 
 === 1.7.0 2012-05-17
