@@ -61,9 +61,9 @@ function subscriber_map_views_pre_render(&$view) {
  */
 function _subscriber_map_get_color($route_name) {
   static $route_names = array();
-  $colors = array('blue', 'brown', 'green');
+  static $colors = array('blue', 'brown', 'green');
   if (!isset($route_names[$route_name])) {
-    $route_names[$route_name] = $colors[count($route_names)];
+    $route_names[$route_name] = ($color = each($colors)) ? $color['value'] : reset($colors);
   }
 
   return $route_names[$route_name];
