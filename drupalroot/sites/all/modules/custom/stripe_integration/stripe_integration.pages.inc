@@ -132,7 +132,7 @@ function stripe_integration_payment_update_form($form, &$form_state, $account) {
       drupal_get_path('module', 'stripe_integration') . "/js/stripe_integration_checkout.js" => array(
         'scope' => 'footer',
       ),
-      'https://checkout.stripe.com/checkout.js' => array('external'),
+      'https://checkout.stripe.com/checkout.js' => array('type' => 'external', 'cache' => FALSE),
       array('data' => array(
         'stripeIntegration' => array(
           'publishableKey' => $conf['stripe_' . $environment . '_publishable_key'],
