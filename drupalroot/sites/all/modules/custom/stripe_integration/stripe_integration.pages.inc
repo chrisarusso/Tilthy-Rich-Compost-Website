@@ -136,7 +136,7 @@ function stripe_integration_payment_update_form($form, &$form_state, $account) {
       array('data' => array(
         'stripeIntegration' => array(
           'publishableKey' => $conf['stripe_' . $environment . '_publishable_key'],
-          'logoURL' => drupal_get_path('theme', 'tilthyrich') . "/logo.jpg"
+          'logoURL' => drupal_get_path('theme', 'tilthyrich2') . "/stripe-logo.png"
         )),
         'type' => 'setting'
       )

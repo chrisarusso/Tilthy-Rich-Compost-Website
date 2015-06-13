@@ -94,7 +94,7 @@ function stripe_integration_form_user_register_form_alter(&$form, $form_state, $
     array('data' => array(
       'stripeIntegration' => array(
         'publishableKey' => $conf['stripe_' . $environment . '_publishable_key'],
-        'logoURL' => drupal_get_path('theme', 'tilthyrich') . "/logo.jpg"
+        'logoURL' => drupal_get_path('theme', 'tilthyrich2') . "/stripe-logo.png"
       )),
       'type' => 'setting'
     )
