@@ -103,17 +103,6 @@ echo render($form['form_id']);
     <?php $form['field_bucket_location'][LANGUAGE_NONE][0]['value']['#theme_wrappers'] = array(); ?>
     <?php echo render($form['field_bucket_location'][LANGUAGE_NONE][0]['value']); ?>
 
-
-    <div class="row">
-      <div class="small-3 columns">
-        <label for="form-service-type">Bucket Size</label>
-      </div>
-      <div class="small-9 columns">
-        <?php $form['field_bucket_size'][LANGUAGE_NONE]['#theme_wrappers'] = array(); ?>
-        <?php echo render($form['field_bucket_size'][LANGUAGE_NONE]); ?>
-      </div>
-    </div>
-
     <?php echo render($form['field_reminders']); ?>
     <?php echo render($form['field_mobile_carrier_provider']); ?>
 
