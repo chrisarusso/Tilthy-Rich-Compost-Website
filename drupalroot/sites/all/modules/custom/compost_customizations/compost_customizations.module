@@ -405,7 +405,7 @@ function compost_customizations_get_email_reminders() {
 /*
  * Implements hook_mail()
  */
-function compost_customizations_mail($key, &$message, $headers) {
+function compost_customizations_mail($key, &$message, $params) {
 
   $account = $message['params']['user'];
   $captain = $message['params']['captain'];
@@ -446,6 +446,13 @@ function compost_customizations_mail($key, &$message, $headers) {
       $message['body'][] = t('Thank you so much for your service') . ',';
       $message['body'][] = "- " . t('Your friends @') . ' ' . url('', array('absolute' => TRUE));
       $message['subject'] = t('Reminder: Put out your compost bucket(s)');
+      break;
+    case 'forgotten_bucket_notification':
+      $message['subject'] = t('Tilthy Rich missed collection');
+      $message['body'] = theme('forgotten_bucket_email', array('user' => $account,
+        'date' => $message['params']['date']));
+
+      break;
   }
 }
 
@@ -459,6 +466,8 @@ function compost_customizations_cron() {
   }
 
   compost_customizations_queue_reminders();
+
+  compost_customizations_queue_forgotten_bucket_emails();
 }
 
 // Implementation per http://rbayliss.net/drupal-queue-api
@@ -476,6 +485,11 @@ function compost_customizations_cron_queue_info() {
     'time' => 300,
   );
 
+  $queues['forgotten_bucket_notifications'] = array(
+    'worker callback' => 'compost_customizations_send_forgotten_notifications',
+    'time' => 300,
+  );
+
   return $queues;
 }
 
@@ -489,6 +503,16 @@ function compost_customizations_send_email_reminders($user) {
   $captain = user_load($route->field_route_captain[LANGUAGE_NONE][0]['target_id']);
   $params = array('user' => $user, 'captain' => $captain);
   drupal_mail('compost_customizations', 'email_reminder', $user->mail, $user->language, $params);
+}
+
+/**
+ * @param $user
+ * @param $date
+ */
+function compost_customizations_send_forgotten_notifications($data) {
+  $params = array('user' => $data['user'], 'date' => $data['date']);
+  drupal_mail('compost_customizations', 'forgotten_bucket_notification',
+    $data['user']->mail, $data['user']->language, $params);
 }
 
 /**
@@ -690,4 +714,92 @@ function compost_customizations_queue_reminders() {
       }
     }
   }
+}
+
+/**
+ * Loop through and queue up reminder notifications to subscribers
+ * who have not notified us of a collection that can be skipped
+ */
+function compost_customizations_queue_forgotten_bucket_emails() {
+
+  // Retrieve all members who have been marked as a forgotten
+  // bucket but have not yet been notified
+  $query = new EntityFieldQuery();
+
+  $query->entityCondition('entity_type', 'user')
+    ->fieldCondition('field_active', 'value', 1)
+    // We started this new system in 2015-July, so let's ignore any records
+    // before we changed to field collections
+    ->fieldCondition('field_forgotten_bucket', 'value', '0', '>=');
+
+  $result = $query->execute();
+  $user_uids = array_keys($result['user']);
+  $users = entity_load('user', $user_uids);
+
+  foreach ($users as $user) {
+    if (empty($user->field_forgotten_bucket)) {
+      continue;
+    }
+
+    $user_wrapper = entity_metadata_wrapper('user', $user);
+    $raw_collections = $user_wrapper->field_forgotten_bucket->value();
+
+    foreach ($raw_collections as $collection) {
+      $forgotten_bucket = entity_metadata_wrapper('field_collection_item', $collection);
+      $date = $forgotten_bucket->field_forgotten_bucket_date->value();
+      $reminded = $forgotten_bucket->field_reminded_about_forgotten_b->value();
+      $start_of_auto_reminders = strtotime('2015-Jul-01');
+      if (!$reminded && $date >= $start_of_auto_reminders) {
+        // Queue email
+        $email_queue = DrupalQueue::get('forgotten_bucket_notifications');
+        $data = array('user' => $user, 'date' => $date);
+        $email_queue->createItem($data);
+        // Set to reminded
+        $forgotten_bucket->field_reminded_about_forgotten_b->set(1);
+        $forgotten_bucket->save();
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function compost_customizations_theme() {
+  return array(
+    'forgotten_bucket_email' => array(
+      'variables' => array('user' => NULL, 'date' => NULL),
+      'template' => 'templates/forgotten-bucket-email'
+      ),
+  );
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function compost_customizations_preprocess_forgotten_bucket_email(&$variables, $hook) {
+  // Populate templates/forgotten-bucket-email.tpl.php with variables.
+  $account = $variables['user'];
+  $variables['first_name'] = $account->field_first_name[LANGUAGE_NONE][0]['value'];
+  $variables['last_name'] = $account->field_last_name[LANGUAGE_NONE][0]['value'];
+  $route = node_load($account->field_route[LANGUAGE_NONE][0]['target_id']);
+  $timestamp = $variables['date'];
+  $variables['date'] = date('Y-M-d - l', $variables['date']);
+  $variables['day_of_week'] = $route->field_pickup_day[LANGUAGE_NONE][0]['value'];
+  $variables['time_of_day'] = date('h:iA', $timestamp);
+  $variables['text_reminder'] = $variables['email_reminder'] = FALSE;
+  if (!empty($account->field_reminders)) {
+    foreach($account->field_reminders[LANGUAGE_NONE] as $reminder) {
+      if ($reminder['value'] == 1) {
+        $variables['email_reminder'] = TRUE;
+      }
+      elseif ($reminder['value'] == 2) {
+        $variables['text_reminder'] = TRUE;
+      }
+    }
+  }
+  $variables['profile_link'] = url('user/' . $account->uid . '/edit',
+    array('absolute' => TRUE));
+  $variables['password_link'] = url('user/password', array('absolute' => TRUE));
+  $variables['bucket_location'] = $account->field_bucket_location[LANGUAGE_NONE][0]['value'];
 }
