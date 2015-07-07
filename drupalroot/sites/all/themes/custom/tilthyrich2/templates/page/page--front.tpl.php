@@ -317,7 +317,7 @@
               <li>Coffee and tea (including bags and filters if they’re paper)</li>
               <li>Bread, pasta, prepared foods</li>
               <li>Eggshells</li>
-              <li>Any food at all, seriously</li>
+              <li>All food, including meat, bones, and dairy</li>
               <li>Food-soiled Paper</li>
               <li>Paper towels from the kitchen area</li>
               <li>Paper cups, plates and napkins</li>
