@@ -1,5 +1,11 @@
 <div class="container dark interior">
 	<div class="row">
+    <nav class="small-12 columns" role="navigation">
+      <?php if ($page['header']): ?>
+        <?php render($page['content']['metatags']); ?>
+        <?php print render($page['header']); ?>
+      <?php endif; ?>
+    </nav>
 		<div class="small-12 columns text-center">
           <a href="<?php print check_url($front_page); ?>"><img src="<?php print $logo ?>" alt="<?php print $site_name; ?>" /></a>
 		</div>
