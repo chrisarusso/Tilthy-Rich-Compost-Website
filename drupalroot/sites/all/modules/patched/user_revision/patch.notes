@@ -1,5 +1,13 @@
-Issue: Conflick with email_registration and user_revision results in github issue #40
+Issue: Conflict with email_registration and user_revision results in github issue #40
 which is that the username gets garbled instead of remaining as everything before the
 "@" in the user's email address.
 Link: https://drupal.org/node/2016671
 Patch: https://drupal.org/files/issues/2016671-conflict-email-registration-1.patch
+
+Issue: user_revision module does not yet include sanitization through drush sqlsan
+  and entity_load() still loads users original emails, so outgoing mail still goes
+to original users.
+
+Link: https://www.drupal.org/node/2534638
+Patch: https://www.drupal.org/files/issues/add_drush_sql_san_hook-2534638-1_0.patch
+

@@ -7,7 +7,7 @@ core = 7.x
 files[] = user_revision.module
 files[] = user_revision.pages.inc
 files[] = user_revision.admin.inc
-
+files[] = user_revision.drush.inc
 files[] = user_revision.views.inc
 
 files[] = views/user_revision.views.inc
