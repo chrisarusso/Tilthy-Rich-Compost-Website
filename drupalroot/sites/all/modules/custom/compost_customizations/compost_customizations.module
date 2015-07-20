@@ -602,14 +602,17 @@ function compost_customizations_views_pre_render(&$view) {
           }
         }
 
-        // If the user joined in the last 8 days, make sure it's known she's new
-        if ($subscriber->users_created > $now - $eight_days_ago) {
-          $view->result[$id]->new = TRUE;
-        }
+        $query = db_select('user_revision', 'ur')
+          ->condition('status', 1)
+          ->condition('uid', $subscriber->uid);
 
-        // If the user was updating in the last 8 days, note that
-        if ($subscriber->user_revision_timestamp > $now - $eight_days_ago) {
-          $view->result[$id]->updated = TRUE;
+        $query->addExpression('MIN(timestamp)', 'min_timestamp');
+        // This gives us the time when the user was activated by an admin.
+        $account_activated = $query->execute()->fetchField(0);
+
+        // If the user was activated in the last 8 days, make sure it's known she's new
+        if ($account_activated > $now - $eight_days_ago) {
+          $view->result[$id]->new = TRUE;
         }
       }
 
