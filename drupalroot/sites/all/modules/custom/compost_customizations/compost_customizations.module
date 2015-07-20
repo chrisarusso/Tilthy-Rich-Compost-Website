@@ -338,71 +338,6 @@ function compost_customizations_retrieve_text_email($user) {
 }
 
 /*
- * Returns users (objects) that opted into text reminders
- */
-function compost_customizations_get_text_reminders() {
-
-  $query = new EntityFieldQuery();
-
-  $query->entityCondition('entity_type', 'user')
-    ->fieldCondition('field_active', 'value', 1)
-    ->fieldCondition('field_reminders', 'value', 2);
-
-  $result = $query->execute();
-
-  if (isset($result['user'])) {
-    $user_uids = array_keys($result['user']);
-    $users = entity_load('user', $user_uids);
-  }
-
-  $users = _compost_customizations_remove_skippers($users);
-
-  return $users;
-
-}
-
-/*
- * Returns users (objects) that opted into email reminders
- */
-function compost_customizations_get_email_reminders() {
-
-  $query = new EntityFieldQuery();
-
-  $now = time();
-  $tomorrow_timestamp = $now + 60 * 60 * 24;
-  $tomorrow = date('l', $tomorrow_timestamp);
-  // Somewhat arbitrary.  Reminders ought to be once a week, but on certain
-  // weeks, like holidays, the gap will be larger or smaller.  Three days seems
-  // safe that it'll never be less than
-  $three_days_ago = $now - 3 * (60 * 60 * 24);
-
-  // Users are created with a 0 for last reminded starting 2014-Mar-09
-  // prior to that, folks were not getting email reminders because
-  // last reminded was never being set for new accounts.
-  // This was fixed at configuration level instead of code level
-  $query->entityCondition('entity_type', 'user')
-    ->fieldCondition('field_reminders', 'value', 1)
-    ->fieldCondition('field_active', 'value', 1)
-    ->fieldCondition('field_collection_day', 'value', $tomorrow)
-    ->fieldCondition('field_last_reminded', 'value', $three_days_ago, '<');
-
-  $result = $query->execute();
-
-  if (isset($result['user'])) {
-    $user_uids = array_keys($result['user']);
-    $users = entity_load('user', $user_uids);
-
-    $users = _compost_customizations_remove_skippers($users);
-
-    return $users;
-  }
-  else {
-    return array();
-  }
-
-}
-
-/*
  * Implements hook_mail()
  */
 function compost_customizations_mail($key, &$message, $params) {
@@ -560,15 +495,17 @@ function _compost_customizations_remove_skippers($users) {
 
   $time = time();
   foreach ($users as $user) {
-    foreach($user->field_skip_day as $day) {
-      $stamp = strtotime($day[0]['value']);
-      if ($stamp > $time && $stamp < $time + 7 * 24 * 60 * 60) {
-        unset ($users[$user->uid]);
+    if (!empty($user->field_skip_day)) {
+      foreach($user->field_skip_day[LANGUAGE_NONE] as $day) {
+        $stamp = strtotime($day['value']);
+        if ($stamp > $time && $stamp < $time + 7 * 24 * 60 * 60) {
+          unset ($users[$user->uid]);
+        }
       }
     }
   }
 
-  return $users;
+  return !empty($users) ? $users : array();
 
 }
 
@@ -700,6 +637,7 @@ function compost_customizations_queue_reminders() {
     $user_uids = array_keys($result['user']);
     $users = entity_load('user', $user_uids);
 
+    $users = _compost_customizations_remove_skippers($users);
     foreach($users as $user) {
       if (!empty($user->field_reminders)) {
         foreach($user->field_reminders[LANGUAGE_NONE] as $reminder) {
