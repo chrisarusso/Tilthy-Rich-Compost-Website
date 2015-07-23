@@ -116,6 +116,7 @@ echo render($form['form_id']);
     <?php echo render($form['field_monthly_contribution'][LANGUAGE_NONE][0]['value']); ?>
 
     <label for="form-service-type">How Did You Hear About Us?</label>
+    If you were referred by a friend, please leave your friend’s first and last name here.
     <?php $form['field_how_did_you_hear_about_us_'][LANGUAGE_NONE][0]['value']['#theme_wrappers'] = array(); ?>
     <?php echo render($form['field_how_did_you_hear_about_us_'][LANGUAGE_NONE][0]['value']); ?>
 
