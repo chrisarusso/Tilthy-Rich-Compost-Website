@@ -105,7 +105,7 @@
     ?>
   </div>
 
-  <?php print render($content['links']); ?>
+  <?php // Hide extra links for blog content type print render($content['links']); ?>
 
   <?php print render($content['comments']); ?>
 
