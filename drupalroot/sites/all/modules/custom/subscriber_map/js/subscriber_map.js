@@ -13,7 +13,7 @@
 
       // Put the map canvas below the View.
       var map_canvas = $('<div id="subscriber-map"></div>');
-      $('.view-id-map').after(map_canvas);
+      $('.view-id-map, .view-yard-sign-map').after(map_canvas);
 
       var center = [];
       var markers = [];

@@ -18,6 +18,7 @@ function subscriber_map_views_pre_render(&$view) {
 
   switch($view->name) {
     case 'map':
+    case 'yard_sign_map':
       // Store up the locations to be passed to javascript.
       $locations = array();
       foreach($view->result as $key => $result) {
