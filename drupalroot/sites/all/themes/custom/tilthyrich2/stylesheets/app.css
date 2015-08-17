@@ -4633,3 +4633,9 @@ textarea.error {
 .calendar-calendar .inner .view-item {
   padding: 10px 5px;
 }
+
+/* line 704, ../scss/app.scss */
+.node-blog img {
+  float: left;
+  margin-right: .625rem;
+}
