@@ -22,7 +22,7 @@
 	</div>
 </div>
 
-<div class="container">
+<div class="container interior">
 	<div class="row">
       <?php if ($messages): ?>
         <div id="console" class="clearfix"><?php print $messages; ?></div>

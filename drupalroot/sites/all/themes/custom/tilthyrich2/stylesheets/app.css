@@ -4639,3 +4639,12 @@ textarea.error {
   float: left;
   margin-right: .625rem;
 }
+
+/* line 712, ../scss/app.scss */
+.interior a {
+  color: #99694b;
+}
+/* line 715, ../scss/app.scss */
+.interior a:visited {
+  color: #99694b;
+}

@@ -706,3 +706,14 @@ textarea.error {
     margin-right: .625rem;
   }
 }
+
+// Interior page default
+.interior {
+  a {
+	color: $brown;
+
+	&:visited {
+	  color: $brown;
+	}
+  }
+}
