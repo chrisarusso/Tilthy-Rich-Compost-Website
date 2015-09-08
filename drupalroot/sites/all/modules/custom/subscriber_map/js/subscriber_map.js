@@ -84,6 +84,11 @@
       var count = 1;
       $.each(markers, function(i){
 
+        // Set count to 0 when it hits 100 to account for lack of markers over 99 ;)
+        if (count == 100) {
+          count = 0;
+        }
+
         // If user is inactive we don't show her on the map
         if (this.status == 0) {
             // Do nothing
