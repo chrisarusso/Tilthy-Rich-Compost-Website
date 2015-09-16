@@ -44,6 +44,12 @@ function compost_views_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<a href="/addresses/csv">Download spreadsheet</a>';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
   /* Relationship: Entity Reference: Referenced Entity */
   $handler->display->display_options['relationships']['field_route_target_id']['id'] = 'field_route_target_id';
   $handler->display->display_options['relationships']['field_route_target_id']['table'] = 'field_data_field_route';
@@ -57,6 +63,13 @@ function compost_views_views_default_views() {
   $handler->display->display_options['fields']['draggableviews']['element_default_classes'] = FALSE;
   $handler->display->display_options['fields']['draggableviews']['hide_alter_empty'] = FALSE;
   $handler->display->display_options['fields']['draggableviews']['draggableviews']['ajax'] = 0;
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = '';
+  $handler->display->display_options['fields']['counter']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   /* Field: User: Location */
   $handler->display->display_options['fields']['field_location']['id'] = 'field_location';
   $handler->display->display_options['fields']['field_location']['table'] = 'field_data_field_location';
@@ -64,12 +77,11 @@ function compost_views_views_default_views() {
   $handler->display->display_options['fields']['field_location']['label'] = 'Address';
   $handler->display->display_options['fields']['field_location']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_location']['type'] = 'just_street_name';
-  /* Field: User: Bucket Location */
+  /* Field: User: Outside Collection Location */
   $handler->display->display_options['fields']['field_bucket_location']['id'] = 'field_bucket_location';
   $handler->display->display_options['fields']['field_bucket_location']['table'] = 'field_data_field_bucket_location';
   $handler->display->display_options['fields']['field_bucket_location']['field'] = 'field_bucket_location';
   $handler->display->display_options['fields']['field_bucket_location']['label'] = 'Location';
-  $handler->display->display_options['fields']['field_bucket_location']['type'] = 'editable';
   $handler->display->display_options['fields']['field_bucket_location']['settings'] = array(
     'click_to_edit' => 1,
     'empty_text' => '',
@@ -80,7 +92,6 @@ function compost_views_views_default_views() {
   $handler->display->display_options['fields']['field_bucket_size']['table'] = 'field_data_field_bucket_size';
   $handler->display->display_options['fields']['field_bucket_size']['field'] = 'field_bucket_size';
   $handler->display->display_options['fields']['field_bucket_size']['label'] = 'Size';
-  $handler->display->display_options['fields']['field_bucket_size']['type'] = 'editable';
   $handler->display->display_options['fields']['field_bucket_size']['settings'] = array(
     'click_to_edit' => 1,
     'empty_text' => '',
@@ -90,7 +101,7 @@ function compost_views_views_default_views() {
   $handler->display->display_options['fields']['field_subscriber_notes']['id'] = 'field_subscriber_notes';
   $handler->display->display_options['fields']['field_subscriber_notes']['table'] = 'field_data_field_subscriber_notes';
   $handler->display->display_options['fields']['field_subscriber_notes']['field'] = 'field_subscriber_notes';
-  $handler->display->display_options['fields']['field_subscriber_notes']['type'] = 'editable';
+  $handler->display->display_options['fields']['field_subscriber_notes']['type'] = 'text_plain';
   $handler->display->display_options['fields']['field_subscriber_notes']['settings'] = array(
     'click_to_edit' => 1,
     'empty_text' => '',
@@ -120,17 +131,34 @@ function compost_views_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Status';
+  /* Field: User revision: Created date */
+  $handler->display->display_options['fields']['timestamp']['id'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['table'] = 'user_revision';
+  $handler->display->display_options['fields']['timestamp']['field'] = 'timestamp';
+  $handler->display->display_options['fields']['timestamp']['label'] = 'Last updated';
+  $handler->display->display_options['fields']['timestamp']['date_format'] = 'raw time ago';
+  $handler->display->display_options['fields']['timestamp']['second_date_format'] = 'long';
+  /* Field: Content: Nid */
+  $handler->display->display_options['fields']['nid']['id'] = 'nid';
+  $handler->display->display_options['fields']['nid']['table'] = 'node';
+  $handler->display->display_options['fields']['nid']['field'] = 'nid';
+  $handler->display->display_options['fields']['nid']['relationship'] = 'field_route_target_id';
+  $handler->display->display_options['fields']['nid']['label'] = 'Route ID';
+  $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+  /* Field: Field: Route */
+  $handler->display->display_options['fields']['field_route']['id'] = 'field_route';
+  $handler->display->display_options['fields']['field_route']['table'] = 'field_data_field_route';
+  $handler->display->display_options['fields']['field_route']['field'] = 'field_route';
+  $handler->display->display_options['fields']['field_route']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_route']['settings'] = array(
+    'link' => 0,
+  );
   /* Sort criterion: Draggableviews: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';
   $handler->display->display_options['sorts']['weight']['table'] = 'draggableviews_structure';
   $handler->display->display_options['sorts']['weight']['field'] = 'weight';
   $handler->display->display_options['sorts']['weight']['draggableviews_setting_view'] = 'self';
   $handler->display->display_options['sorts']['weight']['draggableviews_setting_new_items_bottom_list'] = 1;
-  /* Sort criterion: User: Created date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'users';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
   /* Filter criterion: User: Active */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'users';
@@ -150,26 +178,50 @@ function compost_views_views_default_views() {
   $handler->display->display_options['filters']['rid']['table'] = 'users_roles';
   $handler->display->display_options['filters']['rid']['field'] = 'rid';
   $handler->display->display_options['filters']['rid']['operator'] = 'empty';
-  /* Filter criterion: Content: Title */
-  $handler->display->display_options['filters']['title']['id'] = 'title';
-  $handler->display->display_options['filters']['title']['table'] = 'node';
-  $handler->display->display_options['filters']['title']['field'] = 'title';
-  $handler->display->display_options['filters']['title']['relationship'] = 'field_route_target_id';
-  $handler->display->display_options['filters']['title']['value'] = 'All';
-  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['label'] = 'Route name';
-  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
-  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
-  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+  /* Filter criterion: User: Service Type (field_service_type) */
+  $handler->display->display_options['filters']['field_service_type_value']['id'] = 'field_service_type_value';
+  $handler->display->display_options['filters']['field_service_type_value']['table'] = 'field_data_field_service_type';
+  $handler->display->display_options['filters']['field_service_type_value']['field'] = 'field_service_type_value';
+  $handler->display->display_options['filters']['field_service_type_value']['operator'] = 'not';
+  $handler->display->display_options['filters']['field_service_type_value']['value'] = array(
+    2 => '2',
+    3 => '3',
+  );
+  /* Filter criterion: Field: Route (field_route) */
+  $handler->display->display_options['filters']['field_route_target_id']['id'] = 'field_route_target_id';
+  $handler->display->display_options['filters']['field_route_target_id']['table'] = 'field_data_field_route';
+  $handler->display->display_options['filters']['field_route_target_id']['field'] = 'field_route_target_id';
+  $handler->display->display_options['filters']['field_route_target_id']['value'] = array(
+    'all' => 'all',
+    13 => '13',
+    14 => '14',
+    40 => '40',
+  );
+  $handler->display->display_options['filters']['field_route_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_route_target_id']['expose']['operator_id'] = 'field_route_target_id_op';
+  $handler->display->display_options['filters']['field_route_target_id']['expose']['label'] = 'Route ';
+  $handler->display->display_options['filters']['field_route_target_id']['expose']['operator'] = 'field_route_target_id_op';
+  $handler->display->display_options['filters']['field_route_target_id']['expose']['identifier'] = 'field_route_target_id';
+  $handler->display->display_options['filters']['field_route_target_id']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     3 => 0,
+    4 => 0,
   );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
   $handler->display->display_options['defaults']['hide_admin_links'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: Text area */
+  $handler->display->display_options['header']['area']['id'] = 'area';
+  $handler->display->display_options['header']['area']['table'] = 'views';
+  $handler->display->display_options['header']['area']['field'] = 'area';
+  $handler->display->display_options['header']['area']['content'] = '<a href="/addresses/csv?field_route_target_id=[nid]">Download [field_route]\'s spreadsheet</a>
+<a href="/addresses/csv?field_route_target_id=All">Download full route spreadsheet</a>
+';
+  $handler->display->display_options['header']['area']['format'] = 'full_html';
+  $handler->display->display_options['header']['area']['tokenize'] = TRUE;
   $handler->display->display_options['path'] = 'addresses';
 
   /* Display: Data export */
@@ -186,6 +238,7 @@ function compost_views_views_default_views() {
   $handler->display->display_options['style_options']['trim'] = 0;
   $handler->display->display_options['style_options']['replace_newlines'] = 0;
   $handler->display->display_options['style_options']['header'] = 1;
+  $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: User: Location */
   $handler->display->display_options['fields']['field_location']['id'] = 'field_location';
@@ -194,7 +247,7 @@ function compost_views_views_default_views() {
   $handler->display->display_options['fields']['field_location']['label'] = 'Address';
   $handler->display->display_options['fields']['field_location']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_location']['type'] = 'just_street_name';
-  /* Field: User: Bucket Location */
+  /* Field: User: Outside Collection Location */
   $handler->display->display_options['fields']['field_bucket_location']['id'] = 'field_bucket_location';
   $handler->display->display_options['fields']['field_bucket_location']['table'] = 'field_data_field_bucket_location';
   $handler->display->display_options['fields']['field_bucket_location']['field'] = 'field_bucket_location';
@@ -202,19 +255,6 @@ function compost_views_views_default_views() {
     'click_to_edit' => 1,
     'empty_text' => '',
     'fallback_format' => 'text_default',
-  );
-  /* Field: User: Bucket Size */
-  $handler->display->display_options['fields']['field_bucket_size']['id'] = 'field_bucket_size';
-  $handler->display->display_options['fields']['field_bucket_size']['table'] = 'field_data_field_bucket_size';
-  $handler->display->display_options['fields']['field_bucket_size']['field'] = 'field_bucket_size';
-  $handler->display->display_options['fields']['field_bucket_size']['alter']['max_length'] = '1';
-  $handler->display->display_options['fields']['field_bucket_size']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['field_bucket_size']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['field_bucket_size']['alter']['trim'] = TRUE;
-  $handler->display->display_options['fields']['field_bucket_size']['settings'] = array(
-    'click_to_edit' => 1,
-    'empty_text' => '',
-    'fallback_format' => 'list_default',
   );
   /* Field: User: Subscriber Notes */
   $handler->display->display_options['fields']['field_subscriber_notes']['id'] = 'field_subscriber_notes';
@@ -244,6 +284,18 @@ function compost_views_views_default_views() {
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
   $handler->display->display_options['fields']['nothing']['field'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['label'] = 'Status';
+  /* Field: Global: Custom text */
+  $handler->display->display_options['fields']['nothing_1']['id'] = 'nothing_1';
+  $handler->display->display_options['fields']['nothing_1']['table'] = 'views';
+  $handler->display->display_options['fields']['nothing_1']['field'] = 'nothing';
+  $handler->display->display_options['fields']['nothing_1']['label'] = 'Missed time?';
+  /* Field: User: Created date */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'users';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['created']['date_format'] = 'long';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   /* Sort criterion: Draggableviews: Weight */
   $handler->display->display_options['sorts']['weight']['id'] = 'weight';

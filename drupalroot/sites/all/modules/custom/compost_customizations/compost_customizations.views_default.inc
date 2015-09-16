@@ -50,6 +50,12 @@ function compost_customizations_views_default_views() {
       'empty_column' => 0,
     ),
   );
+  /* Field: Global: View result counter */
+  $handler->display->display_options['fields']['counter']['id'] = 'counter';
+  $handler->display->display_options['fields']['counter']['table'] = 'views';
+  $handler->display->display_options['fields']['counter']['field'] = 'counter';
+  $handler->display->display_options['fields']['counter']['label'] = '#';
+  $handler->display->display_options['fields']['counter']['counter_start'] = '1';
   /* Field: User: Phone number */
   $handler->display->display_options['fields']['field_phone_number']['id'] = 'field_phone_number';
   $handler->display->display_options['fields']['field_phone_number']['table'] = 'field_data_field_phone_number';
@@ -71,41 +77,6 @@ function compost_customizations_views_default_views() {
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
-    'action::system_block_ip_action' => array(
-      'selected' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-      'postpone_processing' => 0,
-    ),
-    'action::user_block_user_action' => array(
-      'selected' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-      'postpone_processing' => 0,
-    ),
-    'action::views_bulk_operations_delete_item' => array(
-      'selected' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-      'postpone_processing' => 0,
-    ),
-    'action::system_message_action' => array(
-      'selected' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-      'postpone_processing' => 0,
-    ),
-    'action::views_bulk_operations_script_action' => array(
-      'selected' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-      'postpone_processing' => 0,
-    ),
     'action::views_bulk_operations_modify_action' => array(
       'selected' => 1,
       'skip_confirmation' => 0,
@@ -119,42 +90,12 @@ function compost_customizations_views_default_views() {
       ),
       'postpone_processing' => 0,
     ),
-    'action::views_bulk_operations_user_roles_action' => array(
-      'selected' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-      'postpone_processing' => 0,
-    ),
-    'action::views_bulk_operations_argument_selector_action' => array(
-      'selected' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-      'settings' => array(
-        'url' => '',
-      ),
-    ),
-    'action::system_goto_action' => array(
-      'selected' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-      'postpone_processing' => 0,
-    ),
     'action::system_send_email_action' => array(
       'selected' => 1,
       'skip_confirmation' => 0,
       'override_label' => 0,
       'label' => '',
       'postpone_processing' => 1,
-    ),
-    'action::pathauto_user_update_action' => array(
-      'selected' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-      'postpone_processing' => 0,
     ),
   );
   /* Field: User: First Name */
@@ -181,12 +122,20 @@ function compost_customizations_views_default_views() {
   $handler->display->display_options['fields']['field_location']['table'] = 'field_data_field_location';
   $handler->display->display_options['fields']['field_location']['field'] = 'field_location';
   $handler->display->display_options['fields']['field_location']['type'] = 'just_street_name';
+  /* Field: User: Bucket Size */
+  $handler->display->display_options['fields']['field_bucket_size']['id'] = 'field_bucket_size';
+  $handler->display->display_options['fields']['field_bucket_size']['table'] = 'field_data_field_bucket_size';
+  $handler->display->display_options['fields']['field_bucket_size']['field'] = 'field_bucket_size';
+  /* Field: User: Stripe Customer ID */
+  $handler->display->display_options['fields']['field_stripe_customer_id']['id'] = 'field_stripe_customer_id';
+  $handler->display->display_options['fields']['field_stripe_customer_id']['table'] = 'field_data_field_stripe_customer_id';
+  $handler->display->display_options['fields']['field_stripe_customer_id']['field'] = 'field_stripe_customer_id';
   /* Sort criterion: User: Created date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'users';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Filter criterion: User: Pick up reminders (field_reminders) */
+  /* Filter criterion: User: Collection Day Reminders (field_reminders) */
   $handler->display->display_options['filters']['field_reminders_value']['id'] = 'field_reminders_value';
   $handler->display->display_options['filters']['field_reminders_value']['table'] = 'field_data_field_reminders';
   $handler->display->display_options['filters']['field_reminders_value']['field'] = 'field_reminders_value';
@@ -210,7 +159,6 @@ function compost_customizations_views_default_views() {
   $handler->display->display_options['filters']['field_active_value']['value'] = array(
     1 => '1',
   );
-  $handler->display->display_options['filters']['field_active_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_active_value']['expose']['operator_id'] = 'field_active_value_op';
   $handler->display->display_options['filters']['field_active_value']['expose']['label'] = 'Active ';
   $handler->display->display_options['filters']['field_active_value']['expose']['operator'] = 'field_active_value_op';
@@ -229,6 +177,61 @@ function compost_customizations_views_default_views() {
     3 => '3',
     4 => '4',
   );
+  /* Filter criterion: User: Service Type (field_service_type) */
+  $handler->display->display_options['filters']['field_service_type_value']['id'] = 'field_service_type_value';
+  $handler->display->display_options['filters']['field_service_type_value']['table'] = 'field_data_field_service_type';
+  $handler->display->display_options['filters']['field_service_type_value']['field'] = 'field_service_type_value';
+  $handler->display->display_options['filters']['field_service_type_value']['value'] = array(
+    1 => '1',
+  );
+  $handler->display->display_options['filters']['field_service_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_service_type_value']['expose']['operator_id'] = 'field_service_type_value_op';
+  $handler->display->display_options['filters']['field_service_type_value']['expose']['label'] = 'Service Type ';
+  $handler->display->display_options['filters']['field_service_type_value']['expose']['operator'] = 'field_service_type_value_op';
+  $handler->display->display_options['filters']['field_service_type_value']['expose']['identifier'] = 'field_service_type_value';
+  $handler->display->display_options['filters']['field_service_type_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  /* Filter criterion: Field: Route (field_route) */
+  $handler->display->display_options['filters']['field_route_target_id']['id'] = 'field_route_target_id';
+  $handler->display->display_options['filters']['field_route_target_id']['table'] = 'field_data_field_route';
+  $handler->display->display_options['filters']['field_route_target_id']['field'] = 'field_route_target_id';
+  $handler->display->display_options['filters']['field_route_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_route_target_id']['expose']['operator_id'] = 'field_route_target_id_op';
+  $handler->display->display_options['filters']['field_route_target_id']['expose']['label'] = 'Route ';
+  $handler->display->display_options['filters']['field_route_target_id']['expose']['operator'] = 'field_route_target_id_op';
+  $handler->display->display_options['filters']['field_route_target_id']['expose']['identifier'] = 'field_route_target_id';
+  $handler->display->display_options['filters']['field_route_target_id']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_route_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  /* Filter criterion: User: Bucket Size (field_bucket_size) */
+  $handler->display->display_options['filters']['field_bucket_size_value']['id'] = 'field_bucket_size_value';
+  $handler->display->display_options['filters']['field_bucket_size_value']['table'] = 'field_data_field_bucket_size';
+  $handler->display->display_options['filters']['field_bucket_size_value']['field'] = 'field_bucket_size_value';
+  $handler->display->display_options['filters']['field_bucket_size_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_bucket_size_value']['expose']['operator_id'] = 'field_bucket_size_value_op';
+  $handler->display->display_options['filters']['field_bucket_size_value']['expose']['label'] = 'Bucket Size ';
+  $handler->display->display_options['filters']['field_bucket_size_value']['expose']['operator'] = 'field_bucket_size_value_op';
+  $handler->display->display_options['filters']['field_bucket_size_value']['expose']['identifier'] = 'field_bucket_size_value';
+  $handler->display->display_options['filters']['field_bucket_size_value']['expose']['multiple'] = TRUE;
+  $handler->display->display_options['filters']['field_bucket_size_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+    3 => 0,
+    4 => 0,
+  );
+  /* Filter criterion: User: Active */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'users';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = '1';
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');

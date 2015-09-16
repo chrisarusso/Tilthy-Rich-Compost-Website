@@ -71,7 +71,7 @@ function compost_customizations_field_default_fields() {
           'display_label' => 1,
         ),
         'type' => 'options_onoff',
-        'weight' => '14',
+        'weight' => '17',
       ),
     ),
   );
@@ -203,7 +203,7 @@ function compost_customizations_field_default_fields() {
           'size' => '30',
         ),
         'type' => 'text_textfield',
-        'weight' => '3',
+        'weight' => '4',
       ),
     ),
   );
@@ -453,7 +453,7 @@ function compost_customizations_field_default_fields() {
         'module' => 'location_cck',
         'settings' => array(),
         'type' => 'location',
-        'weight' => '5',
+        'weight' => '6',
       ),
     ),
   );
@@ -527,6 +527,7 @@ function compost_customizations_field_default_fields() {
         'active' => 1,
         'module' => 'date',
         'settings' => array(
+          'display_all_day' => 0,
           'increment' => '15',
           'input_format' => 'Y M j - g:i:sa',
           'input_format_custom' => '',
@@ -536,74 +537,6 @@ function compost_customizations_field_default_fields() {
           'year_range' => '-3:+3',
         ),
         'type' => 'date_popup',
-        'weight' => '11',
-      ),
-    ),
-  );
-
-  // Exported field: 'user-user-field_subscription_level'.
-  $fields['user-user-field_subscription_level'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_subscription_level',
-      'field_permissions' => array(
-        'type' => '0',
-      ),
-      'foreign keys' => array(),
-      'indexes' => array(
-        'value' => array(
-          0 => 'value',
-        ),
-      ),
-      'locked' => '0',
-      'module' => 'list',
-      'settings' => array(
-        'allowed_values' => array(
-          0 => 'Free',
-          'Carter level' => 'Carter level : $5.00 USD - monthly',
-          'Carter + $5' => 'Carter + $5 : $10.00 USD - monthly',
-          'Carter goes to middle school' => 'Carter goes to middle school : $15.00 USD - monthly',
-          'Middle of the road' => 'Middle of the road : $20.00 USD - monthly',
-          'Middle + $5' => 'Middle + $5 : $25.00 USD - monthly',
-          'One exclamation!' => 'One exclamation! : $30.00 USD - monthly',
-          'Golly, thanks!!' => 'Golly, thanks!! : $35.00 USD - monthly',
-          'Big spender!!!' => 'Big spender!!! : $40.00 USD - monthly',
-          'Please...?' => 'Please...? : $1,000.00 USD - monthly',
-        ),
-        'allowed_values_function' => '',
-      ),
-      'translatable' => '0',
-      'type' => 'list_text',
-    ),
-    'field_instance' => array(
-      'bundle' => 'user',
-      'default_value' => NULL,
-      'deleted' => '0',
-      'description' => '',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'list',
-          'settings' => array(),
-          'type' => 'list_default',
-          'weight' => '5',
-        ),
-      ),
-      'entity_type' => 'user',
-      'field_name' => 'field_subscription_level',
-      'label' => 'Subscription Level',
-      'required' => 0,
-      'settings' => array(
-        'user_register_form' => 1,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'options',
-        'settings' => array(),
-        'type' => 'options_select',
         'weight' => '13',
       ),
     ),
@@ -616,7 +549,6 @@ function compost_customizations_field_default_fields() {
   t('Last Name');
   t('Location');
   t('Skip date');
-  t('Subscription Level');
   t('Whether or not user is an active subscriber.');
 
   return $fields;

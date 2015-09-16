@@ -10,6 +10,159 @@
 function content_types_field_default_fields() {
   $fields = array();
 
+  // Exported field: 'field_collection_item-field_atypical_collection_week_c-field_atypical_collection_day'.
+  $fields['field_collection_item-field_atypical_collection_week_c-field_atypical_collection_day'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_atypical_collection_day',
+      'field_permissions' => array(
+        'type' => '1',
+      ),
+      'foreign keys' => array(),
+      'indexes' => array(
+        'value' => array(
+          0 => 'value',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'list',
+      'settings' => array(
+        'allowed_values' => array(
+          'Sunday' => 'Sunday',
+          'Monday' => 'Monday',
+          'Tuesday' => 'Tuesday',
+          'Wednesday' => 'Wednesday',
+          'Thursday' => 'Thursday',
+          'Friday' => 'Friday',
+          'Saturday' => 'Saturday',
+        ),
+        'allowed_values_function' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'list_text',
+    ),
+    'field_instance' => array(
+      'bundle' => 'field_atypical_collection_week_c',
+      'default_value' => array(
+        0 => array(
+          'value' => 'Thursday',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'list',
+          'settings' => array(),
+          'type' => 'list_default',
+          'weight' => 1,
+        ),
+      ),
+      'entity_type' => 'field_collection_item',
+      'field_name' => 'field_atypical_collection_day',
+      'label' => 'Atypical collection day',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => '3',
+      ),
+    ),
+  );
+
+  // Exported field: 'field_collection_item-field_atypical_collection_week_c-field_atypical_collection_week'.
+  $fields['field_collection_item-field_atypical_collection_week_c-field_atypical_collection_week'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_atypical_collection_week',
+      'field_permissions' => array(
+        'type' => '1',
+      ),
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'locked' => '0',
+      'module' => 'date',
+      'settings' => array(
+        'cache_count' => '4',
+        'cache_enabled' => 0,
+        'granularity' => array(
+          'day' => 'day',
+          'hour' => 0,
+          'minute' => 0,
+          'month' => 'month',
+          'second' => 0,
+          'year' => 'year',
+        ),
+        'repeat' => '0',
+        'timezone_db' => '',
+        'todate' => 'required',
+        'tz_handling' => 'none',
+      ),
+      'translatable' => '0',
+      'type' => 'datetime',
+    ),
+    'field_instance' => array(
+      'bundle' => 'field_atypical_collection_week_c',
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'date',
+          'settings' => array(
+            'format_type' => 'long',
+            'fromto' => 'both',
+            'multiple_from' => '',
+            'multiple_number' => '',
+            'multiple_to' => '',
+            'show_repeat_rule' => 'show',
+          ),
+          'type' => 'date_default',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'field_collection_item',
+      'field_name' => 'field_atypical_collection_week',
+      'label' => 'Atypical collection week',
+      'required' => 0,
+      'settings' => array(
+        'default_value' => 'now',
+        'default_value2' => 'same',
+        'default_value_code' => '',
+        'default_value_code2' => '',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'date',
+        'settings' => array(
+          'display_all_day' => 0,
+          'increment' => '15',
+          'input_format' => 'm/d/Y - H:i:s',
+          'input_format_custom' => '',
+          'label_position' => 'above',
+          'repeat_collapsed' => 0,
+          'text_parts' => array(),
+          'year_range' => '-3:+3',
+        ),
+        'type' => 'date_popup',
+        'weight' => '2',
+      ),
+    ),
+  );
+
   // Exported field: 'node-route-body'.
   $fields['node-route-body'] = array(
     'field_config' => array(
@@ -86,6 +239,165 @@ function content_types_field_default_fields() {
     ),
   );
 
+  // Exported field: 'node-route-field_atypical_collection_week'.
+  $fields['node-route-field_atypical_collection_week'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_atypical_collection_week',
+      'field_permissions' => array(
+        'type' => '1',
+      ),
+      'foreign keys' => array(),
+      'indexes' => array(),
+      'locked' => '0',
+      'module' => 'date',
+      'settings' => array(
+        'cache_count' => '4',
+        'cache_enabled' => 0,
+        'granularity' => array(
+          'day' => 'day',
+          'hour' => 0,
+          'minute' => 0,
+          'month' => 'month',
+          'second' => 0,
+          'year' => 'year',
+        ),
+        'repeat' => '0',
+        'timezone_db' => '',
+        'todate' => 'required',
+        'tz_handling' => 'none',
+      ),
+      'translatable' => '0',
+      'type' => 'datetime',
+    ),
+    'field_instance' => array(
+      'bundle' => 'route',
+      'deleted' => '0',
+      'description' => 'This is used for weeks in which a route\'s collection day is atypical to the given collection day. For example, on Thanksgiving, we typically set Friday to be the collection day for route\'s that are typically collected on Thursday.',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'date',
+          'settings' => array(
+            'format_type' => 'long',
+            'fromto' => 'both',
+            'multiple_from' => '',
+            'multiple_number' => '',
+            'multiple_to' => '',
+            'show_repeat_rule' => 'show',
+          ),
+          'type' => 'date_default',
+          'weight' => 3,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_atypical_collection_week',
+      'label' => 'Atypical collection week',
+      'required' => 0,
+      'settings' => array(
+        'default_value' => 'strtotime',
+        'default_value2' => 'strtotime',
+        'default_value_code' => 'last Sunday',
+        'default_value_code2' => 'Saturday',
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'date',
+        'settings' => array(
+          'display_all_day' => 0,
+          'increment' => '15',
+          'input_format' => 'm/d/Y - H:i:s',
+          'input_format_custom' => '',
+          'label_position' => 'above',
+          'repeat_collapsed' => 0,
+          'text_parts' => array(),
+          'year_range' => '-0:+3',
+        ),
+        'type' => 'date_popup',
+        'weight' => '41',
+      ),
+    ),
+  );
+
+  // Exported field: 'node-route-field_atypical_collection_week_c'.
+  $fields['node-route-field_atypical_collection_week_c'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '-1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_atypical_collection_week_c',
+      'field_permissions' => array(
+        'type' => '1',
+      ),
+      'foreign keys' => array(),
+      'indexes' => array(
+        'revision_id' => array(
+          0 => 'revision_id',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'field_collection',
+      'settings' => array(
+        'hide_blank_items' => 1,
+        'path' => '',
+      ),
+      'translatable' => '0',
+      'type' => 'field_collection',
+    ),
+    'field_instance' => array(
+      'bundle' => 'route',
+      'default_value' => NULL,
+      'deleted' => '0',
+      'description' => 'This is the field collection that ties the atypical collection week to a specific alternative day of that week',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'module' => 'field_collection',
+          'settings' => array(
+            'add' => 'Add',
+            'delete' => 'Delete',
+            'description' => TRUE,
+            'edit' => 'Edit',
+            'view_mode' => 'full',
+          ),
+          'type' => 'field_collection_view',
+          'weight' => 4,
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_atypical_collection_week_c',
+      'label' => 'Atypical collection week collection',
+      'required' => 0,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 0,
+        'module' => 'field_collection',
+        'settings' => array(),
+        'type' => 'field_collection_embed',
+        'weight' => '42',
+      ),
+    ),
+  );
+
   // Exported field: 'node-route-field_pickup_day'.
   $fields['node-route-field_pickup_day'] = array(
     'field_config' => array(
@@ -128,7 +440,7 @@ function content_types_field_default_fields() {
         ),
       ),
       'deleted' => '0',
-      'description' => '',
+      'description' => 'The day of the week this route will be collected',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -146,8 +458,8 @@ function content_types_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_pickup_day',
-      'label' => 'Pickup day',
-      'required' => 0,
+      'label' => 'Collection day',
+      'required' => 1,
       'settings' => array(
         'user_register_form' => FALSE,
       ),
@@ -708,7 +1020,7 @@ function content_types_field_default_fields() {
       'bundle' => 'user',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => 'If not in an obvious place visible from the street (e.g. front porch) input bucket location ',
+      'description' => 'If not in an obvious place visible from the street (e.g. front porch) input bucket location.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -720,7 +1032,7 @@ function content_types_field_default_fields() {
       ),
       'entity_type' => 'user',
       'field_name' => 'field_bucket_location',
-      'label' => 'Bucket Location',
+      'label' => 'Outside Collection Location',
       'required' => 0,
       'settings' => array(
         'text_processing' => '0',
@@ -747,7 +1059,7 @@ function content_types_field_default_fields() {
       'entity_types' => array(),
       'field_name' => 'field_bucket_size',
       'field_permissions' => array(
-        'type' => '0',
+        'type' => '1',
       ),
       'foreign keys' => array(),
       'indexes' => array(
@@ -771,7 +1083,7 @@ function content_types_field_default_fields() {
       'bundle' => 'user',
       'default_value' => array(
         0 => array(
-          'value' => 'Small (2 gallon)',
+          'value' => 'Large (5 gallon)',
         ),
       ),
       'deleted' => '0',
@@ -866,7 +1178,7 @@ function content_types_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '18',
+        'weight' => '20',
       ),
     ),
   );
@@ -937,90 +1249,6 @@ function content_types_field_default_fields() {
     ),
   );
 
-  // Exported field: 'user-user-field_forgotten_bucket_date'.
-  $fields['user-user-field_forgotten_bucket_date'] = array(
-    'field_config' => array(
-      'active' => '1',
-      'cardinality' => '-1',
-      'deleted' => '0',
-      'entity_types' => array(),
-      'field_name' => 'field_forgotten_bucket_date',
-      'field_permissions' => array(
-        'type' => '2',
-      ),
-      'foreign keys' => array(),
-      'indexes' => array(),
-      'locked' => '0',
-      'module' => 'date',
-      'settings' => array(
-        'cache_count' => '4',
-        'cache_enabled' => 0,
-        'granularity' => array(
-          'day' => 'day',
-          'hour' => 0,
-          'minute' => 0,
-          'month' => 'month',
-          'second' => 0,
-          'year' => 'year',
-        ),
-        'repeat' => '0',
-        'timezone_db' => '',
-        'todate' => '',
-        'tz_handling' => 'none',
-      ),
-      'translatable' => '0',
-      'type' => 'datetime',
-    ),
-    'field_instance' => array(
-      'bundle' => 'user',
-      'deleted' => '0',
-      'description' => 'When a subscriber forgets to leave his bucket out, we record it here',
-      'display' => array(
-        'default' => array(
-          'label' => 'above',
-          'module' => 'date',
-          'settings' => array(
-            'format_type' => 'long',
-            'fromto' => 'both',
-            'multiple_from' => '',
-            'multiple_number' => '',
-            'multiple_to' => '',
-            'show_repeat_rule' => 'show',
-          ),
-          'type' => 'date_default',
-          'weight' => 14,
-        ),
-      ),
-      'entity_type' => 'user',
-      'field_name' => 'field_forgotten_bucket_date',
-      'label' => 'Forgotten bucket date',
-      'required' => 0,
-      'settings' => array(
-        'default_value' => 'now',
-        'default_value2' => 'same',
-        'default_value_code' => '',
-        'default_value_code2' => '',
-        'user_register_form' => 0,
-      ),
-      'widget' => array(
-        'active' => 1,
-        'module' => 'date',
-        'settings' => array(
-          'display_all_day' => 0,
-          'increment' => '15',
-          'input_format' => 'Y-m-d H:i:s',
-          'input_format_custom' => '',
-          'label_position' => 'above',
-          'repeat_collapsed' => 0,
-          'text_parts' => array(),
-          'year_range' => '-3:+3',
-        ),
-        'type' => 'date_popup',
-        'weight' => '13',
-      ),
-    ),
-  );
-
   // Exported field: 'user-user-field_how_did_you_hear_about_us_'.
   $fields['user-user-field_how_did_you_hear_about_us_'] = array(
     'field_config' => array(
@@ -1057,7 +1285,7 @@ function content_types_field_default_fields() {
       'bundle' => 'user',
       'default_value' => NULL,
       'deleted' => '0',
-      'description' => '',
+      'description' => 'If you were referred by a friend, please leave your friend’s first and last name here',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -1082,7 +1310,7 @@ function content_types_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '21',
+        'weight' => '23',
       ),
     ),
   );
@@ -1145,7 +1373,7 @@ function content_types_field_default_fields() {
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
-        'weight' => '22',
+        'weight' => '24',
       ),
     ),
   );
@@ -1209,7 +1437,7 @@ function content_types_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '11',
+        'weight' => '12',
       ),
     ),
   );
@@ -1268,7 +1496,7 @@ function content_types_field_default_fields() {
         'module' => 'number',
         'settings' => array(),
         'type' => 'number',
-        'weight' => '16',
+        'weight' => '18',
       ),
     ),
   );
@@ -1406,7 +1634,7 @@ function content_types_field_default_fields() {
           'year_range' => '-3:+3',
         ),
         'type' => 'date_select',
-        'weight' => '41',
+        'weight' => '26',
       ),
     ),
   );
@@ -1549,7 +1777,7 @@ function content_types_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '17',
+        'weight' => '19',
       ),
     ),
   );
@@ -1613,7 +1841,7 @@ function content_types_field_default_fields() {
         'module' => 'options',
         'settings' => array(),
         'type' => 'options_select',
-        'weight' => '14',
+        'weight' => '16',
       ),
     ),
   );
@@ -1679,7 +1907,7 @@ function content_types_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '20',
+        'weight' => '22',
       ),
     ),
   );
@@ -1745,7 +1973,7 @@ function content_types_field_default_fields() {
           'size' => '60',
         ),
         'type' => 'text_textfield',
-        'weight' => '19',
+        'weight' => '21',
       ),
     ),
   );
@@ -1753,25 +1981,28 @@ function content_types_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Any special notes for this date can be written here.  This will often be blank');
+  t('Atypical collection day');
+  t('Atypical collection week');
+  t('Atypical collection week collection');
   t('Body');
-  t('Bucket Location');
   t('Bucket Size');
   t('Cleaner');
   t('Collection Day');
   t('Collection Day Reminders');
+  t('Collection day');
   t('Company Name');
   t('Date');
   t('Enter the time you would like to receive your text or email reminder the day before collection.');
-  t('Forgotten bucket date');
   t('How Did You Hear About Us?');
-  t('If not in an obvious place visible from the street (e.g. front porch) input bucket location ');
+  t('If not in an obvious place visible from the street (e.g. front porch) input bucket location.');
+  t('If you were referred by a friend, please leave your friend’s first and last name here');
   t('Last Reminded');
   t('Minimum contribution for collection to cover costs is $15/month.  Please help us grow and contribute as much as you\'re comfortable with!  Need more info about how much you should pay?  <a href="/how-much-to-pay" target="_blank">Read here</a>');
   t('Mobile Carrier/Provider');
   t('Monthly Contribution');
   t('Notes');
+  t('Outside Collection Location');
   t('Phone number');
-  t('Pickup day');
   t('Please include your mobile phone number.  ');
   t('Please only fill this out if you\'re representing a business account');
   t('Please specify if you\'re a business or a household. ');
@@ -1783,12 +2014,14 @@ function content_types_field_default_fields() {
   t('Special notes unique to a subscriber to help the rider provide good service');
   t('Stripe Customer ID');
   t('Subscriber Notes');
+  t('The day of the week this route will be collected');
   t('This is (s)he who will clean the buckets to be ready for the date in the event.');
   t('This is a hidden field never exposed to the user but used in the back end so we know when we\'ve last sent the user a reminder to put out her bucket');
+  t('This is the field collection that ties the atypical collection week to a specific alternative day of that week');
   t('This is the person who is riding the bike for the route.');
+  t('This is used for weeks in which a route\'s collection day is atypical to the given collection day. For example, on Thanksgiving, we typically set Friday to be the collection day for route\'s that are typically collected on Thursday.');
   t('This the person who is primarily in charge of the route.  (S)He will receive correspondence for subscribers within the route.  (S)He may not always be the one doing the route, but ');
   t('What size bucket will you need on a weekly basis?');
-  t('When a subscriber forgets to leave his bucket out, we record it here');
 
   return $fields;
 }
