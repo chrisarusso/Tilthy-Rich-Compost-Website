@@ -205,6 +205,9 @@ function _stripe_integration_webhook_consume($event = 'e') {
 
       // If payment succeeds, let's update the user's account with last payment.
       $user_wrapper = entity_metadata_wrapper('user', $user);
+      // Caveat: This returns a 500 and null for raw_collection
+      // if the field doesn't already exist. Temporary solution was to bulk
+      // update users to add a default.
       $raw_collection = $user_wrapper->field_last_payment->value();
       $last_payment = entity_metadata_wrapper('field_collection_item', $raw_collection);
       $last_payment->field_last_payment_date->set($event->data->object->date);
