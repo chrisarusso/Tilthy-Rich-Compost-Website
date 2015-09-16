@@ -178,21 +178,38 @@ function _stripe_integration_webhook_consume($event = 'e') {
   $input = @file_get_contents("php://input");
   $event = json_decode($input);
 
+  if (!isset($event->data->object->customer)) {
+    return;
+  }
+
+  // Get associated user.
+  $stripe_customer_id = $event->data->object->customer;
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'user')
+    ->fieldCondition('field_stripe_customer_id', 'value', $stripe_customer_id);
+
+  $result = $query->execute();
+  $uid = key($result['user']);
+
+  $user = user_load($uid);
+
   switch ($event->type) {
+
     case 'invoice.payment_failed' :
 
-      $stripe_customer_id = $event->data->object->customer;
-      $query = new EntityFieldQuery();
-      $query->entityCondition('entity_type', 'user')
-        ->fieldCondition('field_stripe_customer_id', 'value', $stripe_customer_id);
-
-      $result = $query->execute();
-      $uid = key($result['user']);
-
-      $user = user_load($uid);
       $params['user'] = $user;
-
+      // If payment fails, let's email user.
       drupal_mail('stripe_integration', 'invoice_failed', $user->mail, $user->language, $params);
+      break;
+    case 'invoice.payment_succeeded':
+
+      // If payment succeeds, let's update the user's account with last payment.
+      $user_wrapper = entity_metadata_wrapper('user', $user);
+      $raw_collection = $user_wrapper->field_last_payment->value();
+      $last_payment = entity_metadata_wrapper('field_collection_item', $raw_collection);
+      $last_payment->field_last_payment_date->set($event->data->object->date);
+      $last_payment->field_last_payment_amount->set($event->data->object->total/100);
+      $last_payment->save();
       break;
   }
 }
