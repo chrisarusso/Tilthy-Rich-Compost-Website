@@ -609,12 +609,11 @@ function _compost_customizations_gift_form_submit() {
  */
 function compost_customizations_queue_reminders() {
 
-  $now = time();
-  $tomorrow_timestamp = $now + 60 * 60 * 24;
-  $tomorrow = date('l', $tomorrow_timestamp);
+
   // Somewhat arbitrary.  Reminders ought to be once a week, but on certain
   // weeks, like holidays, the gap will be larger or smaller.  Three days seems
   // safe that it'll never be less than
+  $now = time();
   $three_days_ago = $now - 3 * (60 * 60 * 24);
   $hour_of_the_day = "0000-01-01 " . date('G', $now) . ":00:00";
 
@@ -623,7 +622,6 @@ function compost_customizations_queue_reminders() {
   $query->entityCondition('entity_type', 'user')
     ->fieldCondition('field_reminders', 'value', 0, '>')
     ->fieldCondition('field_active', 'value', 1)
-    ->fieldCondition('field_collection_day', 'value', $tomorrow)
     ->fieldCondition('field_last_reminded', 'value', $three_days_ago, '<')
     ->fieldCondition('field_reminder_time', 'value', $hour_of_the_day, '<=');
 
@@ -639,6 +637,19 @@ function compost_customizations_queue_reminders() {
 
     $users = _compost_customizations_remove_skippers($users);
     foreach($users as $user) {
+
+      $route_nid = $user->field_route[LANGUAGE_NONE][0]['target_id'];
+      $route = node_load($route_nid);
+      $collection_day = $route->field_pickup_day[LANGUAGE_NONE][0]['value'];
+      $tomorrow_timestamp = $now + 60 * 60 * 24;
+      $tomorrow = date('l', $tomorrow_timestamp);
+
+      // If their collection day is not tomorrow, skip 'em.
+      if ($tomorrow != $collection_day) {
+        continue;
+      }
+
+      // Check if tomorrow = route->day
       if (!empty($user->field_reminders)) {
         foreach($user->field_reminders[LANGUAGE_NONE] as $reminder) {
           if ($reminder['value'] == 1) {
