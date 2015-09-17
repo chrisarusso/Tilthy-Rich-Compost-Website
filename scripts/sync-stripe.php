@@ -8,8 +8,7 @@
 $query = new EntityFieldQuery();
 
 $query->entityCondition('entity_type', 'user')
-  ->fieldCondition('field_active', 'value', 1)
-  ->range(50, 10);
+  ->fieldCondition('field_active', 'value', 1);
 
 $result = $query->execute();
 
@@ -24,15 +23,14 @@ if (!empty($result['user'])) {
     'Rider'
   );
 
-  foreach ($users as $user) {
-    if (array_intersect($user->roles, $exempted_roles)) {
+  foreach ($users as $account) {
+    if (array_intersect($account->roles, $exempted_roles)) {
       continue;
     }
-    elseif (!empty($user->field_stripe_customer_id)) {
-      $stripe_id = $user->field_stripe_customer_id[LANGUAGE_NONE][0]['value'];
+    elseif (!empty($account->field_stripe_customer_id)) {
+      $stripe_id = $account->field_stripe_customer_id[LANGUAGE_NONE][0]['value'];
       $stripe_customer = Stripe_Customer::retrieve($stripe_id);
       $charges = $stripe_customer->charges();
-      $keys = $charges->keys();
       $charges_array = $charges->__toArray();
       if (isset($charges_array['data'][0])) {
         $most_recent_charge = $charges_array['data'][0];
@@ -42,7 +40,7 @@ if (!empty($result['user'])) {
 
         if ($status == 'paid') {
           // Record payment
-          $user_wrapper = entity_metadata_wrapper('user', $user);
+          $user_wrapper = entity_metadata_wrapper('user', $account);
           $raw_collection = $user_wrapper->field_last_payment->value();
           $last_payment = entity_metadata_wrapper('field_collection_item', $raw_collection);
           $last_payment->field_last_payment_date->set($date);
@@ -50,16 +48,12 @@ if (!empty($result['user'])) {
           $last_payment->save();
         }
       }
-
-      // Update their profile with most recent payment received.
     }
   }
 
 
-  $do = 'something';
 }
 
-//Stripe_List::constructFrom()
 
 
 //drush_log(dt("Users are synced", array()), 'success');
