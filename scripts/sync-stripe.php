@@ -40,20 +40,14 @@ if (!empty($result['user'])) {
 
         if ($status == 'paid') {
           // Record payment
-          $user_wrapper = entity_metadata_wrapper('user', $account);
-          $raw_collection = $user_wrapper->field_last_payment->value();
-          $last_payment = entity_metadata_wrapper('field_collection_item', $raw_collection);
-          $last_payment->field_last_payment_date->set($date);
-          $last_payment->field_last_payment_amount->set($amount);
-          $last_payment->save();
+          $field_collection_entity2 = field_collection_item_load($account->field_last_payment[LANGUAGE_NONE][0]['value']);
+          $account->field_last_payment_amount[LANGUAGE_NONE][0]['value'] = $amount;
+          $account->field_last_payment_date[LANGUAGE_NONE][0]['value'] = $date;
+          user_save($account);
         }
       }
     }
   }
-
-
 }
 
-
-
-//drush_log(dt("Users are synced", array()), 'success');
+drush_log(dt("Users are synced", array()), 'success');
