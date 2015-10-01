@@ -203,7 +203,7 @@ function _stripe_integration_webhook_consume($event = 'e') {
       break;
     case 'invoice.payment_succeeded':
       $posted_array = json_decode($input);
-      $amount = $posted_array->data->object->total;
+      $amount = $posted_array->data->object->total / 100;
       $date = $posted_array->data->object->date;
       
       // If payment succeeds, let's update the user's account with last payment.
