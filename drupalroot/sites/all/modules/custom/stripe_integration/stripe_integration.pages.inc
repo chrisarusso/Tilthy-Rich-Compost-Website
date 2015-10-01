@@ -191,28 +191,25 @@ function _stripe_integration_webhook_consume($event = 'e') {
   $result = $query->execute();
   $uid = key($result['user']);
 
-  $user = user_load($uid);
+  $account = user_load($uid);
 
   switch ($event->type) {
 
     case 'invoice.payment_failed' :
 
-      $params['user'] = $user;
+      $params['user'] = $account;
       // If payment fails, let's email user.
-      drupal_mail('stripe_integration', 'invoice_failed', $user->mail, $user->language, $params);
+      drupal_mail('stripe_integration', 'invoice_failed', $account->mail, $account->language, $params);
       break;
     case 'invoice.payment_succeeded':
-
+      $posted_array = json_decode($input);
+      $amount = $posted_array->data->object->total;
+      $date = $posted_array->data->object->date;
+      
       // If payment succeeds, let's update the user's account with last payment.
-      $user_wrapper = entity_metadata_wrapper('user', $user);
-      // Caveat: This returns a 500 and null for raw_collection
-      // if the field doesn't already exist. Temporary solution was to bulk
-      // update users to add a default.
-      $raw_collection = $user_wrapper->field_last_payment->value();
-      $last_payment = entity_metadata_wrapper('field_collection_item', $raw_collection);
-      $last_payment->field_last_payment_date->set($event->data->object->date);
-      $last_payment->field_last_payment_amount->set($event->data->object->total/100);
-      $last_payment->save();
+      $account->field_last_payment_amount[LANGUAGE_NONE][0]['value'] = $amount;
+      $account->field_last_payment_date[LANGUAGE_NONE][0]['value'] = $date;
+      user_save($account);
       break;
   }
 }
