@@ -40,7 +40,6 @@ if (!empty($result['user'])) {
 
         if ($status == 'paid') {
           // Record payment
-          $field_collection_entity2 = field_collection_item_load($account->field_last_payment[LANGUAGE_NONE][0]['value']);
           $account->field_last_payment_amount[LANGUAGE_NONE][0]['value'] = $amount;
           $account->field_last_payment_date[LANGUAGE_NONE][0]['value'] = $date;
           user_save($account);
