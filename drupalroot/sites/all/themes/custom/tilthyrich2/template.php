@@ -17,7 +17,17 @@ function tilthyrich2_theme($existing, $type, $theme, $path){
  */
 function tilthyrich2_preprocess_page(&$variables) {
 
-  $url_pieces = explode("/", $_GET['q']);
+  if (user_is_logged_in()) {
+    global $user;
+    $account = user_load($user->uid);
+    $first_name =  $account->field_first_name[LANGUAGE_NONE][0]['value'];
+    $last_name =  $account->field_last_name[LANGUAGE_NONE][0]['value'];
+    $url_pieces = explode("/", $_GET['q']);
+    $route_id = $account->field_route[LANGUAGE_NONE][0]['target_id'];
+    $route = node_load($route_id);
+    $variables['collection_day'] = $route->field_pickup_day[LANGUAGE_NONE][0]['value'];
+    $variables['display_name'] = $first_name . ' ' . $last_name;
+  }
 
   if ($variables['is_front']) {
     $variables['partners'] = tilthyrich2_get_partners();
@@ -34,6 +44,7 @@ function tilthyrich2_preprocess_page(&$variables) {
     }
   }
   elseif (user_is_logged_in() && count($url_pieces) > 1 && $url_pieces[0] == 'user') {
+    $url_pieces = explode("/", $_GET['q']);
     $account = user_load($url_pieces[1]);
     $first_name =  $account->field_first_name[LANGUAGE_NONE][0]['value'];
     $last_name =  $account->field_last_name[LANGUAGE_NONE][0]['value'];

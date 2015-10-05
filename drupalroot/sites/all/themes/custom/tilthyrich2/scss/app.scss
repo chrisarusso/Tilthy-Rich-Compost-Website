@@ -84,6 +84,13 @@ body {
         .row {
           max-width: none;
         }
+
+		.subscriber-header {
+		  text-align: center;
+		}
+	  	.display_name, .collection_day {
+		  color: $brown;
+		}
 	}
 
 	&.banner {

@@ -1,6 +1,12 @@
 <!-- Page -->
 <div class="container dark">
   <div class="row">
+    <?php if(user_is_logged_in()): ?>
+      <div class="subscriber-header">
+        Hi <span class="display_name"><?php print $display_name; ?></span> <br>
+        Your collection day is <span class="display_name"><?php print $collection_day; ?></span>
+      </div>
+    <?php endif; ?>
     <nav class="small-12 columns" role="navigation">
       <?php if ($page['header']): ?>
         <?php render($page['content']['metatags']); ?>
