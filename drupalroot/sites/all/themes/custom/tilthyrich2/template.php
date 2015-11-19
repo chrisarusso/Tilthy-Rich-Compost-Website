@@ -51,7 +51,7 @@ function tilthyrich2_preprocess_page(&$variables) {
     drupal_set_title($first_name . ' ' . $last_name . "'s profile");
   }
 
-  drupal_add_js('http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js', 'external');
+  drupal_add_js('https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js', 'external');
 }
 
 /**
