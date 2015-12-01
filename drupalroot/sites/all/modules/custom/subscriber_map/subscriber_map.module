@@ -37,7 +37,7 @@ function subscriber_map_views_pre_render(&$view) {
         }
       }
       // Add Google maps API.
-      drupal_add_js('http://maps.googleapis.com/maps/api/js?sensor=false', array('type' => 'external', 'scope' => 'header'));
+      drupal_add_js('https://maps.googleapis.com/maps/api/js?sensor=false', array('type' => 'external', 'scope' => 'header'));
 
       // Add Custom JS.
       drupal_add_js(drupal_get_path('module', 'subscriber_map') . '/js/subscriber_map.js');
