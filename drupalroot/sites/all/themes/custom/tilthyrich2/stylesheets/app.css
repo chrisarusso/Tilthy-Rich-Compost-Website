@@ -4656,3 +4656,43 @@ textarea.error {
 .interior a:visited {
   color: #99694b;
 }
+
+/* line 731, ../scss/app.scss */
+form#webform-client-form-53 label {
+  font-family: GR;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 40px;
+}
+@media only screen and (min-width: 54.063em) {
+  /* line 731, ../scss/app.scss */
+  form#webform-client-form-53 label {
+    font-size: 18px;
+  }
+}
+/* line 742, ../scss/app.scss */
+form#webform-client-form-53 input[type="submit"] {
+  height: 36px;
+  line-height: 36px;
+  font-family: GR;
+  text-transform: uppercase;
+  background: #242425;
+  padding: 0 24px;
+  max-width: 100%;
+  font-size: 20px;
+  border: 0;
+  box-shadow: 0;
+  cursor: pointer;
+  margin: 10px 0;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  color: #00ff00;
+  background: #FF0000;
+}
+/* line 759, ../scss/app.scss */
+form#webform-client-form-53 input[type="submit"]:hover {
+  color: #FF0000;
+  background: #00ff00;
+}

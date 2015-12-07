@@ -724,3 +724,41 @@ textarea.error {
 	}
   }
 }
+
+
+form#webform-client-form-53{
+
+	label {
+		font-family: GR;
+		font-weight: normal;
+		font-size: 13px;
+		line-height: 40px;
+
+		@media #{$large-up} {
+			font-size: 18px;
+		}
+	}
+
+	input[type="submit"] {
+		height: 36px;
+		line-height: 36px;
+		font-family: GR;
+		text-transform: uppercase;
+		background: $offblack;
+		padding: 0 24px;
+		max-width: 100%;
+		font-size: 20px;
+		border: 0;
+		box-shadow: 0;
+		cursor: pointer;
+		margin: 10px 0;
+		@include transition(all .2s);
+		color: #00ff00;
+		background: #FF0000;
+
+		&:hover {
+			color: #FF0000;
+			background: #00ff00;
+		}
+	}
+}
