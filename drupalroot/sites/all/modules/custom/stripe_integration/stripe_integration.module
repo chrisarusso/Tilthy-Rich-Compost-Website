@@ -73,6 +73,40 @@ function _stripe_integration_payment_tab_access($account) {
 
 
 /*
+ * Implements hook_form_alter()
+ */
+function stripe_integration_form_alter(&$form, $form_state, $form_id) {
+  // The give the gift of compost form
+  if ($form_id == 'webform_client_form_53') {
+
+    $environment = 'test';
+    global $conf;
+    _stripe_integration_stripe_init();
+    // @todo: Uncomment when production ready
+    // $environment = ($conf['production']) == TRUE ? 'live' : 'test';
+
+    $form['#submit'][] = 'stripe_integration_gift_form_submit';
+    $form['actions']['submit']['#value'] = t('Pay now');
+
+    $form['actions']['submit']['#attached']['js'] = array(
+      drupal_get_path('module', 'stripe_integration') . "/js/stripe_integration_checkout.js" => array(
+        'scope' => 'footer',
+      ),
+      'https://checkout.stripe.com/checkout.js' => array('type' => 'external', 'cache' => FALSE),
+      array('data' => array(
+        'stripeIntegration' => array(
+          'publishableKey' => $conf['stripe_' . $environment . '_publishable_key'],
+          'logoURL' => drupal_get_path('theme', 'tilthyrich2') . "/stripe-logo.png"
+        )),
+        'type' => 'setting'
+      )
+    );
+
+  }
+}
+
+
+/*
  * Implements hook_form_FORM_ID_alter()
  */
 function stripe_integration_form_user_register_form_alter(&$form, $form_state, $form_id) {
@@ -215,11 +249,6 @@ function stripe_integration_form_submit($form, &$form_state){
  */
 function stripe_integration_gift_form_submit($form, &$form_state){
 
-  // Don't process unless this is a gift form
-  if ($_GET['gift'] !== 'true') {
-    return;
-  }
-
   require_once(drupal_get_path('module', 'stripe_integration') . "/stripe-php/lib/Stripe.php");
 
   if ($_POST) {
@@ -242,23 +271,16 @@ function stripe_integration_gift_form_submit($form, &$form_state){
         "description" => "Online gift giver"
       ));
 
-      $amount = (int)$v['field_monthly_contribution'][LANGUAGE_NONE][0]['value']
-        * (int)$v['gift_length'] * 100;
+      $length_of_service = (int)$v['submitted_tree']['length_of_service'];
+      $amount = MINIMUM_PICKUP_PAYMENT * $length_of_service * 100;
 
       $charge = Stripe_Charge::create(array(
         "amount" => $amount,
         "currency" => "usd",
         "customer" => $customer->id,
-        "description" => "Charge for gift donation",
+        "description" => "Charge for pre-paid gift service",
       ));
-
-      // Save customer id as hidden field for internal usage
-      $form_state['user']->field_stripe_customer_id[LANGUAGE_NONE][0]['value'] = $customer->id;
-
-      // Run save to update customer id upon registration or
-      // subscription details upon payment update
-      user_save($form_state['user'], $v);
-
+      
     }
     catch (Exception $e) {
       $error = $e->getMessage();

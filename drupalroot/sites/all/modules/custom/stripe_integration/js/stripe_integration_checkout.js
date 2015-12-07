@@ -1,12 +1,15 @@
 (function ($) {
 
-    // Custom Stripe checkout handler for both the user registration and update payment forms.
+    var subscriptionMinimum = 15;
+
+    // Custom Stripe checkout handler for both the user registration and update
+    // payment forms as well as give the gift webform.
 
     var handler = StripeCheckout.configure({
         key: Drupal.settings.stripeIntegration.publishableKey,
         image: Drupal.settings.basePath + Drupal.settings.stripeIntegration.logoURL,
         token: function(token, args) {
-            var form = $('#user-register-form, #stripe-integration-payment-update-form');
+            var form = $('#user-register-form, #stripe-integration-payment-update-form, #webform-client-form-53');
             var input = $("<input name='stripeToken' value='" + token.id + "' style='display:none;' />");
             form.append(input[0]);
             form.find('#edit-submit').attr('disabled','disabled');
@@ -19,9 +22,10 @@
 
         document.getElementById('edit-submit').addEventListener('click', function(e) {
             // Open Checkout with further options
-            var gift = $('#gift_registration').val()
-            if (gift) {
-              var amount = parseInt($('#edit-gift-length').val()) *  parseInt($('#edit-field-monthly-contribution-und-0-value').val())
+
+            var giftMonths = $("input[type=radio]:checked").val();
+            if (giftMonths) {
+              var amount = parseInt(giftMonths) *  subscriptionMinimum;
             }
             else {
               var amount = jQuery('#edit-field-monthly-contribution-und-0-value').val();
@@ -37,6 +41,15 @@
                 email: jQuery('#edit-mail').val()
               });
               e.preventDefault();
+            }
+            else if (giftMonths.length) {
+                handler.open({
+                    name: 'Tilthy Rich Compost',
+                    description: 'The Gift of Compost',
+                    amount: amount * 100,
+                    email: $('#edit-submitted-your-email').val()
+                });
+                e.preventDefault();
             }
         });
     } else{
