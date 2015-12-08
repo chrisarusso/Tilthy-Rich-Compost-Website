@@ -251,8 +251,7 @@ function stripe_integration_gift_form_submit($form, &$form_state){
 
   if ($_POST) {
     global $conf;
-    $environment = 'test'; //($conf['production']) == TRUE ? 'live' : 'test';
-    // @todo: uncomment when production ready $environment = ($conf['production']) == TRUE ? 'live' : 'test';
+    $environment = ($conf['production']) == TRUE ? 'live' : 'test';
 
     Stripe::setApiKey($conf['stripe_' . $environment . '_secret_key']);
 
