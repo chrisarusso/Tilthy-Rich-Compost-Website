@@ -79,11 +79,9 @@ function stripe_integration_form_alter(&$form, $form_state, $form_id) {
   // The give the gift of compost form
   if ($form_id == 'webform_client_form_53') {
 
-    $environment = 'test';
     global $conf;
     _stripe_integration_stripe_init();
-    // @todo: Uncomment when production ready
-    // $environment = ($conf['production']) == TRUE ? 'live' : 'test';
+    $environment = ($conf['production']) == TRUE ? 'live' : 'test';
 
     $form['#submit'][] = 'stripe_integration_gift_form_submit';
     $form['actions']['submit']['#value'] = t('Pay now');

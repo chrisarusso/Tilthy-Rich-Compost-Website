@@ -268,8 +268,6 @@ function _compost_customizations_paypal_process_ipn() {
   // Log it
   watchdog('paypal_ipn', 'Post: @Post', array('@Post' => print_r($_POST, TRUE)), WATCHDOG_INFO);
 
-  // @todo: Handle it.  Update when we get live data to test with
-
   // If IPN for instant payment, set user's selection in his/her profile
   // Set the user's payment selection
 }
