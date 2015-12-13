@@ -5,8 +5,8 @@
  * Integration of Stripe payment system.
  */
 
-define('MINIMUM_PICKUP_PAYMENT', 15);
-define('MINIMUM_DROPOFF_PAYMENT', 15);
+define('MINIMUM_PICKUP_PAYMENT', 20);
+define('MINIMUM_DROPOFF_PAYMENT', 20);
 
 // Plan IDs created from Stripe dashboard (can also be created from the API).
 define('RESIDENTIAL_PICKUP_SERVICE_PLAN_ID', 1);
