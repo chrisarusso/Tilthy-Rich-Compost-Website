@@ -1,6 +1,6 @@
 (function ($) {
 
-    var subscriptionMinimum = 15;
+    var subscriptionMinimum = 20;
 
     // Custom Stripe checkout handler for both the user registration and update
     // payment forms as well as give the gift webform.

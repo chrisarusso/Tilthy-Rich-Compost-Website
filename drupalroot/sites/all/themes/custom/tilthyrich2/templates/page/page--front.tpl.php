@@ -366,7 +366,7 @@
       <div class="row">
           <div class="small-12 columns">
               <h2><span>Zero-hassle compost<br /> services starting at just</h2>
-              <h2>$15 a month</h2>
+              <h2>$20 a month</h2>
           </div>
       </div>
       <div class="row">
