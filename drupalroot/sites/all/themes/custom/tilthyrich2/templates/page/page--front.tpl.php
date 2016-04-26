@@ -44,8 +44,14 @@
   <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
   <!--End mc_embed_signup -->
 </div>
-
 <div class="container banner">
+  <div class="promotion">
+    <a href="http://indyweek.secondstreetapp.com/l/Best-of-the-Triangle-2016--FINAL-BALLOT/Ballot/Shop">
+        <img src="http://media2.fdncms.com/indyweek/imager/u/original/4982314/best_of_vote_300x250.jpg" alt="Indy week best of logo">
+      <h2>Vote for us!</h2>
+      Today - May 15th
+    </a>
+  </div>
   <div class="row logo">
 		<div class="small-12 columns">
           <a href="<?php print check_url($front_page); ?>"><img src="<?php print $logo ?>" alt="<?php print $site_name; ?>" /></a>
