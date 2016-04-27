@@ -47,7 +47,7 @@
 <div class="container banner">
   <div class="promotion">
     <a href="http://indyweek.secondstreetapp.com/l/Best-of-the-Triangle-2016--FINAL-BALLOT/Ballot/Shop">
-        <img src="http://media2.fdncms.com/indyweek/imager/u/original/4982314/best_of_vote_300x250.jpg" alt="Indy week best of logo">
+        <img src="<?php echo base_path() . path_to_theme();?>/images/best_of_vote_300x250.jpg" alt="Indy week best of logo">
       <h2>Vote for us!</h2>
       Today - May 15th
     </a>
