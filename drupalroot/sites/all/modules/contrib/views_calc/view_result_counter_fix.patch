@@ -1,0 +1,27 @@
+Index: theme.inc
+===================================================================
+--- theme.inc	(revision )
++++ theme.inc	(revision )
+@@ -187,6 +187,7 @@
+   // Render each field into its appropriate column. Preserve rows.
+   foreach ($result as $num => $row) {
+     foreach ($columns as $field => $column) {
++      $fields[$field]->view->row_index = $num;
+       $field_output = $fields[$field]->theme($row);
+       if (!empty($fields[$field]) && empty($fields[$field]->options['exclude'])) {
+ 
+Index: views_calc_table.inc
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- views_calc_table.inc	(revision )
++++ views_calc_table.inc	(revision )
+@@ -149,6 +149,7 @@
+     $summary_view = $this->view->clone_view();
+     // copy the query object by value not by reference!
+     $summary_view->query = clone $this->view->query;
++    $summary_view->query->pager = clone $this->view->query->pager;
+ 
+     // Make sure the view is completely valid.
+     $errors = $summary_view->validate();
