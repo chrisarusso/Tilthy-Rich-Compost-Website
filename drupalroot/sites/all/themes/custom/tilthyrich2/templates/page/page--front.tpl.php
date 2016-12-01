@@ -44,8 +44,18 @@
   <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
   <!--End mc_embed_signup -->
 </div>
-
 <div class="container banner">
+  <div class="row promotion">
+    <a href="/give-gift-compost">
+      <div class="link">
+        <h3>Chichi says:</h3>
+        <blockquote>
+            "Give the gift of
+            <br>compost!"
+        </blockquote>
+      </div>
+    </a>
+  </div>
   <div class="row logo">
 		<div class="small-12 columns">
           <a href="<?php print check_url($front_page); ?>"><img src="<?php print $logo ?>" alt="<?php print $site_name; ?>" /></a>
