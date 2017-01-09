@@ -94,10 +94,10 @@ body {
 	}
 
 	&.banner {
-		background: url(../images/Cheech67.jpg) no-repeat center;
+		background: url(../images/photo1.jpg) no-repeat center;
 		background-size: cover;
 		text-align: center;
-		padding: 0;
+		padding: 50px 0 0;
         position: relative;
         min-height: 600px;
         color: $white;
@@ -110,36 +110,6 @@ body {
           bottom: 42px;
           margin-left: -20px;
         }
-
-		h2 {
-			margin: 10px 0;
-		}
-
-		.promotion {
-			padding-right: 20px;
-			width: 250px;
-			position: relative;
-			left: 25%;
-
-			@media #{$large-up} {
-				left: 150px;
-			}
-
-			blockquote {
-				border-top: 1px solid #ccc;
-				border-bottom: 1px solid #ccc;
-				font-style: italic;
-				display:inline-block;
-				font-size: 2em;
-				line-height: 1em;
-				margin: 0;
-			}
-
-			h3 {
-				text-align: right;
-			}
-
-		}
 	}
 
 	&.banner-interior {
@@ -379,11 +349,10 @@ h2 {
 	padding: 0;
 	margin: 30px 0;
 	text-transform: uppercase;
-	line-height: 1em;
-
 
 	@media #{$large-up} {
 		font-size: 42px;
+                line-height: 1em;
 	}
 }
 
